@@ -1,0 +1,67 @@
+.viewer .panviewer /*pansize depends upon scale-factor of original image*/
+{
+  position: absolute;
+  width: 128px;
+  height: 128px;
+  margin: 0;
+  overflow: hidden; 
+  z-index: 20;
+  border: 4px solid #000000;
+  opacity: 0.8;
+  filter: alpha(opacity=80); 
+  right: 4px;
+  bottom: 4px;  
+}
+
+
+.viewer .panviewer .pansurface
+{
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;  
+  z-index: 30;
+  width: 100%;
+  height: 100%;  
+}
+
+
+.viewer .panviewer .panwell
+{
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 20;
+  cursor: grab;
+  cursor: -moz-grab;
+  overflow: hidden;
+}
+
+
+.viewer .panviewer .panwell .panimg 
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 20;
+  overflow: hidden;
+}
+
+
+.viewer .panviewer .panrectangleframe
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;  
+  width: 0px;
+  height: 0px;
+  margin: 0;
+  padding: 0px;
+  border: 2px solid #00C000;
+  z-index: 25;
+}

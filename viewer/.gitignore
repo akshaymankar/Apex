@@ -1,0 +1,11 @@
+#ps
+*.ps
+
+#tile dir
+tile/*
+
+#tilemaker
+tilemaker
+
+#swap files
+*.swp

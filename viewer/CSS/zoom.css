@@ -1,0 +1,61 @@
+.viewer 
+{
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: #434343;
+  overflow: hidden;     
+  padding: 0;
+  width: 0;
+  height: 0;
+}
+
+
+.viewer img 
+{
+  margin: 0px;
+  float: none;  
+}
+
+
+.viewer .well
+{
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  cursor: grab;
+  cursor: -moz-grab;
+  _cursor: url(Images/grab.cur);
+  overflow: hidden;
+}
+
+
+.viewer .surface
+{
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  cursor: grab;
+  cursor: -moz-grab;
+  _cursor: url(Images/grab.cur);
+  overflow: hidden;
+  z-index: 10;
+}
+
+
+.viewer .well .tile 
+{
+  border: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  display: block;
+}
