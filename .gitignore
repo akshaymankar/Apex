@@ -3,3 +3,6 @@ output/
 
 #tiles
 tile/
+
+#swap files
+*.swp
