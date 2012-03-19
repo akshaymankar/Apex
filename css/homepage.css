@@ -1,0 +1,67 @@
+body{
+    margin:0px;
+    padding:0px;
+    background:#292929;
+    overflow: hidden;
+}
+
+
+/*The size of the original ad image is 770by340 with each slice 35pixels wide which is transformed to */
+/*Current Image size of 400width and 194height*/
+
+.container{
+    position:absolute;
+    top:0px;
+    left:50%;
+    
+	margin-left:-447px;
+
+
+
+}
+
+.ad{
+    
+
+    position:relative;
+    margin:60px 0px 0px 180px;
+    background-color:#333;
+}
+.ad_1 img{
+ 
+   width:20px;
+    height:190px;
+    position:absolute;    
+}
+.ad_2 img{
+    width:0px;
+    height:190px;
+    margin-left:18px;
+    position:absolute;
+}
+
+/*current gap between two slices is 1 px since size of every slice is 20px*/
+
+
+.slice_1{left:0px;}
+.slice_2{left:21px;}
+.slice_3{left:42px;}
+.slice_4{left:63px;}
+.slice_5{left:84px;}
+.slice_6{left:105px;}
+.slice_7{left:126px;}
+.slice_8{left:147px;}
+.slice_9{left:168px;}
+.slice_10{left:189px;}
+.slice_11{left:210px;}
+.slice_12{left:231px;}
+.slice_13{left:252px;}
+.slice_14{left:273px;}
+.slice_15{left:294px;}
+.slice_16{left:315px;}
+.slice_17{left:336px;}
+.slice_18{left:357px;}
+.slice_19{left:378px;}
+.slice_20{left:399px;}
+.slice_21{left:420px;}
+.slice_22{left:441px;}

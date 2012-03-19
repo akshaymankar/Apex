@@ -1,0 +1,104 @@
+
+  #sign_up {
+        -moz-border-radius: 30px 0px 30px 0px;  
+        background: #eef2f7;
+        -webkit-border-radius: 30px 0px 30px 0px;
+        border: 8px solid blue;
+        -webkit-box-shadow: rgba(255,255,255,0.6) 0px 2px 12px;
+        -moz-box-shadow:  rgba(255,255,255,0.6) 0px 2px 12px;
+        padding: 10px 50px 10px 50px;
+        position:relative;
+	display:none;
+	
+    font-family: "OstrichBold", sans-serif;
+		        
+    }
+
+
+
+
+  #change_up {
+        -moz-border-radius: 30px 0px 30px 0px;  
+        background: #eef2f7;
+        -webkit-border-radius: 30px 0px 30px 0px;
+        border: 8px solid blue;
+        -webkit-box-shadow: rgba(255,255,255,0.6) 0px 2px 12px;
+        -moz-box-shadow:  rgba(255,255,255,0.6) 0px 2px 12px;
+        padding: 10px 50px 10px 50px;
+        position:relative;
+	display:none;
+	
+    font-family: "OstrichBold", sans-serif;
+		        
+    }
+
+/*
+ * Submit button used internally id="sub" 
+ */
+
+#sub
+{
+display:none;
+}
+
+
+.formbuttons
+{
+text-decoration:none;
+background-color:white;
+border:2px solid black;
+border-radius: 15px;
+
+
+ -moz-border-radius: 10px 0px 10px 0px;  
+        background: yellow;
+-webkit-box-shadow: rgba(255,255,255,1) 0px 2px 5px;
+
+
+padding:5px 10px 5px 10px;
+
+margin-top:10px;
+display:inline-block;
+}
+    
+    
+    .formbuttons:hover
+{
+text-decoration:none;
+background-color:gold;
+border:2px solid black;
+border-radius: 15px;
+
+
+border-radius: 25px 10px / 10px 25px;
+
+padding:5px 10px 5px 10px;
+
+margin-top:10px;
+display:inline-block;
+}
+    
+.formbuttons:active
+{
+text-decoration:none;
+background-color:red;
+border:2px solid black;
+border-radius: 15px;
+
+
+padding:5px 10px 5px 10px;
+
+margin-top:10px;
+display:inline-block;
+}
+
+
+#closebutton
+{
+width:30px;
+height:30px;
+position:absolute;
+left:380px;
+top:2px;
+
+}
