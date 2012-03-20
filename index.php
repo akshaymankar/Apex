@@ -5,6 +5,6 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
     
         <title>Redirecting</title>
-        <meta name="redirect" http-equiv='REFRESH' content="0; url=ui/index.php" >
+        <meta name="redirect" http-equiv='REFRESH' content="0; url=ui/" >
     </head>
 </html>
