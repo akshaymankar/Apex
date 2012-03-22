@@ -123,13 +123,14 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
 
 
 	var tempImg = document.createElement('img');
-	tempImg.setAttribute('id', '0');
+	/*
+    tempImg.setAttribute('id', '0');
 	tempImg.setAttribute('class', 'tile');
 	//tempImg.setAttribute('name', '');
 	tempImg.setAttribute('style', 'height:256px; width:256px; top:'+topTile[0][0]+'px; left:'+leftTile[0][0]+'px;');
 	tempImg.setAttribute('src',fileName[0][0]);
 	tempWell.appendChild(tempImg);
-	
+	*/
 	
 	previousTopOfFirst = topTile[0][0];
 	previousLeftOfFirst = leftTile[0][0];
@@ -144,6 +145,8 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
 	
 	initPan();
 	initCreatePanRectangleFrame();
+    advanceZoomUp();
+    advanceZoomUp();
 }
 
 
@@ -481,7 +484,7 @@ function advanceZoomUp()
                 
                 PREV_ZOOM = CUR_ZOOM;
                  
-                panOnZoomUp(flagY,flagX); 
+                viewerToPanOnZoom(); 
             }
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
@@ -620,7 +623,7 @@ function advanceZoomDown()
 		PREV_ZOOM = CUR_ZOOM;
 		
 		
-		panOnZoomDown(flagY,flagX);
+		viewerToPanOnZoom(); 
 	} 	
 }
 
@@ -679,7 +682,7 @@ function mouseMoveHandler(oEvent)
 	}
 	
 	
-	viewerToPanOnMouseMove(offsetToAddY,offsetToAddX);
+	viewerToPanOnMove();
 	
 	
 	var tempViewer = document.getElementById('viewer');

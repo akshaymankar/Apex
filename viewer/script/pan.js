@@ -1,6 +1,6 @@
 var panSize = 256 / 2;//to do
-var hgthRF = panSize;
-var wdthRF = panSize;
+var hgthRF = 0;
+var wdthRF = 0;
 var diffY = 0;
 var diffX = 0;
 var topRectangleFrame = 0;
@@ -66,6 +66,10 @@ function initCreatePanRectangleFrame()
 	var tempPanViewer = document.getElementById('panviewer');
 	
 	
+	var hgthRF = panSize;
+	var wdthRF = panSize;
+
+
 	var tempPanRectangleFrame = document.createElement('div');
 	tempPanRectangleFrame.setAttribute('id', 'panrectangleframe');
 	tempPanRectangleFrame.setAttribute('class', 'panrectangleframe');
@@ -250,25 +254,15 @@ function panMouseUpHandler()
 }
 
 
-function viewerToPanOnMouseMove(offsetToAddY,offsetToAddX)
+function viewerToPanOnMove()
 {
+	viewerToPan();
+	
+	
 	var tempPanRectangleFrame = document.getElementById("panrectangleframe");
 	var tempPanViewer = document.getElementById('panviewer');
-	
 
-	var currentViewerImgHeight = 256 * Math.pow(2,CUR_ZOOM); //to do
-	var currentViewerImgWidth = 256 * Math.pow(2,CUR_ZOOM); 
-	var currentPanImgHeight = panSize; 
-	var currentPanImgWidth = panSize; 
-	
-	var diffVTPY2 = (offsetToAddY * currentPanImgHeight) / currentViewerImgHeight;
-	var diffVTPX2 = (offsetToAddX * currentPanImgWidth) / currentViewerImgWidth;
-	
-	topRectangleFrame = topRectangleFrame - diffVTPY2;
-	leftRectangleFrame = leftRectangleFrame - diffVTPX2;
-	
-	
-	tempPanViewer.removeChild(tempPanRectangleFrame);
+	tempPanViewer.removeChild(tempPanRectangleFrame);	
 	
 	tempPanRectangleFrame = document.createElement('div');
 	tempPanRectangleFrame.setAttribute('id', 'panrectangleframe');
@@ -276,63 +270,19 @@ function viewerToPanOnMouseMove(offsetToAddY,offsetToAddX)
 	tempPanRectangleFrame.setAttribute('style', 'width:'+wdthRF+'px; height:'+hgthRF+'px; top:'+topRectangleFrame+'px; left:'+leftRectangleFrame+'px;');
 	tempPanViewer.appendChild(tempPanRectangleFrame); 
 	
-	
+
 	previousTopRectangleFrame = topRectangleFrame;
 	previousLeftRectangleFrame = leftRectangleFrame;
 }
 
 
-function panOnZoomUp(flagY,flagX)
+function viewerToPanOnZoom()
 {
+	viewerToPan();
+	
+	
 	var tempPanViewer = document.getElementById('panviewer');
 
-	
-    hgthRF = hgthRF / 2;
-	wdthRF = wdthRF / 2;
-	
-	topRectangleFrame = midPanHeight - (hgthRF / 2);
-	leftRectangleFrame = midPanWidth - (wdthRF / 2);
-		
-	
-	var tempDiffY = topRectangleFrame - previousTopRectangleFrame;
-	var tempDiffX = leftRectangleFrame - previousLeftRectangleFrame;
-	
-	topRectangleFrame = topRectangleFrame - tempDiffY;
-	leftRectangleFrame = leftRectangleFrame - tempDiffX;
-
-	
-	var maxConstY = hgthRF + (hgthRF / 2);
-	var maxConstX = wdthRF + (wdthRF / 2);
-	var minConstY = hgthRF / 2;
-	var minConstX = wdthRF / 2;
-
-	
-	if(flagY == 1)
-		topRectangleFrame = topRectangleFrame + minConstY;
-	
-	if(flagY == 2)
-		topRectangleFrame = topRectangleFrame + maxConstY;
-		
-	if(flagY == 3)
-		topRectangleFrame = topRectangleFrame - minConstY;
-		
-	if(flagY == 4)
-		topRectangleFrame = topRectangleFrame + maxConstY;
-	
-	
-	if(flagX == 1)
-		leftRectangleFrame = leftRectangleFrame + minConstX;
-	
-	if(flagX == 2)
-		leftRectangleFrame = leftRectangleFrame + maxConstX;
-		
-	if(flagX == 3)
-		leftRectangleFrame = leftRectangleFrame - minConstX;
-		
-	if(flagX == 4)
-		leftRectangleFrame = leftRectangleFrame + maxConstX;
-	
-	
 	var tempPanRectangleFrame = document.createElement('div');
 	tempPanRectangleFrame.setAttribute('id', 'panrectangleframe');
 	tempPanRectangleFrame.setAttribute('class', 'panrectangleframe');
@@ -345,66 +295,99 @@ function panOnZoomUp(flagY,flagX)
 }
 
 
-function panOnZoomDown(flagY,flagX)
-{	
-	var tempPanViewer = document.getElementById('panviewer');
+function viewerToPan()
+{
+	var currentViewerImgHeight = 256 * Math.pow(2,CUR_ZOOM); 
+	var currentViewerImgWidth = 256 * Math.pow(2,CUR_ZOOM); 
+	var currentPanImgHeight = panSize; 
+	var currentPanImgWidth = panSize; 
 	
+	var right = leftTile[0][0] + currentViewerImgWidth;
+    var bottom = topTile[0][0] + currentViewerImgHeight;
+    
+    var ratioWidth =  currentViewerImgWidth / offWidth;
+    var ratioHeight = currentViewerImgHeight / offHeight;
+ 
+ 
+	if(ratioWidth > 1) 
+    {
+		var resizedRatioWidth = 1 / ratioWidth;
+		wdthRF = panSize * resizedRatioWidth;
+	}
+	else
+	{
+		wdthRF = panSize;
+	}
+	
+	if(ratioHeight > 1) 
+    {
+		var resizedRatioHeight = 1 / ratioHeight;
+		hgthRF = panSize * resizedRatioHeight;
+	}
+	else
+	{
+		hgthRF = panSize;
+	}
+	
+	
+	if(((ratioWidth<=1) || (ratioHeight<=1)) && (leftTile[0][0]>=0 && right<=offWidth))
+	{
+		leftRectangleFrame = 0;
+	}
+	
+	if(((ratioWidth<=1) || (ratioHeight<=1)) && (topTile[0][0]>=0 && bottom<=offHeight))
+	{
+		topRectangleFrame = 0;
+	}
+	
+	if(((ratioWidth<=1) || (ratioHeight<=1)) && (right>offWidth))
+	{
+		var diffRight = offWidth - leftTile[0][0];
+	
+		var diffXOnPan = (diffRight * currentPanImgWidth) / currentViewerImgWidth;
 		
-	hgthRF = hgthRF * 2;
-	wdthRF = wdthRF * 2;
+		leftRectangleFrame = diffXOnPan - panSize;
+	}
 	
-	topRectangleFrame = midPanHeight - (hgthRF / 2);
-	leftRectangleFrame = midPanWidth - (wdthRF / 2);
+	if(((ratioWidth<=1) || (ratioHeight<=1)) && (bottom>offHeight))
+	{
+		var diffBottom = offHeight - topTile[0][0];
 	
-	
-	var tempDiffY = topRectangleFrame - previousTopRectangleFrame;
-	var tempDiffX = leftRectangleFrame - previousLeftRectangleFrame;
-	
-	topRectangleFrame = topRectangleFrame - tempDiffY;
-	leftRectangleFrame = leftRectangleFrame - tempDiffX;
-
-	
-	var maxConstY = (3 * hgthRF) / 4;
-	var maxConstX = (3 * wdthRF) / 4;
-	var minConstY = hgthRF / 4;
-	var minConstX = wdthRF / 4;
-
-	
-	if(flagY == 1)
-		topRectangleFrame = topRectangleFrame - minConstY;
-	
-	if(flagY == 2)
-		topRectangleFrame = topRectangleFrame - maxConstY;
+		var diffYOnPan = (diffBottom * currentPanImgHeight) / currentViewerImgHeight;
 		
-	if(flagY == 3)
-		topRectangleFrame = topRectangleFrame + minConstY;
+		topRectangleFrame = diffYOnPan - panSize;
+	}
+	
+	if(((ratioWidth<=1) || (ratioHeight<=1)) && (leftTile[0][0]<0))
+	{
+		var diffLeft = - leftTile[0][0];
+	
+		var diffXOnPan = (diffLeft * currentPanImgWidth) / currentViewerImgWidth;
 		
-	if(flagY == 4)
-		topRectangleFrame = topRectangleFrame - maxConstY;
+		leftRectangleFrame = diffXOnPan;
 	
+	}
 	
-	if(flagX == 1)
-		leftRectangleFrame = leftRectangleFrame - minConstX;
+	if(((ratioWidth<=1) || (ratioHeight<=1)) && (topTile[0][0]<0))
+	{
+		var diffTop = - topTile[0][0];
 	
-	if(flagX == 2)
-		leftRectangleFrame = leftRectangleFrame - maxConstX;
+		var diffYOnPan = (diffTop * currentPanImgHeight) / currentViewerImgHeight;
 		
-	if(flagX == 3)
-		leftRectangleFrame = leftRectangleFrame + minConstX;
+		topRectangleFrame = diffYOnPan;	
+	}
+	
+	if((ratioWidth>1) || (ratioHeight>1)) 
+	{		
+		var diffTop = - topTile[0][0];
+		var diffLeft = - leftTile[0][0];
+	
+		var diffYOnPan = (diffTop * currentPanImgHeight) / currentViewerImgHeight;
+		var diffXOnPan = (diffLeft * currentPanImgWidth) / currentViewerImgWidth;
 		
-	if(flagX == 4)
-		leftRectangleFrame = leftRectangleFrame - maxConstX;
-	
-	
-	var tempPanRectangleFrame = document.createElement('div');
-	tempPanRectangleFrame.setAttribute('id', 'panrectangleframe');
-	tempPanRectangleFrame.setAttribute('class', 'panrectangleframe');
-	tempPanRectangleFrame.setAttribute('style', 'width:'+wdthRF+'px; height:'+hgthRF+'px; top:'+topRectangleFrame+'px; left:'+leftRectangleFrame+'px;');
-	tempPanViewer.appendChild(tempPanRectangleFrame); 
-	
-
-	previousTopRectangleFrame = topRectangleFrame;
-	previousLeftRectangleFrame = leftRectangleFrame;
+		topRectangleFrame = diffYOnPan;
+		leftRectangleFrame = diffXOnPan;
+	}
 }
 
 
