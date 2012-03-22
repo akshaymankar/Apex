@@ -1,26 +1,7 @@
 <?php
-header("Expires: Thu, 17 May 2001 10:17:17 GMT");    // Date in the past
-	header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modified
-	header ("Cache-Control: no-cache, must-revalidate");  // HTTP/1.1
-	header ("Pragma: no-cache");                          // HTTP/1.0
-	
-	session_start();
-	
-	
-	if (!isset($_SESSION['SESSION'])) 
-	{
-		require ( "./lib/session_init.php");
-    }
 
+require_once('./lib/sessioncode.php');
 
-
-
-$_SESSION['LOGGEDIN'] = true;
-$_SESSION['usertype'] = "admin";
-
-//if $_SESSION['usertype'];
-
-//header("Location: logout.php");
 // make sure same password or phone number isn't entered twice
 
 //$sql = "INSERT INTO `apex`.`userdata` (`serialnum`, `username`, `password`, `phone`, `usertype`) VALUES (NULL, \'blah\', \'this\', \'9923184428\', \'1\');";
@@ -35,6 +16,15 @@ $_SESSION['usertype'] = "admin";
 
 <head>
 
+
+
+<?php
+/////////////////////////////////////////////////////////////////////
+require_once('./generic_page/page_head.php');
+/////////////////////////////////////////////////////////////////////
+?>
+
+
 <script type="text/javascript" src="./lib/jquery.js"></script>
 
 <script src="./lib/lightbox.js"></script>
@@ -45,6 +35,7 @@ $_SESSION['usertype'] = "admin";
 <!-- 
 
 var GLOBALUSERID = 0;
+var GLOBALREQUESTID = 0;
 
 var ajaxRequest;
 
@@ -72,8 +63,22 @@ ajaxRequest.onreadystatechange=function(){
    
    document.getElementById("result").innerHTML=ajaxRequest.responseText;
 
-  //alert( document.getElementById("result").innerHTML);
+	//alert( document.getElementById("result").innerHTML);
   var resultString = document.getElementById("result").innerHTML;	
+
+if (resultString == "Rejected")
+{
+$('#REQ'+GLOBALREQUESTID).css('display','none');
+return true;
+}
+
+if (resultString == "Accepted")
+{
+$('#REQ'+GLOBALREQUESTID).css('display','none');
+return true;
+}
+
+
 
 if (resultString == "Record Deleted Successfully")
 {
@@ -220,7 +225,7 @@ $(function(){
 //////////////////////////////////////////////////////////////////////////////////
 
 
-	$("tr td").dblclick(function(){
+	$("#summarytable tr td").dblclick(function(){
    $("#change_up").lightbox_me({centered: true, onLoad: function() {
 			
 			$('#result').css('display','none')
@@ -230,6 +235,7 @@ $(function(){
 			$('#deletebutton').show();
 			$('#submitbutton').show();
 	}});
+
 
 });
 
@@ -292,6 +298,28 @@ ajaxRequest.send(parameters);
 				
 				     
 }
+
+
+function acceptUser(thisrow,status)
+{				
+//$('#submitbutton').hide();
+//$('#throbber').show();
+
+var strid = thisrow.id;
+strid = strid.substring(3);
+//alert(strid+status);
+
+GLOBALREQUESTID = strid;
+var requestid=encodeURIComponent(strid);
+
+var parameters="requestid="+requestid+"&action="+status;
+
+ajaxRequest.open("POST", "recordAcceptor.php", true);
+ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ajaxRequest.send(parameters);		
+				     
+}
+
 
 </script>
 
@@ -442,14 +470,20 @@ cursor:pointer;
 
 <body>
 
-<form action="logout.php" method ="POST">
+<?php
+////////////////////////////////////////////////////////////////////
+require_once('./generic_page/page_body.php');
+////////////////////////////////////////////////////////////////////
+?>
 
-<input type="submit" ></input>
+<br />
+<br />
 
-<p id="temp"></p>
+<br />
+<br />
 
-</form>
-
+<br />
+<br />
 <center>
 
 <div id="usersummarycontainer" class="containers" >
@@ -460,21 +494,11 @@ cursor:pointer;
 <h1 id="usersummaryheader" class="containerHeaders">User Summary</h1>
 </center>
 
+
+
 <?php
 
-
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "apex";
-
-
-	//Connect to MySQL Server
-mysql_connect($dbhost, $dbuser, $dbpass);
-	//Select Database
-mysql_select_db($dbname) or die(mysql_error());
-	// Retrieve data from Query String
-
+require_once('./lib/mysql.php');
 	//build query
 
 
@@ -489,7 +513,7 @@ echo "<center><h1>Something broke !</h1></center>";
 }
 
 
-echo '<table cellpadding="5" cellspacing="5" width="50%" align="center">';
+echo '<table id="summarytable" cellpadding="5" cellspacing="5" width="50%" align="center">';
 echo "<tr style=\"background-color:yellow;\">";
 echo "<th>User&nbsp;Id</th>";
 echo "<th>Username</th>";
@@ -519,6 +543,7 @@ echo "</tr>";
 /*
 */
 ?>
+
 </table>
 </div>
 </center>
@@ -531,6 +556,77 @@ echo "</tr>";
 <center>
 <h1 id="createuserheader" class="containerHeaders">Create User</h1>
 </center>
+
+
+
+<?php
+
+	$query = "SELECT * FROM userpending";
+
+	//Execute query
+$qry_result = mysql_query($query) or die(mysql_error());
+
+if(mysql_affected_rows() == 0)
+{
+echo "<center><h1>Something broke !</h1></center>";
+}
+
+
+echo '<table cellpadding="5" cellspacing="5" width="50%" align="center">';
+echo "<tr style=\"background-color:yellow;\">";
+echo "<th>Request ID</th>";
+echo "<th>Name</th>";
+echo "<th>Username</th>";
+echo "<th>Phone</th>";
+echo "<th>Email</th>";
+echo "<th>Location</th>";
+echo "</tr>";
+
+
+while($row = mysql_fetch_assoc($qry_result))
+{
+echo "<tr id='REQ".$row['requestnumber']."' style=\"cursor:pointer\"ondblclick=\"acceptUser(this,true);\">";
+
+
+echo "<td>";
+echo "$row[requestnumber]";
+echo "</td>";
+
+echo "<td>";
+echo "$row[firstname]"." "."$row[lastname]";
+echo "</td>";
+
+
+echo "<td>";
+echo "$row[username]";
+echo "</td>";
+
+
+echo "<td>";
+echo "$row[phone]";
+echo "</td>";
+
+echo "<td>";
+echo "$row[email]";
+echo "</td>";
+
+echo "<td>";
+echo "$row[location]";
+echo "</td>";
+
+
+echo "<td id='TMP".$row['requestnumber']."' onclick = 'acceptUser(this,false);' >";	
+echo "<img src='resource/close_button.png' class='closebutton' style ='cursor:pointer;' />";
+echo "</td>";
+
+echo "</tr>";
+
+}
+
+?>
+
+
+
 
 </div>
 </center>
@@ -603,6 +699,10 @@ echo "</tr>";
 </center>
 
 </form>
+
+
+
+
 
 </body>
 </html>

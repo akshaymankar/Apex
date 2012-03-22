@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `apex`
 --
-/*drop database apex;*/
+drop database apex;
 create database apex;
 use apex;
 

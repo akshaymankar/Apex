@@ -12,18 +12,7 @@ $password = addslashes($password);
 $isRemember = addslashes($isRemember);
 
 
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "blackpearl";
-$dbname = "apex";
-
-
-	//Connect to MySQL Server
-$myconnection = mysql_connect($dbhost, $dbuser, $dbpass) or die('Error in MySQL Connection');
-	//Select Database
-mysql_select_db($dbname) or die(mysql_error());
-	// Retrieve data from Query String
-
+require_once('./lib/mysql.php');
 
 ////////////////////////
 
@@ -49,8 +38,7 @@ else
 $query = "SELECT * FROM userdata WHERE username = '$username' ";
 }
 	//Execute query
-$qry_result = mysql_query($query);
-if(!$qry_result) die(mysql_error());
+$qry_result = mysql_query($query) or die(mysql_error());
 
 if(mysql_affected_rows() == 0)
 {
@@ -77,6 +65,12 @@ exit();
 	
 	setcookie("remember", $isRemember, time()+60*60*24*7); 
 	setcookie("username", $username, time()+60*60*24*7); 
+	
+	
+	session_start();
+	$_SESSION['LOGGED'] = true ;
+	$_SESSION['usertype'] = "user";
+	$_SESSION['userid'] = $row['serialnum'];
 	}
 	else if($row['password'] == $password && $row['usertype'] == "admin" )
 	{
@@ -84,6 +78,13 @@ exit();
 	
 	setcookie("remember", $isRemember, time()+60*60*24*7); 
 	setcookie("username", $username, time()+60*60*24*7); 
+
+	session_start();
+	$_SESSION['LOGGED'] = true ;
+	$_SESSION['usertype'] = "admin";
+	$_SESSION['userid'] = $row['serialnum'];
+
+
 	}
 	else
 	{

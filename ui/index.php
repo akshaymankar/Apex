@@ -234,13 +234,13 @@ ajaxRequest.onreadystatechange=function(){
   if(document.getElementById("result").innerHTML == 'acceptedadmin')
   {
 	  
-	  window.location = "page.php";
+	  window.location = "admin.php";
   }
   
   
   if(document.getElementById("result").innerHTML == 'accepted')
   {
-	  window.location = "page.php";
+	  window.location = "./generic_page/page.php";
   }
   
   
@@ -386,7 +386,7 @@ $(function() {
 			<li><a href="#"></a></li>
 			<li><a href="#" >Home</a></li>
 			<li><a href="#" id="signin">Sign-In</a></li>
-			<li><a href="./page/page.html">About</a></li>
+			<li><a href="./page.php">About</a></li>
 			<li><a href="#">Contact Us</a></li>
 			
 		</ul>

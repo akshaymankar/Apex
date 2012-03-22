@@ -1,19 +1,7 @@
 <?php
 
 
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "blackpearl";
-$dbname = "apex";
-
-
-	//Connect to MySQL Server
-$myconnection =   mysql_connect($dbhost, $dbuser, $dbpass);
-	//Select Database
-mysql_select_db($dbname) or die(mysql_error());
-	// Retrieve data from Query String
-
-
+require_once('./lib/mysql.php');
 
 
 

@@ -5,16 +5,7 @@
 	header ("Pragma: no-cache");                          // HTTP/1.0
 	
 	session_start();
-	// Unset session data
-	//$_SESSION=array();
-	// or...
-	session_unset();
-	// Clear the session cookie
-	unset($_COOKIE[session_name()]);
-	// Destroy session data
 	session_destroy();
-	echo "this";
-	sleep(2);
-	header("Location: ./index.html");
-	exit;
+	header("Location: ../index.php");
+	exit();
 ?>
