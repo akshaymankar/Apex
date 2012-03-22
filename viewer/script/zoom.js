@@ -146,7 +146,7 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
 	initPan();
 	initCreatePanRectangleFrame();
     advanceZoomUp();
-    advanceZoomUp();
+//    advanceZoomUp();
 }
 
 
