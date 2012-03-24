@@ -20,6 +20,7 @@ function getparameters($id) {
     ob_flush();
     ob_start();
     ?>
+
     <table class="parameters">
         <?php
         while ($row1 = mysql_fetch_assoc($res1)) {
@@ -39,6 +40,8 @@ function getparameters($id) {
 
 //end of function getparameters
 ?>
+    
+    
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -48,7 +51,7 @@ function getparameters($id) {
 
     </head>
     <body>
-        <form action='deleteTemplate.php' method='post' onsubmit="show_confirm();">
+        <form action='deleteTemplate.php' method='GET' onsubmit="show_confirm();">
             <table class="templates">
                 <th>Templates</th><th>Parameters</th>
                 <?php while ($row = mysql_fetch_assoc($res)) { ?>
@@ -66,5 +69,3 @@ function getparameters($id) {
         </form>	
     </body>
 </html>
-
-
