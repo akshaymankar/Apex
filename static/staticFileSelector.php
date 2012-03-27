@@ -39,14 +39,14 @@
                             $countToSkip = $data[1];
                             while (($i <= $countToSkip) && (($data = fgetcsv($handleForFileTypes, 80, ',', '"')) !== FALSE)) {
                                 if ($i == 1) {
-                                    $temp = "<img id='" . $lineNo . "' name='" . $data[1] . "' class='thumbnails' src='./Configure/CFG_Images/" . $name . ".jpg' title='" . $title . "'alt='" . $data[0] . "'  onclick='changeMainContent(this);' />";
+									$temp = "<input type='button' id='" . $lineNo . "' name='" . $data[1] . "' class='thumbnails' title='" . $data[0] . "'value='" . $name . "'  onclick='changeMainContent(this);' />";
                                     echo "$temp";
 
                                     $break = "<br/>";
                                     echo "$break";
 
-                                   $temp = "<h1 class='thumbnailName' id='" . $name . "'/>"."$name"."</h1>";
-                                   echo "$temp";
+                                   /*$temp = "<h1 class='thumbnailName' id='" . $name . "'/>"."$name"."</h1>";
+                                   echo "$temp";*/
                                 }
 
                                 $i++;
@@ -54,10 +54,6 @@
                             }
 
 
-                            if (($countToBreak % 3) == 0) {
-                                $break = "<br/>";
-                                echo "$break";
-                            }
                         }
 
                         fclose($handleForFileTypes);

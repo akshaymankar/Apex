@@ -22,7 +22,7 @@ else if (window.ActiveXObject)
 	
 function changeMainContent(thumbnail)
 {   
-    GLO_MainType = thumbnail.title;		
+    GLO_MainType = thumbnail.value;		
   
     var tempST = document.getElementById("sT");
     var tempSubType = document.getElementById("subType");
@@ -37,7 +37,7 @@ function changeMainContent(thumbnail)
     var tempHeading = document.createElement('h1');
     tempHeading.setAttribute('class', 'headingForType');
     tempHeading.setAttribute('align', 'center');
-    tempHeading.innerHTML = thumbnail.title;
+    tempHeading.innerHTML = thumbnail.value;
     tempSubType.appendChild(tempHeading);
 	
     var brk = document.createElement('br');
@@ -59,14 +59,14 @@ function changeMainContent(thumbnail)
 			
 					
             changedPrefix = thumbnail.name;
-            GLO_SubType = thumbnail.alt;		
+            GLO_SubType = thumbnail.title;		
 				
 				
             changeYear(document.getElementById(year));
             changeMonth(document.getElementById('Id'+parseInt(month,10)));
             //changePrefix(document.getElementById('SubType'+parseInt(month,10)));
             
-
+//alert(GLO_MainType+"_"+thumbnail.id+"_"+changedPrefix+"_"+GLO_SubType);
             changeFileList();
         }
         else if (xhr.readyState == 4 && xhr.status != 200) 
