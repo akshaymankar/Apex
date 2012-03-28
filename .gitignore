@@ -6,3 +6,6 @@ tile/
 
 #swap files
 *.swp
+
+#nbproject
+admin/nbproject/

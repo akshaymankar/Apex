@@ -1,5 +1,14 @@
 var largestId=0;
 
+//Ajax
+xhr=false;
+if(window.XMLHttpRequest){
+    xhr=new XMLHttpRequest();
+}
+else{
+    xhr=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
 function validatefield()
 {
     var template_name=document.getElementById('template_name').value; 
@@ -7,20 +16,20 @@ function validatefield()
     if(template_name!=' '){
         for(i=0;i<documnet.getElementById(param_name).length();i++)
         {
-                if(param_name[i]==" ")
-                    {
-                         alert ('Please Fill All the fields');
-                         doucment.getElementbyId('param_name['+i+']').focus();  
-                         return false;
-                    }
+            if(param_name[i]==" ")
+            {
+                alert ('Please Fill All the fields');
+                doucment.getElementbyId('param_name['+i+']').focus();  
+                return false;
+            }
         }
         return true;
     }else{
-            alert('Please Give The Template Name');
-            document.getElementById('template_name').focus();
-            return false;
+        alert('Please Give The Template Name');
+        document.getElementById('template_name').focus();
+        return false;
     }
-  }//end of function validatefield
+}//end of function validatefield
 
 
 function addNewFields(currentId){
@@ -67,4 +76,10 @@ function addNewFields(currentId){
     row.appendChild(tdName);
     row.appendChild(tdType);
     tbl.appendChild(row);  
+}
+
+function uploadFile(){
+    if(!xhr){
+        document.getElementById('box').innerHTML="Error Occurred: AJAX Not Supported !!<br>Please Consider Upgrading your browser !";
+    }
 }

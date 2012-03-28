@@ -27,6 +27,20 @@ var PREV_ZOOM = "";
 var firstFile = "";//to make function to compute no of tiles along width
 
 
+var xhr=false;
+
+if(window.XMLHttpRequest) {
+    xhr=new XMLHttpRequest();
+}
+else{
+    xhr=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+var firstTileY;
+var firstTileX;
+var lastTileY;
+var lastTileX;
+
 function getMaxZoomLevel(width,height,tilesize)
 {
 	var zoomLevels = 0;
@@ -298,19 +312,6 @@ function defaultPositions()
 	
 	initPan();
 }
-var xhr=false;
-
-if(window.XMLHttpRequest) {
-    xhr=new XMLHttpRequest();
-}
-else{
-    xhr=new ActiveXObject("Microsoft.XMLHTTP");
-}
-
-var firstTileY;
-var firstTileX;
-var lastTileY;
-var lastTileX;
 
 function loadImage()
 {

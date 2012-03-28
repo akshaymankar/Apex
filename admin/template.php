@@ -46,7 +46,8 @@ function getparameters($id) {
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <Title>Admin</Title>
-
+        
+        <script language="javascript" type="text/javascript" src="js/box.js"></script>
         <script language="javascript" type="text/javascript" src="js/template.js" ></script>
 
     </head>

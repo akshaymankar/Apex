@@ -3,7 +3,7 @@
         <script src="js/addTemplate.js" type="text/javascript" ></script>
     </head>
     <body>
-        <form name="addTemplate" method='GET' action="newTemplate.php" onsubmit="return validatefield()">
+        <form enctype="multipart/form-data" name="addTemplate" method='POST' action="newTemplate.php" onsubmit="return validatefield()">
             <table id ="addTemplateTable" class="addTemplate">
                 <tr class="name">
                     <td>Name</td>
@@ -30,7 +30,7 @@
             </table>
             <table>
                 <tr>
-                    <td><input type="submit" name="Submit" value="Add Template" /></td>
+                    <td><input type="submit" name="Submit" value="Add Template" onclick="showBox()" /></td>
                 </tr>
             </table>
         </form>
