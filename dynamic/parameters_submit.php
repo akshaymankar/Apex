@@ -5,7 +5,7 @@
     $template_id=$_POST['template'];
     
     //echo "Template id=$template_id";
-    $query="insert into output values('','$template_id','0')";
+    $query="insert into output values('','$template_id','PREPARING')";
     mysql_query($query) or die('Error Occurred !!'.mysql_error());
     
     $query="select LAST_INSERT_ID()";

@@ -10,15 +10,11 @@ function check_op(opid)
     xhr.onreadystatechange = function() {
         if(xhr.status==200 && xhr.readyState==4){
             var res = xhr.responseText;
-            if (res==1) {
+            if (res=='READY') {
                 alert("Result is Ready..!!");
                 window.location="../viewer/index.php";
-                res_ready=true;
-                
-                //call chebozoom
-                
+                res_ready=true;               
                 xhr_ps_file.open("get","getps.php");
-
                 xhr_ps_file.onreadystatechange = function() {
                     if (xhr.status==200 && xhr.readyState==4) {
                         var res=xhr.responseText;
@@ -28,6 +24,10 @@ function check_op(opid)
                         }
                     }
                 }
+            }
+            else if(res=='FAILED'){
+                alert('Result Failed to be started');
+                res_ready=false;
             }
         }
     }
