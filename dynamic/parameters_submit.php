@@ -40,7 +40,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title>Apex: Route 2 Route</title>
         <script type="text/javascript" charset="utf-8" src="result.js"></script>
     </head>
