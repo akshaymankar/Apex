@@ -79,7 +79,34 @@ function addNewFields(currentId){
 }
 
 function uploadFile(){
+    var file=document.forms["addTemplate"]["file"].value;
+    params="file="+encodeURI(file);
+    
+    xhr.open("POST","uploadCode.php");
+    xhr.setRequestHeader("Content-type", "multipart/form-data");
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            alert("Yo Uploaded !");
+            alert(xhr.responseText);
+        }
+    }
+    xhr.send(params);    
+}
+
+function submit_form(){
     if(!xhr){
         document.getElementById('box').innerHTML="Error Occurred: AJAX Not Supported !!<br>Please Consider Upgrading your browser !";
     }
+    
+    var ul_id='submit_jobs'
+    
+    showBox(ul_id);
+    
+    uploadFile();
+    /*
+    makeExec();
+    writeDB();
+    */
+    //redirect to template.php!
+    //window.location("template.php");
 }

@@ -1,7 +1,7 @@
 <?php
     
     if(!isset($_POST['file']))
-        die(json_encode (Array(1,"File Not Found !")));
+        die(json_encode (Array(1,"File Not Found !","post"=>$_POST,"file"=>$_FILES)));
     
     if($_FILES['file']['type'] != 'application/zip')
         die(json_encode (Array(2,"File is Not a Zip Archive !!")));

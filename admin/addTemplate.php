@@ -1,6 +1,7 @@
 <html>
     <head>
         <script src="js/addTemplate.js" type="text/javascript" ></script>
+        <script src="js/box.js" type="text/javascript"></script>
     </head>
     <body>
         <form enctype="multipart/form-data" name="addTemplate" method='POST' action="newTemplate.php" onsubmit="return validatefield()">
@@ -30,7 +31,7 @@
             </table>
             <table>
                 <tr>
-                    <td><input type="submit" name="Submit" value="Add Template" onclick="showBox()" /></td>
+                    <td><input type="button" name="Submit" value="Add Template" onclick="submit_form()" /></td>
                 </tr>
             </table>
         </form>

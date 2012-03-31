@@ -1,4 +1,4 @@
-function showBox()
+function showBox(ul_id)
 { 
     var width = document.documentElement.clientWidth + document.documentElement.scrollLeft;
 
@@ -29,7 +29,7 @@ function showBox()
     document.body.appendChild(div);
     
     var ul=document.createElement('ul');
-    ul.className="jobs";
-    ul.id="jobs";
+    ul.className=ul_id;
+    ul.id=ul_id;
     div.appendChild(ul);
 } 
