@@ -4,8 +4,8 @@ var changedPrefix = "";
 var curDate = new Date();
 var day = "";
 var month = curDate.getMonth();
-var year = curDate.getFullYear();
-		
+var YEAR = curDate.getFullYear();
+var filedata;		
 if(month < 10)
 {
     month = "0" + month;
@@ -24,25 +24,27 @@ function changeMainContent(thumbnail)
 {   
     GLO_MainType = thumbnail.title;		
   
-    var tempST = document.getElementById("sT");
-    var tempSubType = document.getElementById("subType");
+    var tempST = document.getElementById("subCategoryWrapper");
+    var tempSubType = document.getElementById("subCategory");
+    var tempremoveHeading = document.getElementById('headingForTypeid');
+    if(tempremoveHeading)
+    {
+        $(tempremoveHeading).remove();
+    }
     
     tempST.removeChild(tempSubType);
-    
+        
+    var tempHeading = document.createElement('span');
+    tempHeading.setAttribute('class', 'headingForType');
+    tempHeading.setAttribute('id', 'headingForTypeid');
+    tempHeading.innerHTML = thumbnail.title;
+    tempST.appendChild(tempHeading);
+	
     tempSubType = document.createElement('div');
-    tempSubType.setAttribute('id', 'subType');
+    tempSubType.setAttribute('id', 'subCategory');
     tempST.appendChild(tempSubType);   	
     
-   	
-    var tempHeading = document.createElement('h1');
-    tempHeading.setAttribute('class', 'headingForType');
-    tempHeading.setAttribute('align', 'center');
-    tempHeading.innerHTML = thumbnail.title;
-    tempSubType.appendChild(tempHeading);
-	
-    var brk = document.createElement('br');
-    tempSubType.appendChild(brk);
-		
+   		
                 
     var params="id="+thumbnail.id;
       
@@ -52,22 +54,33 @@ function changeMainContent(thumbnail)
     {
         if (xhr.readyState == 4 && xhr.status == 200)
         {
-            var tempDiv = document.createElement('div');
-            tempDiv.setAttribute('align', 'center');
-            tempDiv.innerHTML = xhr.response;
-            tempSubType.appendChild(tempDiv);
+            tempSubType.innerHTML += xhr.response;
+            
 			
 					
             changedPrefix = thumbnail.name;
             GLO_SubType = thumbnail.alt;		
 				
 				
-            changeYear(document.getElementById(year));
+				
+            changeYear(document.getElementById('year'+YEAR));
             changeMonth(document.getElementById('Id'+parseInt(month,10)));
             //changePrefix(document.getElementById('SubType'+parseInt(month,10)));
             
 
             changeFileList();
+            
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
+            
         }
         else if (xhr.readyState == 4 && xhr.status != 200) 
         {
@@ -86,15 +99,16 @@ function displayYearMonth()
 
 
     var tempYearList = document.createElement('div');
+    
     tempYearList.setAttribute('id', 'year');
-    tempYearList.setAttribute('style', 'float:left; margin-left:25px; margin-right:25px; height:390px; overflow:auto;');
+    tempYearList.setAttribute('style', 'float:left; overflow:auto;');
     tempYearMonth.appendChild(tempYearList);
 
     for(var i=(new Date()).getFullYear(); i>=2001; i--)
     {
         var tempYear = document.createElement('input');
         tempYear.setAttribute('type', 'button');
-        tempYear.setAttribute('id', i);
+        tempYear.setAttribute('id', 'year'+i);
         tempYear.setAttribute('class', 'years');
         tempYear.setAttribute('value', i);
         tempYear.setAttribute('onclick', 'preChangeYear(this)');
@@ -107,7 +121,7 @@ function displayYearMonth()
 		
     var tempMonthList = document.createElement('div');
     tempMonthList.setAttribute('id', 'month');
-    tempMonthList.setAttribute('style', 'float:left;margin-left:25px;margin-right:25px;');
+    tempMonthList.setAttribute('style', 'float:left;');
     tempYearMonth.appendChild(tempMonthList);
 		
     var months = new Array(12);
@@ -140,7 +154,7 @@ function displayYearMonth()
     }  
     
     
-    changeYear(document.getElementById(year));
+    changeYear(document.getElementById('year'+YEAR));
     changeMonth(document.getElementById('Id'+parseInt(month,10)));
 }
 
@@ -159,7 +173,7 @@ function changePrefix(obj)
     GLO_SubType = obj.value;
 		
      
-    /*for(i=1;i<=(document.getElementById('subType')).childNodes.length;i++)
+/*for(i=1;i<=(document.getElementById('subType')).childNodes.length;i++)
         document.getElementById('SubType'+i).style.backgroundColor='#33FFFF';
    
     obj.style.backgroundColor='#f00'; */
@@ -176,10 +190,10 @@ function preChangeYear(obj)
 
 function changeYear(obj)
 {
-    year = obj.id;
-    
+    var temp = obj.id;
+    YEAR = temp.substring(4);
     for(i=(new Date()).getFullYear();i>=2001;i--)
-        document.getElementById(i).style.backgroundColor='#9F9';
+        document.getElementById('year'+i).style.backgroundColor='#9F9';
    
     obj.style.backgroundColor='#f00';
 }
@@ -217,9 +231,9 @@ function changeFileList()
     
     tempFileSelector.removeChild(tempFileNameList);
 	
-	
-    var params="mainType="+GLO_MainType+"&subType="+GLO_SubType+"&changedPrefix="+changedPrefix+"&year="+year+"&month="+month;
-      
+    //alert(GLO_MainType+"_"+);
+    var params="mainType="+GLO_MainType+"&subType="+GLO_SubType+"&changedPrefix="+changedPrefix+"&year="+YEAR+"&month="+month;
+ 
     xhr.open("POST","isFile.php?"+params);
 			
     xhr.onreadystatechange = function ()
@@ -228,9 +242,60 @@ function changeFileList()
         {
             tempFileNameList = document.createElement('div');
             tempFileNameList.setAttribute('id', 'fileNameList');
-            tempFileNameList.setAttribute('style', 'float:left; margin-left:25px; margin-right:25px; height:390px; overflow:scroll;');
+            
             tempFileNameList.innerHTML = xhr.response;
-            tempFileSelector.appendChild(tempFileNameList);
+
+            tempFileSelector.insertBefore(tempFileNameList,tempFileSelector.firstChild);
+
+            //tempFileSelector.appendChild(tempFileNameList);
+
+
+
+
+
+
+
+            $('.filenamebutton').mouseenter(function() {
+                //if($('.toolTip'))
+                //{
+                $('.toolTip').remove();
+                //}
+                //alert(this);
+                tempthis=(this).firstChild;//.childNodes[0];
+
+
+
+                //alert(tempthis.firstChild.id);
+
+                filedata=new Object();
+                filedata.buttonName=this.childNodes[1].value;
+                filedata.fileDir=this.childNodes[2].value;
+                filedata.filename=this.childNodes[3].value;
+                $(tempthis).append('<span class="toolTip"><span href="#" onclick="wayToDisplay(filedata);">View</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span href="#" onclick="wayToDownload(filedata);">Download</span></span>');
+                $('.toolTip').attr('title',this.id);
+
+            });
+
+            $('.filenamebutton').mouseleave(function() {
+                tempTimer = setTimeout("$('.toolTip').remove();",1000);
+            });
+
+            /*
+
+$('.toolTip').mouseover(function() {
+
+clearTimeout(tempTimer);
+
+//disable timer
+
+});
+*/
+
+
+
+
+
+
 
             
             if((tempFileNameList.childNodes.length / 2) == 0)
@@ -285,11 +350,11 @@ function changeFileList()
 }
 */	
 	
-function wayToDisplay(file)
+function wayToDisplay(fileData)
 { 
-    var psFile = file.id;
+    var psFile = fileData.filename;
     var compressedPsFile = psFile + ".gz";
-    var inputImagePath = file.name;
+    var inputImagePath = fileData.fileDir;
     var outputFileName = psFile;
 			
 			
@@ -313,13 +378,12 @@ function wayToDisplay(file)
 }
 
 
-function wayToDownload(file)
+function wayToDownload(fileData)
 { 
-    var psFile = file.id;
+    var psFile = fileData.filename;
     var compressedPsFile = psFile + ".gz";
     var outputFileName = compressedPsFile;
-    var inputImagePath = file.name;
-  
+    var inputImagePath = fileData.fileDir;
   
     window.location.href = inputImagePath + "/" + outputFileName;
 }
@@ -327,6 +391,8 @@ function wayToDownload(file)
 
 $(document).ready(function(){	
     // TODO
-    changeMainContent(document.getElementById("1"));
     displayYearMonth();
+    
+    changeMainContent(document.getElementById("1"));
+    
 });

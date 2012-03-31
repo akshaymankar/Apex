@@ -37,17 +37,10 @@ for ($i = 1; $i <= 31; $i++) {
 
 
     if (is_file($filename)) {
-        $temp = "<input type='button' class='file' id='" . $i . "' name='" . $fileDir . "' value='" . $psFilename . "'/>";
-        echo "$temp";
-
-        $temp = "<input type='button' class='disDownLink' id='" . $psFilename . "' name='" . $fileDir . "' value='" . View . "' onclick='wayToDisplay(this);'/>";
-        echo "$temp";
         
-        $temp = "<input type='button' class='disDownLink' id='" . $psFilename . "' name='" . $fileDir . "' value='" . Download . "' onclick='wayToDownload(this);'/>";
+        $temp = "<div class='filenamebutton file'><span>$psFilename</span><input type='hidden' value='filenamebutton$i' /><input type='hidden' value='$fileDir' /><input type='hidden' value='$psFilename'/></div>";
         echo "$temp";
-        
-        $break = "<br/>";
-        echo "$break";
+     
     }
 }
 ?>

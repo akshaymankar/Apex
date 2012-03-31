@@ -30,8 +30,12 @@ if ($handleForFileTypes !== FALSE) {
                     $firstSubType = $data[1];
                 }
 
-                $temp = "<input type='button' class='subtype' id='SubType + "."$j-1"."' name='" . $data[1] . "' value='" . $data[0] . "' onclick='preChangePrefix(this);'/>";
-                echo "$temp";
+                if($countToEnd > 1)
+                {
+					$tempj = $j - 1;
+					$temp = "<input type='button' class='subtypeclass' id='SubType+".$tempj."' name='" . $data[1] . "' value='" . $data[0] . "' onclick='preChangePrefix(this);'/>";
+					echo "$temp";
+				}
             }
         }
     }

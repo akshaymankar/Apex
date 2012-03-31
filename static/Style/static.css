@@ -6,50 +6,65 @@
         Purpose of the stylesheet follows.
 */
 
-#wrapper
+body
 {
-    width: 950px;
-    margin: auto;
+text-align:center;
+margin: 10 auto;
+width:800px;
+overflow:auto;
+height:560px;
 }
 
 
-.content-head
+
+#banner
 {
     width: 100%;
-    text-align: center;
-    display:inline;
+    margin-top:5px;
     color:blue;
-    font-size:300%;
+    font-size:200%;
+    font-family:Verdana, Geneva, sans-serif;
+	font-style:normal;
+
 }
 
 
 #content-wrapper
 {
-    width: 100%;
+position:relative;
+width: 100%;
+height:100%;
 }
 
 
 #sidebar
 {
     width: 20%;
+    height:100%;
+    
     float: left;
     background-color: #99FF99;
     border-radius: 20px;
     border: 2px;
     border-color: #99FF99;
-    padding-top: 20px;
+    
     alignment-adjust: central;
+    position:relative;
+	overflow:auto;
 }
 
 
 #main-area
 {
-    width: 80%;
+	width: 79%;
+	height:100%; 
     float: right;
     background-color: #FD8;
     border-radius: 20px;
     border: 2px;
     border-color: #99FF99;
+	position:relative;
+	overflow:auto;
 }
 
 
@@ -75,10 +90,65 @@
     margin-bottom:15px;
     height:20px;
     font-size:125%;
+    font-weight:bolder;
+}
+
+#subCategoryWrapper
+{
+position:absolute;
+width:100%;
+margin-top:5px;
+
+}
+
+#subCategory
+{
+height:50px;
+margin-top:5px;
+
+position:absolute;
+top:40px;
+
 }
 
 
-.subtype
+
+#fileSelector
+{
+
+ overflow:auto;
+ position:absolute;
+ top:100px;
+ left:10px;
+ width:90%
+}
+
+#fileNameList
+{
+height:390px;
+float:left;
+overflow:auto;
+width:70%;
+position:relative;
+}
+
+
+            
+
+#yearMonth
+{
+display:inline-block;
+float:right;
+position:relative;
+
+}
+
+#year
+{
+margin-right:15px;
+}
+
+.subtypeclass
 {
     display:inline;
     margin-left:25px;
@@ -90,38 +160,56 @@
     color:#000000;
     background-color:#33FFFF;
     border-radius: 10px;
+
 }
 
 
 .file
 {
-    display:inline;
+   
+
     margin-top:1px;
     margin-bottom:1px;
     margin-left:1px;
     margin-right:1px;
-    height:30px;
-    border: 2px solid #000000;
-    font-size:100%;
+
+    height:20px;
+    display:block;
+    
+
     color:#000000;
     background-color:#99FF99;
+
+padding:15px;
+
+text-align:left;
+
+margin:5px;
+
 }
 
-
-.disDownLink
+.filenamebutton span
 {
-    display:inline;
-    margin-top:1px;
-    margin-bottom:1px;
-    margin-left:1px;
-    margin-right:1px;
-    height:30px;
-    border: 2px solid #000000;
-    font-size:100%;
-    color:blue;
-    background-color:#99FF99;
-    border-radius: 20px;
+padding-top:10px;
+padding-bottom:10px;
+
 }
+
+
+
+.toolTip {
+	background-color:yellow;
+        padding: 10px;
+        color: blue;
+        cursor:help;
+        position: relative;
+	border-radius:10px;
+margin-left:15px;
+display:inline;
+}
+
+
+
 
 
 .years
@@ -156,7 +244,9 @@
 
 .headingForType
 {
-    display:inline;
+    display:block;
     color:blue;
-    font-size:250%;
+    font-size:220%;
+    text-align:center;
+	
 }
