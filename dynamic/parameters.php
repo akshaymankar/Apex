@@ -62,20 +62,9 @@
     }
 
 ?>
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    
-        <title>Apex: Route to Route</title>
-        
-    </head>
-    <body>
-        <form action="parameters_submit.php" method="post" accept-charset="utf-8">
-            <?php
-                getFormInputs_Parameters($res);
-            ?>
-        <p><input type="submit" value="Continue &rarr;"></p>
-        </form>
-    </body>
-</html>
+<form action="parameters_submit.php" method="post" accept-charset="utf-8">
+    <?php
+        getFormInputs_Parameters($res);
+    ?>
+<p><input type="submit" value="Continue &rarr;" /></p>
+</form>

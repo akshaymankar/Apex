@@ -1,0 +1,9 @@
+pssplit	--	script that calls 'psselect' to split a multiple-page PostScript file in individual files.
+		This script performs sequential calls to the psselect program, part of the PSUtils package.
+
+
+
+Installation
+------------
+  1) Copy the pssplit script to a location in your PATH environment variable,
+     e.g. /usr/local/bin
