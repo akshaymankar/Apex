@@ -75,9 +75,10 @@
 
 	.docviewerthumbnails
 	{
-		display:inline;
+		display:block;
 		margin-right:25px;
 		height: 300px;
+
 	}
 	
 	div#main 
@@ -93,6 +94,20 @@
 		border-style:solid;
 	}
 	
+
+#docviewer a
+{
+text-decoration:none;
+}
+
+.caption
+{
+display:inline-block;
+color:#FFF;
+margin-top:-16px;
+}
+
+
 	</style>
     
     
@@ -135,18 +150,18 @@
         var params="file="+psfile;
         params+="&tiledir="+tiledir;
     
-        xhr.open("POST","ps2jpg&ps2png.php?"+params);
+        xhr.open("POST","ps2jpg.php?"+params);
         xhr.onreadystatechange = function ()
         {
             if (xhr.readyState == 4 && xhr.status == 200)
             {
-				var jpgList=new Array();
+				var pageNameList=new Array();
 							         
-				jpgList=eval('(' + xhr.responseText + ')');
+				pageNameList=eval('(' + xhr.responseText + ')');
             	
 				var tempDocViewer = document.getElementById("docviewer");
 
-            	for(var i=0;i<jpgList.length;i++)
+            	for(var i=0;i<pageNameList.length;i++)
             	{
 					var imageNumber = i + 1; 
 
@@ -154,7 +169,7 @@
 					var tempAnchor = document.createElement('a');
 					tempAnchor.setAttribute('id', imageNumber);
 					tempAnchor.setAttribute('href', '#');
-					tempAnchor.setAttribute('onclick', 'displayInViewer(this.id);');
+					tempAnchor.setAttribute('onclick', 'psToPng(this.id);');
 					tempDocViewer.appendChild(tempAnchor);
 					
 					var tempImg = document.createElement('img');
@@ -164,10 +179,21 @@
 					tempImg.setAttribute('style', 'height:200px;margin:20px;');//todo
 					tempImg.setAttribute('src','<?php echo $tiledir; ?>/'+imageNumber+'.jpg');
 					tempAnchor.appendChild(tempImg);						
-				}
+				
+					//var tempNewline = document.createElement('br');
+					//tempAnchor.appendChild(tempNewline);
+
+
+					var tempCaption = document.createElement('span');
+
+					tempCaption.innerHTML = pageNameList[i];
+					tempCaption.setAttribute('class','caption');
+					tempAnchor.appendChild(tempCaption);
+
+			}
 				
 				
-				displayInViewer('1');
+				psToPng('1');
 			}
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
@@ -179,6 +205,33 @@
 	}
 
 
+	function psToPng(imgNumber)
+	{
+		var psfile = "<?php echo $fileName; ?>";
+        var tiledir= "<?php echo $tiledir; ?>";
+        
+        var params="file="+psfile;
+        params+="&tiledir="+tiledir;
+		params+="&pageNo="+imgNumber;
+    
+        xhr.open("POST","ps2png.php?"+params);
+        xhr.onreadystatechange = function ()
+        {
+            if (xhr.readyState == 4 && xhr.status == 200)
+            {
+				//alert(xhr.responseText);
+				displayInViewer(imgNumber);
+			}
+            else if (xhr.readyState == 4 && xhr.status != 200) 
+            {
+				alert("xhr status :" + xhr.status);//TODO There should be error page
+            }
+		}
+        
+        xhr.send(null);
+	}
+	
+	
 	function displayInViewer(imgNumber) 
     {
         GLO_ImgNumber=imgNumber;
