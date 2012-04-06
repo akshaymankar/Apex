@@ -220,7 +220,7 @@ margin-top:-16px;
             if (xhr.readyState == 4 && xhr.status == 200)
             {
 				//alert(xhr.responseText);
-				//displayInViewer(imgNumber);
+				displayInViewer(imgNumber);
 			}
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
