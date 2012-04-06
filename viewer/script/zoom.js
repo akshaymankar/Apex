@@ -121,15 +121,16 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
 	topTile[0][0] = midHeight - 128;
 	leftTile[0][0] = midWidth - 128;
 
-
+    
 	var tempImg = document.createElement('img');
-	tempImg.setAttribute('id', '0');
+	/*
+    tempImg.setAttribute('id', '0');
 	tempImg.setAttribute('class', 'tile');
-	//tempImg.setAttribute('name', '');
+	tempImg.setAttribute('name', '');
 	tempImg.setAttribute('style', 'height:256px; width:256px; top:'+topTile[0][0]+'px; left:'+leftTile[0][0]+'px;');
 	tempImg.setAttribute('src',fileName[0][0]);
 	tempWell.appendChild(tempImg);
-	
+	*/
 	
 	previousTopOfFirst = topTile[0][0];
 	previousLeftOfFirst = leftTile[0][0];
@@ -144,6 +145,7 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
 	
 	initPan();
 	initCreatePanRectangleFrame();
+    advanceZoomUp();
 }
 
 
