@@ -17,7 +17,7 @@
         }
     }
     exec("mkdir $dirname");
-    $cmd1 = "gs -sDEVICE=jpeg -r20x20 -sOutputFile=$dirname/%d.jpg < $file";
+    $cmd1 = "gs -sDEVICE=jpeg -r16x16 -sOutputFile=$dirname/%d.jpg < $file";
     exec($cmd1);
 
 
