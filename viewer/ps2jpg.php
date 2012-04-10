@@ -43,7 +43,7 @@ array_pop($pageNameList);
     opendir($dirname);
     
     /*
-    $fileNamelist=array();
+   // $fileNamelist=array();
     while($jpgFile=readdir())
     {
 		if(preg_match('/.jpg$/',$jpgFile) > 0)
