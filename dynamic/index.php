@@ -30,16 +30,24 @@
             function selectTemplate()
             {
                 var template=document.forms["template"]["template"].value;
-                var params="template="+template;
-                xhr.open("POST", "parameters.php");
-                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange=function(){
-                    if(xhr.readyState==4 && xhr.status==200){
-                        var params_div=document.getElementById('params');
-                        params_div.innerHTML=xhr.responseText;
-                    }
+                if(template==-1)
+                {
+                    document.getElementById("params").innerHTML="";
                 }
-                xhr.send(params);
+                else
+                {
+                        
+                    var params="template="+template;
+                    xhr.open("POST", "parameters.php");
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange=function(){
+                        if(xhr.readyState==4 && xhr.status==200){
+                            var params_div=document.getElementById('params');
+                            params_div.innerHTML=xhr.responseText;
+                        }
+                    }
+                    xhr.send(params);
+                }
             }
         </script>
         <title>Apex : Route 2 Root</title> 
@@ -47,7 +55,8 @@
     <body>
         <div id="template">
             <form action="parameters.php" name="template" method="post" accept-charset="utf-8">
-                Select Template: <select name="template" id="template" onclick="selectTemplate()">
+                Select Template: <select name="template" id="selTemplate" onclick="selectTemplate()">
+                    <option value="-1" id="defaultOpt">--Please Select One--</option>
                 <?php
                     getTemplates();
                 ?>
