@@ -3,7 +3,7 @@
     if (isset($_SESSION['opid'])) {
         $opid=$_SESSION['opid'];
         $file="../output/dynamic/$opid/".$_SESSION['file'];
-        $dirname="../tile/dynamic/$opid";
+        $dirname="../tile/dynamic/$opid/";
         $pageNo="1";//error
     }
     else {
@@ -25,9 +25,6 @@
     
     $outputFile = "$dirname"."$pageNo";
     
-    $cmd1 = "pssplit $pageNo $file $outputFile";
-    exec($cmd1);
-     
     if($pageNo<10)
     {
 		$singlePagePsFile = $dirname.$pageNo."_000".$pageNo.".ps";
@@ -45,6 +42,17 @@
 		$singlePagePsFile = $dirname.$pageNo."_".$pageNo.".ps";
 	}
 	
-	$cmd2 = "gs -sDEVICE=png16m -r300x300 -sOutputFile=$dirname/$pageNo.png < $singlePagePsFile";
-    exec($cmd2); 
+	
+	if(!is_file($singlePagePsFile))
+	{
+		$cmd1 = "pssplit $pageNo $file $outputFile";
+		exec($cmd1);
+    } 
+    
+    
+	if(!is_file($outputFile.".png"))
+	{
+		$cmd2 = "gs -sDEVICE=png16m -r300x300 -sOutputFile=$outputFile.png < $singlePagePsFile";
+		exec($cmd2); 
+	}
 ?>

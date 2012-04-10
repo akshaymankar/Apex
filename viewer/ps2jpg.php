@@ -3,7 +3,7 @@
     if (isset($_SESSION['opid'])) {
         $opid=$_SESSION['opid'];
         $file="../output/dynamic/$opid/".$_SESSION['file'];
-        $dirname="../tile/dynamic/$opid";
+        $dirname="../tile/dynamic/$opid/";
     }
     else {
         
@@ -16,10 +16,19 @@
             die('Died');
         }
     }
-    exec("mkdir $dirname");
-    $cmd1 = "gs -sDEVICE=jpeg -r16x16 -sOutputFile=$dirname/%d.jpg < $file";
-    exec($cmd1);
-
+    
+    
+    if(!is_dir($dirname))
+    {
+		exec("mkdir $dirname");
+	}
+	
+	
+    if(!is_file($dirname."1.jpg"))
+    {
+		$cmd1 = "gs -sDEVICE=jpeg -r16x16 -sOutputFile=$dirname%d.jpg < $file";
+		exec($cmd1);
+	}
 
 
 //    echo $cmd1;

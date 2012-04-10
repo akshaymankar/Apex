@@ -63,7 +63,7 @@
 
 	div#docviewer
 	{
-		background-color:blue;
+		background-color:#668CFF;
 		float:left;
 		overflow:auto;
 		border:5px;
@@ -71,6 +71,9 @@
 		border-style:solid;
 		padding:10px;
 		margin:0; 
+
+		border-radius:20px;
+
 	}
 
 	.docviewerthumbnails
@@ -81,6 +84,17 @@
 
 	}
 	
+		
+	#docviewer span
+	{
+	color:black !important;
+	font-weight:bolder;
+	font-family:sans-serif;
+	}
+
+	
+	
+	
 	div#main 
 	{
 		font-family: sans-serif;
@@ -90,8 +104,12 @@
 		background-color: #FFFFFF;
 		font-size: 0.7em;
 		border: 5px;
-		border-color:black;
+			border-color:black;
 		border-style:solid;
+
+
+	border-radius:20px;
+
 	}
 	
 
