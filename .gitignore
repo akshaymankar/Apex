@@ -9,3 +9,6 @@ tile/
 
 #nbproject
 admin/nbproject
+
+#mysql configs
+mysql.php
