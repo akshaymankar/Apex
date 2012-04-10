@@ -1,0 +1,83 @@
+var largestId=0;
+
+function validatefield()
+{
+    var template_name=document.getElementById('template_name').value; 
+    var file_name=document.getElementById('file');
+     
+    if(template_name!=""){
+        for(var i=0;i<largestId || largestId==0 ;i++)
+        {
+            var param_name=document.getElementById('param_name'+i);
+            
+            if(file_name.value==''){
+                alert ('Please Select the proper file!');
+                file_name.focus();  
+                file_name.style.borderStyle="outset";
+                file_name.style.borderColor="RED";  
+                return false;
+            }
+            else if(param_name.value == "")
+            {
+                alert ('Please give input parameter name');
+                param_name.focus();  
+                param_name.style.borderStyle="outset";
+                param_name.style.borderColor="RED";
+                return false;
+            }
+        }
+        return true;
+    }else{
+            alert('Please Give The Template Name');
+            document.getElementById('template_name').focus();
+            document.getElementById('template_name').style.borderStyle="outset";
+            document.getElementById('template_name').style.borderColor="RED";
+            return false;
+    }
+}//end of function validatefield
+
+function addNewFields(currentId){
+    if(currentId<largestId)
+        return;
+    largestId++;
+    var tbl=document.getElementById('addTemplateTable');
+    
+    var row=document.createElement('tr');
+    row.setAttribute('class', 'template');
+    
+    var tdName=document.createElement('td');
+    
+    var inputParamName=document.createElement('input');
+    inputParamName.setAttribute('name', 'param_name[]');
+    inputParamName.setAttribute('id', 'param_name'+largestId);
+    inputParamName.setAttribute('onchange', 'addNewFields('+largestId+')');
+    inputParamName.setAttribute('type', 'text');
+    
+    var tdType=document.createElement('td');
+    
+    var selectType=document.createElement('select');
+    selectType.setAttribute('name', 'param_type[]');
+    selectType.setAttribute('class', 'param_type');
+    selectType.setAttribute('id', 'param_type'+largestId);
+    
+    var optInt=document.createElement('option');
+    optInt.setAttribute('value', 'INT');
+    optInt.innerHTML='Integer Number';
+    
+    var optStr=document.createElement('option');
+    optStr.setAttribute('value', 'String');
+    optStr.innerHTML='Text';
+    
+    var optFloat=document.createElement('option');
+    optFloat.setAttribute('value', 'FLOAT');
+    optFloat.innerHTML='Decimal Number';
+    
+    selectType.appendChild(optInt);
+    selectType.appendChild(optStr);
+    selectType.appendChild(optFloat);
+    tdName.appendChild(inputParamName);
+    tdType.appendChild(selectType);
+    row.appendChild(tdName);
+    row.appendChild(tdType);
+    tbl.appendChild(row);  
+}
