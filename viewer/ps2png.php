@@ -20,7 +20,7 @@
     }
    
    
-    //exec("mkdir $dirname");
+    ////exec("mkdir $dirname");
     
     
     $outputFile = "$dirname"."$pageNo";
