@@ -16,7 +16,7 @@
 
     function getFormInputs_Parameters($res) {
         ?>
-        <input type="hidden" name="template" value="<?php echo $_POST['template']; ?>">
+        <input type="hidden" name="template" value="<?php echo $_POST['template']; ?>" />
         <table border="0">
         <?php
         while($row=mysql_fetch_assoc($res)) {
@@ -62,6 +62,7 @@
     }
 
 ?>
+<h1>Enter Values for Parameters</h1>
 <form action="parameters_submit.php" method="post" accept-charset="utf-8">
     <?php
         getFormInputs_Parameters($res);

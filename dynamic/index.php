@@ -50,23 +50,27 @@
                 }
             }
         </script>
+        <link rel="stylesheet" href="css/template.css" />
         <title>Apex : Route 2 Root</title> 
     </head>
     <body>
-        <div id="template">
-            <form action="parameters.php" name="template" method="post" accept-charset="utf-8">
-                Select Template: <select name="template" id="selTemplate" onclick="selectTemplate()">
-                    <option value="-1" id="defaultOpt">--Please Select One--</option>
-                <?php
-                    getTemplates();
-                ?>
-                </select>
-            <!--
-            <p><input type="submit" value="Continue" /></p>
-            -->
-            </form>
-        </div>
-        <div id="params">
+        <div class="divMain">
+            <div id="template" class="divTemplate" >
+                <form action="parameters.php" name="template" method="post" accept-charset="utf-8">
+                    <h2>Select Template: </h2>
+                    <select name="template" id="selTemplate" onclick="selectTemplate()" size="10" >
+                        <option value="-1" id="defaultOpt">--Please Select One--</option>
+                    <?php
+                        getTemplates();
+                    ?>
+                    </select>
+                <!--
+                <p><input type="submit" value="Continue" /></p>
+                -->
+                </form>
+            </div>
+            <div id="params" class="divParams">
+            </div>
         </div>
     </body>
 </html>
