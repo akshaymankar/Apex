@@ -35,6 +35,16 @@
                     <?php
                     break;
                 case 'DATE':
+                    ?>
+                        <tr>
+                            <td><?php echo $row['name']; ?></td>
+                            <td><input type="text" id="param<?php echo $row['parameter_id'];?>" value="11th April 2012" /></td>
+                            <script>
+                                AnyTime.picker( "<?php echo $row['parameter_id'];?>",{ format: "%D %M %z", firstDOW: 1 });
+                            </script>
+                        </tr>
+                    <?php
+                    break;
                 case 'DATE_TIME':
                 case 'TIME':
                     break;

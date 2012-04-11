@@ -42,7 +42,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Apex: Route 2 Route</title>
-        <script type="text/javascript" charset="utf-8" src="result.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/result.js"></script>
     </head>
     <body onload="check_op(<?php echo $output_id; ?>)">
         <p>Please wait while the output is ready</p>
