@@ -1,7 +1,10 @@
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/anytime.js"></script>
 <?php
     require_once 'mysql.php';
     if(!isset($_POST['template'])) {
-        die('Error Occured !!<br/>Please press "Back" button of your browser and submit the form again.<br>Inconvinience is regeretted.');
+        //die('Error Occured !!<br/>Please press "Back" button of your browser and submit the form again.<br>Inconvinience is regeretted.');
+        $_POST['template']="4";
     }
     
     $template_id = $_POST['template'];
@@ -40,7 +43,8 @@
                             <td><?php echo $row['name']; ?></td>
                             <td><input type="text" id="param<?php echo $row['parameter_id'];?>" value="11th April 2012" /></td>
                             <script>
-                                AnyTime.picker( "<?php echo $row['parameter_id'];?>",{ format: "%D %M %z", firstDOW: 1 });
+                                AnyTime.picker( "param<?php echo $row['parameter_id'];?>",{ format: "%D %M %z", firstDOW: 1 });
+//                                alert("Loaded !");
                             </script>
                         </tr>
                     <?php

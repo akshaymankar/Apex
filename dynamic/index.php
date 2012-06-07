@@ -20,6 +20,10 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/anytime.js"></script>
+        <link rel="stylesheet" href="css/template.css" />
+        <link rel="stylesheet" href="css/anytime.css" />
         <script type="text/javascript">
             xhr=false;
             if (window.XMLHttpRequest)
@@ -30,30 +34,46 @@
             function selectTemplate()
             {
                 var template=document.forms["template"]["template"].value;
+                var params_div = document.getElementById("params");
                 if(template==-1)
                 {
-                    document.getElementById("params").innerHTML="";
+//                    while(params_div.hasChildNodes())
+//                    {
+//                        Anytime.noPicker(params_div.firstChild.getAttribute(id));
+//                        params_div.removeChild(params_div.firstChild);
+//                    }
+                    params_div.innerHTML="";
                 }
                 else
                 {
-                        
+                    while(params_div.children.length > 0)
+                    {
+                        try{
+                            AnyTime.noPicker(params_div.firstChild.getAttribute("id"));
+                        } catch (e){}
+                        params_div.removeChild(params_div.firstChild);
+                    }   
                     var params="template="+template;
                     xhr.open("POST", "parameters.php");
                     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhr.onreadystatechange=function(){
                         if(xhr.readyState==4 && xhr.status==200){
-                            var params_div=document.getElementById('params');
+                            //var params_div=document.getElementById('params');
                             params_div.innerHTML=xhr.responseText;
+                            
+                            //AnyTime.noPicker();    //Remove All previous pickeres
+                            
+                            var scripts=params_div.getElementsByTagName("script");
+                            for(i=0;i<scripts.length;i++)
+                            {
+                                eval(scripts[i].textContent);
+                            }
                         }
                     }
                     xhr.send(params);
                 }
             }
         </script>
-        <link rel="stylesheet" href="css/template.css" />
-        <link rel="stylesheet" href="css/anytime.css" />
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/anytime.js"></script>
         <title>Apex : Route 2 Root</title> 
     </head>
     <body>
