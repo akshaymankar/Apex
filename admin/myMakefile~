@@ -1,0 +1,2 @@
+all:
+	gcc /var/www/Apex_notGit/Admin/hello.c -o hello2
