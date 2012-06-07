@@ -1,2 +1,0 @@
-all:
-	gcc /var/www/Apex_notGit/Admin/uploads/temp.c -o /var/www/Apex_notGit/Admin/executable/temp
