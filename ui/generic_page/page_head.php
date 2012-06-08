@@ -1,7 +1,10 @@
   <title>Apex - </title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="stylesheet" href="./css/page.css" type="text/css" charset="utf-8"/>
-    	
+  	
+<link rel="shortcut icon" href="../favicon.ico"> </link>
+
+  	
     	<script type="text/javascript" src="./lib/jquery.js"></script>
     	<script type="text/javascript" src="./lib/print.js"></script>
         

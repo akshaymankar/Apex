@@ -14,3 +14,6 @@ admin/nbproject
 dynamic/mysql.php
 ui/lib/mysql.php
 admin/mysql.php
+#sql
+sql/
+>>>>>>> Final_Viewer

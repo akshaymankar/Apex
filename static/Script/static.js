@@ -60,9 +60,24 @@ function changeMainContent(thumbnail)
 					
             changedPrefix = thumbnail.name;
             GLO_SubType = thumbnail.alt;		
+
+
+
+if(thumbnail.id==1)
+{
+$(thumbnail).addClass('highlightedthumbnail');
+}
+
+
+//TODO...for highlighting the first subtype
 				
-				
-				
+
+
+if(document.getElementById('SubType+1')!=null)
+{				
+document.getElementById('SubType+1').style.backgroundColor="black";
+document.getElementById('SubType+1').style.color="white";
+}
             changeYear(document.getElementById('year'+YEAR));
             changeMonth(document.getElementById('Id'+parseInt(month,10)));
             //changePrefix(document.getElementById('SubType'+parseInt(month,10)));
@@ -73,11 +88,6 @@ function changeMainContent(thumbnail)
             
             
 
-            
-            
-            
-            
-            
             
             
             
@@ -171,12 +181,19 @@ function changePrefix(obj)
 {
     changedPrefix = obj.name;
     GLO_SubType = obj.value;
-		
-     
-/*for(i=1;i<=(document.getElementById('subType')).childNodes.length;i++)
-        document.getElementById('SubType'+i).style.backgroundColor='#33FFFF';
-   
-    obj.style.backgroundColor='#f00'; */
+
+
+
+//TODO
+
+for(i=1;i<=(document.getElementById('subCategory')).childNodes.length;i++)
+{ 
+document.getElementById('SubType+'+i).style.backgroundColor='#33CCFF';
+document.getElementById('SubType+'+i).style.color='black';
+}
+    obj.style.backgroundColor='black'; 
+    obj.style.color='white'; 
+
 }
 	
 	
@@ -193,9 +210,12 @@ function changeYear(obj)
     var temp = obj.id;
     YEAR = temp.substring(4);
     for(i=(new Date()).getFullYear();i>=2001;i--)
-        document.getElementById('year'+i).style.backgroundColor='#9F9';
-   
-    obj.style.backgroundColor='#f00';
+{ //TODO
+        document.getElementById('year'+i).style.backgroundColor='#33CCFF';
+ 	document.getElementById('year'+i).style.color='black';
+}  
+    obj.style.backgroundColor='black';
+	obj.style.color='white';
 }
 	
 	
@@ -212,9 +232,12 @@ function changeMonth(obj)
     month = obj.name;
 
     for(i=1;i<=12;i++)
-        document.getElementById('Id'+i).style.backgroundColor='#9F9';
-    
-    obj.style.backgroundColor='#f00';
+{
+        document.getElementById('Id'+i).style.backgroundColor='#33CCFF';
+	document.getElementById('Id'+i).style.color='black'; 
+}   
+    obj.style.backgroundColor='black';
+	obj.style.color='white';
 
 
     if(month < 10)
@@ -394,5 +417,12 @@ $(document).ready(function(){
     displayYearMonth();
     
     changeMainContent(document.getElementById("1"));
-    
+
+   
+$("#sidebar > img").bind("click",function(){
+
+	$("#sidebar > img[class~='highlightedthumbnail']").removeClass('highlightedthumbnail');
+	$(this).addClass('highlightedthumbnail');
+});
+ 
 });
