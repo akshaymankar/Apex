@@ -6,7 +6,8 @@
         border: 8px solid #3366FF;
         -webkit-box-shadow: rgba(255,255,255,0.6) 0px 2px 12px;
         -moz-box-shadow:  rgba(255,255,255,0.6) 0px 2px 12px;
-        padding: 10px 50px 10px 50px;
+        
+	padding: 10px 50px 10px 50px;
         position:relative;
 	display:none;
 	
@@ -14,6 +15,11 @@
 		        
     }
 
+
+#see_id
+{
+display:inline-block;
+}
 
 
 
@@ -95,10 +101,14 @@ display:inline-block;
 
 #closebutton
 {
+float:right;
 width:30px;
 height:30px;
 position:absolute;
-left:380px;
+
+right:3px;
 top:2px;
+
+cursor:pointer;
 
 }

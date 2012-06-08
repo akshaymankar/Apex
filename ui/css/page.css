@@ -6,8 +6,9 @@ ul#navigation {
     right: 10px;
     list-style: none;
     z-index:999999;
-    width:721px;
+float:right;
 }
+
 ul#navigation li {
     width: 103px;
     display:inline;
@@ -39,9 +40,10 @@ ul#navigation li a:hover{
 }
 ul#navigation li a span{
     letter-spacing:2px;
-    font-size:11px;
-    color:#60ACD8;
-    text-shadow: 0 -1px 1px #fff;      
+    font-size:12px;	
+font-weight:bold;
+color:black;
+text-shadow: 0 -1px 1px #fff;      
 }
 ul#navigation .home a{
     background-image: url(../generic_page_images/home.png);

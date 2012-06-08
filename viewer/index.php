@@ -1,7 +1,7 @@
 <?php    
     session_start();
 
-    include '../dynamic/mysql.php';
+    include '../lib/mysql.php';
 
     if(!isset($_SESSION['opid'])) {
         //print_r($_SESSION);
@@ -43,8 +43,18 @@
 ?>
 <html>
 <head>
-    <title>APEX : CheBoZ</title>
+	
 
+    <title>Apex - Viewer</title>
+
+
+<?php
+/////////////////////////////////////////////////////////////////////
+require_once('./viewer_generic_page/generic_page/page_head.php');
+/////////////////////////////////////////////////////////////////////
+?>
+
+	
 
 	<style type="text/css">
 	<!--   @import url(CSS/zoom.css);-->
@@ -163,7 +173,11 @@ margin-top:-16px;
         var psfile = "<?php echo $fileName; ?>";
         var tiledir= "<?php echo $tiledir; ?>";
 		GLO_MainFileDir = psfile + '_Dir';    
-        
+       
+
+
+
+ 
         
         var params="file="+psfile;
         params+="&tiledir="+tiledir;
@@ -225,7 +239,10 @@ margin-top:-16px;
 
 	function psToPng(imgNumber)
 	{
-		var psfile = "<?php echo $fileName; ?>";
+
+$(".ajax-loader").show();
+	
+	var psfile = "<?php echo $fileName; ?>";
         var tiledir= "<?php echo $tiledir; ?>";
         
         var params="file="+psfile;
@@ -305,13 +322,21 @@ margin-top:-16px;
 
 
 <body>   
+<div style="height:20px;">
+<?php
+////////////////////////////////////////////////////////////////////
+require_once('./viewer_generic_page/generic_page/page_body.php');
+////////////////////////////////////////////////////////////////////
+?>
+</div>
+
 	
 	<input type="hidden" id="opFile" name="opFile" value="<?php echo $fileName?>">	
 	
 	
 	<?php
 	
-		echo '<script type="text/javascript">ps2jpg();</script>';
+		echo '<script type="text/javascript">$(".ajax-loader").show();ps2jpg();</script>';
 
 	?>
 	
@@ -321,8 +346,12 @@ margin-top:-16px;
     
     
 	<div id="main">
-		<div id="viewer" class="viewer" style="width:77%;height:100%">
-		</div>
+
+<img src="resource/ajax-loader.gif" style="position:absolute;left:50%;width:100px;height:100px;top:50%;z-index:100;" class="ajax-loader" />
+	
+<div id="viewer" class="viewer" style="width:77%;height:100%">
+	
+	</div>
 	</div>	
 </body>
 </html>

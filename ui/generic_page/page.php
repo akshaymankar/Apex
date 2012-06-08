@@ -9,6 +9,9 @@ require_once('../lib/sessioncode.php');
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="stylesheet" href="../css/page.css" type="text/css" charset="utf-8"/>
     	
+<link rel="shortcut icon" href="/Apex/ui/favicon.ico"> </link>
+
+
     	<script type="text/javascript" src="../lib/jquery.js"></script>
     	<script type="text/javascript" src="../lib/print.js"></script>
         
@@ -70,6 +73,7 @@ require_once('../lib/sessioncode.php');
             text-transform:uppercase;
             text-decoration:none;
         }
+
     </style>
         
 </head>        
@@ -103,7 +107,8 @@ require_once('../lib/sessioncode.php');
 Plese Select type of Output:
         <ul>
             <li><a href="../../dynamic/">Dynamic Graph</a></li>
-            <li><a href="../../static/staticFileSelector.php">Static Graphs</a></li>
+
+            <li><a href="../../static/index.php">Static Graphs</a></li>
         </ul>
 
 

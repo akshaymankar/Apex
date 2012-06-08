@@ -1,5 +1,13 @@
 <html>
     <head>
+<title>Apex - Static Plots</title>
+        
+<?php
+/////////////////////////////////////////////////////////////////////
+require_once('./static_generic_page/generic_page/page_head.php');
+/////////////////////////////////////////////////////////////////////
+?>
+
         <title>Static</title>
 
         <meta http-equiv="Content-Type" content="text/html;">
@@ -19,6 +27,14 @@
 
 
     <body>
+
+<div style="height:20px;">
+<?php
+////////////////////////////////////////////////////////////////////
+require_once('./static_generic_page/generic_page/page_body.php');
+////////////////////////////////////////////////////////////////////
+?>
+</div>
 
         <h1 id="banner">GRAPES-3 DATA Monitoring Plots</h1>
 

@@ -10,7 +10,8 @@
         
     <link rel="stylesheet" href="css/homepage.css" type="text/css" charset="utf-8"/>
 		
-	
+	<title>Apex - The Route to ROOT</title>
+
 		<script src="./lib/jquery.js"></script>
 		
 		<script src="./lib/lightbox.js"></script>
@@ -131,6 +132,12 @@ $('#signin').click(function(e)
 				//$("#sign_up").find("input:first").focus();
 				//},2000);	
 				
+
+if((navigator.userAgent).search("Chrome")==-1)
+{
+	$("#name").focus();
+}
+
 				if($.cookies.get("remember") == "remember")
 				{
 						
@@ -138,42 +145,73 @@ $('#signin').click(function(e)
 						document.getElementById("password").focus();
 						
 				}
-								
-				     
-				}
-		});
+	
+
+
+}
+	});
 				
 		e.preventDefault();
 		
 }); //end of .click
             
-            
-            
+
+
+/*
+
+
+$('#sign_up').keypress(function(e) {
+	
+	var e=window.event || e ;
+
+//alert(e.keyCode);
+
+	if(e.keyCode == '9')
+	{
+$("#name").focus();	
+
+	}
+
+	});
+        
+*/
+      
 $('#name').keypress(function(e) {
 	
 	var e=window.event || e ;
 
-	if(e.which == '13')
+	if(e.keyCode == '13')
 	{
-	document.getElementById("password").focus();
+	$("#password").focus();
 	}
 
 	});
             
+            
+
             
 $('#password').keypress(function(e) {
 	
 	var e=window.event || e ;
 
-	if(e.which == '13')
+	if(e.keyCode == '13')
 	{
-	document.getElementById("submitbutton").click();
-	}
+	
+
+$("#submitbutton").click();	
+
+}
 
 	});
             
             
+
+
             
+            
+
+
+          
 }); //end of document on ready binding
             
 
@@ -459,7 +497,7 @@ $(function() {
 
 
 
-<img src="resource/close_button.png" style="cursor:pointer;" id="closebutton" onclick="$('#sign_up').trigger('close');" />
+<img src="resource/close_button.png" id="closebutton" onclick="$('#sign_up').trigger('close');" />
 <p id="see_id" >Can we see some ID?</p>
 
 
@@ -495,9 +533,10 @@ onClick ="altInvisibleRememberBoxValue();" >
 
 <center>
 
-<div style="postion:relative;">
-                        <a class="formbuttons"  href="#" tabindex="90" onclick="document.forms[0].reset();" >Reset</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="formbuttons"  href="#" tabindex="100" id="submitbutton" onclick="makeRequest();return false;" >Log In</a>
+<div style="position:relative;">
+                        <a class="formbuttons"  href="#" tabindex="90" onclick="document.forms[0].reset();$('#submitbutton').show();
+$('#throbber').hide();" >Reset</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="formbuttons"  href="#" tabindex="30" id="submitbutton" onclick="makeRequest();return false;" >Log In</a>
                                                                                             
                         <img style="display:none;" id="throbber" src="resource/ajax-loader.gif" />
 </div>

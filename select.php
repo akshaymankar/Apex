@@ -16,6 +16,8 @@ require_once('./ui/generic_page/page_head.php');
     
         <title>Apex: Route 2 ROOT</title>
         
+
+
     </head>
     <body>
 		
@@ -29,7 +31,7 @@ require_once('./ui/generic_page/page_body.php');
         Plese Select type of Output:
         <ul>
             <li><a href="dynamic/">Dynamic Graph</a></li>
-            <li><a href="static/staticFileSelector.php">Static Graphs</a></li>
+            <li><a href="static/index.php">Static Graphs</a></li>
         </ul>
     </body>
 </html>

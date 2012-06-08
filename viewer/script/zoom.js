@@ -93,6 +93,25 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
 	tempViewer.setAttribute('style', 'width:77%;height:100%');
     mainviewer.appendChild(tempViewer);
     
+
+
+
+	
+	tempLoader = document.createElement('img');
+///////////////	tempLoader.setAttribute('id', 'ajax-loader');
+	tempLoader.setAttribute('class', 'ajax-loader');
+	tempLoader.setAttribute('style', 'position:absolute;left:150px;width:100px;height:100px;top:5px;z-index:100;');
+	tempLoader.setAttribute('src', 'resource/ajax-loader.gif');
+	//tempLoader.setAttribute('left', '100px');
+  	//tempLoader.setAttribute('top', '100px');
+
+//    mainviewer.appendChild(tempLoader);
+
+
+//	$(".ajax-loader").show();
+
+
+
     tempSurface = document.createElement('div');
 	tempSurface.setAttribute('id', 'surface');
 	tempSurface.setAttribute('class', 'surface');
@@ -108,7 +127,7 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
         
     tempWell = document.createElement('div');
 	tempWell.setAttribute('id', 'well');
-	tempWell.setAttribute('class', 'well');
+	tempWell.setAttribute('class', 'well printable');
     tempWell.setAttribute('style', 'width:100%;height:100%');
     tempViewer.appendChild(tempWell);
 
@@ -209,7 +228,7 @@ function defaultPositions()
     
     tempWell = document.createElement('div');
 	tempWell.setAttribute('id', 'well');
-	tempWell.setAttribute('class', 'well');
+	tempWell.setAttribute('class', 'well printable');
 	tempWell.setAttribute('style', 'width:100%;height:100%');
 	tempViewer.appendChild(tempWell);
 
@@ -318,6 +337,7 @@ function loadImage()
     lastTileY=Math.floor(Math.max((-topTile[0][0]+offHeight+256)/256,0));
     lastTileX=Math.floor(Math.max((-leftTile[0][0]+offWidth)+256/256,0));
 
+
         
                 var tileNo=0;
             for(var i=firstTileY; i<tileRow && i<lastTileY; i++)
@@ -337,14 +357,21 @@ function loadImage()
                 }
             }	
         		
+$(".ajax-loader").hide();
+
 }
 
 
 function advanceZoomUp()
 {
-    
+
+
+
 	if(CUR_ZOOM < MAX_ZOOM)
 	{
+$(".ajax-loader").show();    
+
+
 		CUR_ZOOM++;
 		
 		
@@ -482,24 +509,34 @@ function advanceZoomUp()
                 previousRightOfLast = leftTile[lastIndexY][lastIndexX] + 256;
                 
                 PREV_ZOOM = CUR_ZOOM;
-                 
+
+	
                 viewerToPanOnZoom(); 
-            }
+	 
+				$(".ajax-loader").hide();
+
+               }
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
                 alert(xhr.status);//TODO There should be error page
             }
         }
         xhr.send(params);
-	} 	
+	}
+
 }
 
 
 function advanceZoomDown()
 {
+
+
 	if(CUR_ZOOM > 0)
 	{		
 		CUR_ZOOM--;	
+
+
+$(".ajax-loader").show();
 		
 		
 		tempWell = null;
@@ -623,6 +660,10 @@ function advanceZoomDown()
 		
 		
 		viewerToPanOnZoom(); 
+	
+	
+		$(".ajax-loader").hide();
+	
 	} 	
 }
 
@@ -691,7 +732,7 @@ function mouseMoveHandler(oEvent)
 	
 	tempWell = document.createElement('div');
 	tempWell.setAttribute('id', 'well');
-	tempWell.setAttribute('class', 'well');
+	tempWell.setAttribute('class', 'well printable');
 	tempWell.setAttribute('style', 'width:100%;height:100%');
 	tempViewer.appendChild(tempWell);
 	
