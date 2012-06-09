@@ -1,0 +1,26 @@
+/* 
+    Document   : template
+    Created on : Apr 11, 2012, 7:59:05 AM
+    Author     : akshay
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+.divMain{
+    width: 100%;
+    background-color: #33333;
+}
+.divTemplate{
+    width: 20%;
+    float: left;
+}
+.divParams{
+    width: 80%;
+    float: right;
+}

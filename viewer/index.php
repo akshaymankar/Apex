@@ -92,6 +92,7 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
 		margin-right:25px;
 		height: 300px;
 
+<<<<<<< HEAD
 	}
 	
 		
@@ -100,6 +101,8 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
 	color:black !important;
 	font-weight:bolder;
 	font-family:sans-serif;
+=======
+>>>>>>> dynamic_better_UI
 	}
 
 	
@@ -239,6 +242,7 @@ margin-top:-16px;
 
 	function psToPng(imgNumber)
 	{
+<<<<<<< HEAD
 
 $(".ajax-loader").show();
 	

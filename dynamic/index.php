@@ -20,17 +20,83 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/anytime.js"></script>
+        <link rel="stylesheet" href="css/template.css" />
+        <link rel="stylesheet" href="css/anytime.css" />
+        <script type="text/javascript">
+            xhr=false;
+            if (window.XMLHttpRequest)
+                xhr = new XMLHttpRequest();	//For every browser other than IE
+            else if (window.ActiveXObject)
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");	//For IE 7+
+            
+            function selectTemplate()
+            {
+                var template=document.forms["template"]["template"].value;
+                var params_div = document.getElementById("params");
+                if(template==-1)
+                {
+//                    while(params_div.hasChildNodes())
+//                    {
+//                        Anytime.noPicker(params_div.firstChild.getAttribute(id));
+//                        params_div.removeChild(params_div.firstChild);
+//                    }
+                    params_div.innerHTML="";
+                }
+                else
+                {
+                    try{
+                        var paramId = document.forms["parameters"]["paramId"].value
+                    }catch(e){
+                        paramId=10
+                    }
+                   
+                   while(params_div.children.length > 0)
+                    {
+                        try{
+                            AnyTime.noPicker(params_div.firstChild.getAttribute("id"));
+                        } catch (e){}
+                        params_div.removeChild(params_div.firstChild);
+                    }   
+                    
+                    var http_params="template="+template+"&paramId="+paramId;
+                    xhr.open("POST", "parameters.php");
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange=function(){
+                        if(xhr.readyState==4 && xhr.status==200){
+                            params_div.innerHTML=xhr.responseText;
+                            
+                            //AnyTime.noPicker();    //Remove All previous pickeres
+                            
+                            var scripts=params_div.getElementsByTagName("script");
+                            for(i=0;i<scripts.length;i++)
+                                eval(scripts[i].textContent);
+                        }
+                    }
+                    xhr.send(http_params);
+                }
+            }
+        </script>
         <title>Apex : Route 2 Root</title> 
     </head>
     <body>
-        <form action="parameters.php" method="post" accept-charset="utf-8">
-        Template: <select name="template" id="template">
-            <?php
-                getTemplates();
-            ?>
-        </select>
-        <p><input type="submit" value="Continue" /></p>
-        </form>
+        <div class="divMain">
+            <div id="template" class="divTemplate" >
+                <form action="parameters.php" name="template" method="post" accept-charset="utf-8">
+                    <h2>Select Template: </h2>
+                    <select name="template" id="selTemplate" onclick="selectTemplate()" size="10" >
+                    <?php
+                        getTemplates();
+                    ?>
+                    </select>
+                <!--
+                <p><input type="submit" value="Continue" /></p>
+                -->
+                </form>
+            </div>
+            <div id="params" class="divParams">
+            </div>
+        </div>
     </body>
 </html>
