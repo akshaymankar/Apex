@@ -317,7 +317,7 @@ function changeFileList()
 	
 function wayToDisplay(fileData)
 { 
-    var psFile = fileData.filename;
+    var psFile = fileData.filename.replace(/.gz/,"");
     var compressedPsFile = psFile + ".gz";
     var inputImagePath = fileData.fileDir;
     var outputFileName = psFile;
@@ -345,12 +345,7 @@ function wayToDisplay(fileData)
 
 function wayToDownload(fileData)
 { 
-    var psFile = fileData.filename;
-    var compressedPsFile = psFile + ".gz";
-    var outputFileName = compressedPsFile;
-    var inputImagePath = fileData.fileDir;
-  
-    window.location.href = inputImagePath + "/" + outputFileName;
+    window.location.href = fileData.fileDir + "/" + fileData.filename;
 }
 
 
