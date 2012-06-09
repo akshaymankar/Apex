@@ -498,7 +498,7 @@ require_once('./generic_page/page_body.php');
 
 <?php
 
-require_once('./lib/mysql.php');
+require_once('../conf/mysql.php');
 	//build query
 
 

@@ -1,7 +1,7 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/anytime.js"></script>
 <?php
-    require_once 'mysql.php';
+    require_once '../conf/mysql.php';
     if(!isset($_POST['template'])) {
         $_POST['template']="4";
     }

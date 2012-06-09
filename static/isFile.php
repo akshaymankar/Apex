@@ -14,7 +14,29 @@ if (isset($_GET['mainType']) && isset($_GET['subType']) && isset($_GET['changedP
 
 $fileDir = "../output/static/" . "$mainType" . "/" . "$subType";
 
+ob_start();
+passthru("ls \"$fileDir\"|grep ".$changedPrefix."$year"."$month");
+$files = ob_get_contents();
+ob_end_clean();
 
+//$fileArr = explode('\n',$files);
+$fileArr = str_word_count($files,1,'0123456789_.');
+sort($fileArr);
+$count =1 ;
+foreach ( $fileArr as $file){
+    ?>
+    <div class="filenamebutton file">
+        <span><?php echo $file; ?></span>
+        <form action="" method="get" accept-charset="utf-8">
+    		<input type='hidden' name="buttonName" value='filenamebutton<?php echo $count; ?>' />
+        	<input type="hidden" name="fileDir" value="<?php echo $fileDir; ?>" />
+        	<input type='hidden' name='fileName' value='<?php echo $file; ?>' />
+        </form>
+       
+    </div>
+    <?php
+}
+/*
 for ($i = 1; $i <= 31; $i++) {
     if ($i < 10)
         $day = "0" . "$i";
@@ -43,4 +65,5 @@ for ($i = 1; $i <= 31; $i++) {
      
     }
 }
+*/
 ?>

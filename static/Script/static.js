@@ -276,15 +276,12 @@ function changeFileList()
 
             $('.filenamebutton').mouseenter(function() {
                 $('.toolTip').remove();
-                tempthis=(this).firstChild;
+                tempthis=(this).getElementsByTagName("span")[0];
 
-
-
-               
                 filedata=new Object();
-                filedata.buttonName=this.childNodes[1].value;
-                filedata.fileDir=this.childNodes[2].value;
-                filedata.filename=this.childNodes[3].value;
+                filedata.buttonName=this.getElementsByTagName("form")[0]["buttonName"].value;
+                filedata.fileDir=this.getElementsByTagName("form")[0]["fileDir"].value;
+                filedata.filename=this.getElementsByTagName("form")[0]["fileName"].value;
                 $(tempthis).append('<span class="toolTip"><span href="#" onclick="wayToDisplay(filedata);">View</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span href="#" onclick="wayToDownload(filedata);">Download</span></span>');
                 $('.toolTip').attr('title',this.id);
 

@@ -12,7 +12,7 @@ $password = addslashes($password);
 $isRemember = addslashes($isRemember);
 
 
-require_once('./lib/mysql.php');
+require_once('../conf/mysql.php');
 
 ////////////////////////
 

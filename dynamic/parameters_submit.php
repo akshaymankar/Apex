@@ -1,5 +1,5 @@
 <?php
-    require_once 'mysql.php';
+    require_once '../conf/mysql.php';
     //read values and write to db
     
     $template_id=$_POST['template'];

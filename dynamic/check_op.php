@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include 'mysql.php';
+    include '../conf/mysql.php';
     if (!isset($_POST['opid'])) {
         //die('Error Occurred..!! You are not Supposed to be here.');
         die('0');

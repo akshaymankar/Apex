@@ -1,7 +1,7 @@
 <?php    
     session_start();
 
-    include '../lib/mysql.php';
+    include '../conf/mysql.php';
 
     if(!isset($_SESSION['opid'])) {
         //print_r($_SESSION);
