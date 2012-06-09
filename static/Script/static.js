@@ -54,7 +54,7 @@ function changeMainContent(thumbnail)
     {
         if (xhr.readyState == 4 && xhr.status == 200)
         {
-            tempSubType.innerHTML += xhr.response;
+            tempSubType.innerHTML += xhr.responseText;
             
 			
 					
@@ -266,7 +266,7 @@ function changeFileList()
             tempFileNameList = document.createElement('div');
             tempFileNameList.setAttribute('id', 'fileNameList');
             
-            tempFileNameList.innerHTML = xhr.response;
+            tempFileNameList.innerHTML = xhr.responseText;
 
             tempFileSelector.insertBefore(tempFileNameList,tempFileSelector.firstChild);
 
