@@ -3,13 +3,17 @@
 <?php
     require_once 'mysql.php';
     if(!isset($_POST['template'])) {
-        //die('Error Occured !!<br/>Please press "Back" button of your browser and submit the form again.<br>Inconvinience is regeretted.');
         $_POST['template']="4";
     }
     
     $template_id = $_POST['template'];
+    $paramId = $_POST['paramId'];
     
-    //echo "template id=$template_id";
+    /* Param Id is required to make sure that every input element gets 
+     * a different id, so that no exceptions in HTML DOM are raised 
+     * while processing them.
+     */
+
     $query="select * from parameters where template_id='$template_id'";
     $res=mysql_query($query);
     
@@ -19,7 +23,8 @@
 
     function getFormInputs_Parameters($res) {
         ?>
-        <input type="hidden" name="template" value="<?php echo $_POST['template']; ?>" />
+        <input type="hidden" name="template" 
+            value="<?php echo $_POST['template']; ?>" />
         <table border="0">
         <?php
         while($row=mysql_fetch_assoc($res)) {
@@ -41,10 +46,9 @@
                     ?>
                         <tr>
                             <td><?php echo $row['name']; ?></td>
-                            <td><input type="text" id="param<?php echo $row['parameter_id'];?>" value="11th April 2012" /></td>
+                            <td><input type="text" id="param<?php echo nextId(); ?>" name="<?php echo $row['parameter_id']; ?>" value="11th April 2012" /></td>
                             <script>
-                                AnyTime.picker( "param<?php echo $row['parameter_id'];?>",{ format: "%D %M %z", firstDOW: 1 });
-//                                alert("Loaded !");
+                                AnyTime.picker( "param<?php echo lastId();?>",{ format: "%D %M %z", firstDOW: 1 });
                             </script>
                         </tr>
                     <?php
@@ -71,13 +75,23 @@
             }
         }
         ?>
+        <input type="hidden" name="paramId" value="<?php echo lastId(); ?>">
         </table>
         <?php
+    }
+    function nextId(){
+        global $paramId;
+        $paramId++;
+        return $paramId;
+    }
+    function lastId(){
+        global $paramId;
+        return $paramId;
     }
 
 ?>
 <h1>Enter Values for Parameters</h1>
-<form action="parameters_submit.php" method="post" accept-charset="utf-8">
+<form action="parameters_submit.php" method="post" name="parameters" accept-charset="utf-8">
     <?php
         getFormInputs_Parameters($res);
     ?>

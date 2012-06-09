@@ -46,31 +46,35 @@
                 }
                 else
                 {
-                    while(params_div.children.length > 0)
+                    try{
+                        var paramId = document.forms["parameters"]["paramId"].value
+                    }catch(e){
+                        paramId=10
+                    }
+                   
+                   while(params_div.children.length > 0)
                     {
                         try{
                             AnyTime.noPicker(params_div.firstChild.getAttribute("id"));
                         } catch (e){}
                         params_div.removeChild(params_div.firstChild);
                     }   
-                    var params="template="+template;
+                    
+                    var http_params="template="+template+"&paramId="+paramId;
                     xhr.open("POST", "parameters.php");
                     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhr.onreadystatechange=function(){
                         if(xhr.readyState==4 && xhr.status==200){
-                            //var params_div=document.getElementById('params');
                             params_div.innerHTML=xhr.responseText;
                             
                             //AnyTime.noPicker();    //Remove All previous pickeres
                             
                             var scripts=params_div.getElementsByTagName("script");
                             for(i=0;i<scripts.length;i++)
-                            {
                                 eval(scripts[i].textContent);
-                            }
                         }
                     }
-                    xhr.send(params);
+                    xhr.send(http_params);
                 }
             }
         </script>
@@ -82,7 +86,6 @@
                 <form action="parameters.php" name="template" method="post" accept-charset="utf-8">
                     <h2>Select Template: </h2>
                     <select name="template" id="selTemplate" onclick="selectTemplate()" size="10" >
-                        <option value="-1" id="defaultOpt">--Please Select One--</option>
                     <?php
                         getTemplates();
                     ?>
