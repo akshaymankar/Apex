@@ -139,9 +139,6 @@ margin-top:-16px;
 	</style>
     
     
-    <?php
-		//$dirHandle = opendir("/var/www/Apex/chebo");
-	?>
     
          
 	<script type="text/javascript">
@@ -229,7 +226,8 @@ margin-top:-16px;
 			}
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
-				alert("xhr status :" + xhr.status);//TODO There should be error page
+				console.log("xhr status :" + xhr.status);
+                               //TODO There should be error page
             }
 		}
         
@@ -254,12 +252,11 @@ $(".ajax-loader").show();
         {
             if (xhr.readyState == 4 && xhr.status == 200)
             {
-				//alert(xhr.responseText);
 				displayInViewer(imgNumber);
 			}
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
-				alert("xhr status :" + xhr.status);//TODO There should be error page
+				console.log("xhr status :" + xhr.status);//TODO There should be error page
             }
 		}
         
@@ -299,7 +296,7 @@ $(".ajax-loader").show();
 			}
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
-                alert(xhr.status);//TODO There should be error page
+                console.log(xhr.status);//TODO There should be error page
             }
         }
         

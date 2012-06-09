@@ -63,24 +63,22 @@ function changeMainContent(thumbnail)
 
 
 
-if(thumbnail.id==1)
-{
-$(thumbnail).addClass('highlightedthumbnail');
-}
+            if(thumbnail.id==1)
+            {
+                $(thumbnail).addClass('highlightedthumbnail');
+            }
 
 
-//TODO...for highlighting the first subtype
 				
 
 
-if(document.getElementById('SubType+1')!=null)
-{				
-document.getElementById('SubType+1').style.backgroundColor="black";
-document.getElementById('SubType+1').style.color="white";
-}
+            if(document.getElementById('SubType+1')!=null)
+            {				
+                document.getElementById('SubType+1').style.backgroundColor="black";
+                document.getElementById('SubType+1').style.color="white";
+            }
             changeYear(document.getElementById('year'+YEAR));
             changeMonth(document.getElementById('Id'+parseInt(month,10)));
-            //changePrefix(document.getElementById('SubType'+parseInt(month,10)));
             
 
             changeFileList();
@@ -94,7 +92,7 @@ document.getElementById('SubType+1').style.color="white";
         }
         else if (xhr.readyState == 4 && xhr.status != 200) 
         {
-            alert(xhr.status);//TODO There should be error page
+            console.log(xhr.status);//TODO There should be error page
         }
     }
         
@@ -184,13 +182,13 @@ function changePrefix(obj)
 
 
 
-//TODO
 
-for(i=1;i<=(document.getElementById('subCategory')).childNodes.length;i++)
-{ 
-document.getElementById('SubType+'+i).style.backgroundColor='#33CCFF';
-document.getElementById('SubType+'+i).style.color='black';
-}
+
+    for(i=1;i<=(document.getElementById('subCategory')).childNodes.length;i++)
+    { 
+        document.getElementById('SubType+'+i).style.backgroundColor='#33CCFF';
+        document.getElementById('SubType+'+i).style.color='black';
+    }
     obj.style.backgroundColor='black'; 
     obj.style.color='white'; 
 
@@ -210,12 +208,12 @@ function changeYear(obj)
     var temp = obj.id;
     YEAR = temp.substring(4);
     for(i=(new Date()).getFullYear();i>=2001;i--)
-{ //TODO
+    { 
         document.getElementById('year'+i).style.backgroundColor='#33CCFF';
- 	document.getElementById('year'+i).style.color='black';
-}  
+        document.getElementById('year'+i).style.color='black';
+    }  
     obj.style.backgroundColor='black';
-	obj.style.color='white';
+    obj.style.color='white';
 }
 	
 	
@@ -232,12 +230,12 @@ function changeMonth(obj)
     month = obj.name;
 
     for(i=1;i<=12;i++)
-{
+    {
         document.getElementById('Id'+i).style.backgroundColor='#33CCFF';
-	document.getElementById('Id'+i).style.color='black'; 
-}   
+        document.getElementById('Id'+i).style.color='black'; 
+    }   
     obj.style.backgroundColor='black';
-	obj.style.color='white';
+    obj.style.color='white';
 
 
     if(month < 10)
@@ -254,7 +252,6 @@ function changeFileList()
     
     tempFileSelector.removeChild(tempFileNameList);
 	
-    //alert(GLO_MainType+"_"+);
     var params="mainType="+GLO_MainType+"&subType="+GLO_SubType+"&changedPrefix="+changedPrefix+"&year="+YEAR+"&month="+month;
  
     xhr.open("POST","isFile.php?"+params);
@@ -270,8 +267,7 @@ function changeFileList()
 
             tempFileSelector.insertBefore(tempFileNameList,tempFileSelector.firstChild);
 
-            //tempFileSelector.appendChild(tempFileNameList);
-
+            
 
 
 
@@ -279,17 +275,12 @@ function changeFileList()
 
 
             $('.filenamebutton').mouseenter(function() {
-                //if($('.toolTip'))
-                //{
                 $('.toolTip').remove();
-                //}
-                //alert(this);
-                tempthis=(this).firstChild;//.childNodes[0];
+                tempthis=(this).firstChild;
 
 
 
-                //alert(tempthis.firstChild.id);
-
+               
                 filedata=new Object();
                 filedata.buttonName=this.childNodes[1].value;
                 filedata.fileDir=this.childNodes[2].value;
@@ -303,16 +294,6 @@ function changeFileList()
                 tempTimer = setTimeout("$('.toolTip').remove();",1000);
             });
 
-            /*
-
-$('.toolTip').mouseover(function() {
-
-clearTimeout(tempTimer);
-
-//disable timer
-
-});
-*/
 
 
 
@@ -328,7 +309,7 @@ clearTimeout(tempTimer);
         }
         else if (xhr.readyState == 4 && xhr.status != 200) 
         {
-            alert(xhr.status);//TODO There should be error page
+            console.log(xhr.status);//TODO There should be error page
         }
     }
       
@@ -336,42 +317,6 @@ clearTimeout(tempTimer);
 }
 	
 	
-/*function wayToDisDown(file)
-{
-    var psFile = file.value;
-    var compressedPsFile = psFile + ".gz";
-    var inputImagePath = file.name;
-    var outputFileName = psFile;
-			
-			
-    var params="dir="+inputImagePath+"&file1="+compressedPsFile+"&file2="+psFile;
-      
-    xhr.open("POST","extract.php?"+params);
-			
-    xhr.onreadystatechange = function ()
-    {
-        if (xhr.readyState == 4 && xhr.status == 200)
-        {
-            var choice = confirm("Press 'Ok' for 'Display' and 'Cancel' for 'Download' CHOICE.");
-
-            if(choice == true)
-            {
-                window.location.href = "../viewer/index.php?filetype=" + GLO_MainType + "&filename=" + outputFileName;
-            }
-            else
-            {
-                window.location.href = "../tile/static/" + outputFileName + "/" + outputFileName;;
-            }
-        }
-        else if (xhr.readyState == 4 && xhr.status != 200) 
-        {
-            alert(xhr.status);//TODO There should be error page
-        }
-    }
-        
-    xhr.send(null);			
-}
-*/	
 	
 function wayToDisplay(fileData)
 { 
@@ -393,7 +338,7 @@ function wayToDisplay(fileData)
         }
         else if (xhr.readyState == 4 && xhr.status != 200) 
         {
-            alert(xhr.status);//TODO There should be error page
+            console.log(xhr.status);//TODO There should be error page
         }
     }
         
@@ -413,16 +358,16 @@ function wayToDownload(fileData)
 
 
 $(document).ready(function(){	
-    // TODO
+    
     displayYearMonth();
     
     changeMainContent(document.getElementById("1"));
 
    
-$("#sidebar > img").bind("click",function(){
+    $("#sidebar > img").bind("click",function(){
 
-	$("#sidebar > img[class~='highlightedthumbnail']").removeClass('highlightedthumbnail');
-	$(this).addClass('highlightedthumbnail');
-});
+        $("#sidebar > img[class~='highlightedthumbnail']").removeClass('highlightedthumbnail');
+        $(this).addClass('highlightedthumbnail');
+    });
  
 });
