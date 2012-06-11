@@ -5,7 +5,9 @@
             <li class="home"><a href=""><span>Home</span></a></li>
             <li class="myaccount"><a href=""><span>My Account</span></a></li>
             
-			<li class="download"><a href=""><span>Download</span></a></li>
+			<li class="download"><a href="#"><span>Download</span></a></li>
+
+
             <li id="printbutton" class="print"><a href=""><span>Print</span></a></li>
 <!--
 
