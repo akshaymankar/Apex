@@ -134,7 +134,9 @@ text-decoration:none;
 display:block;
 color:#FFF;
 margin-top:0px;
-
+border-width:0px;
+border-bottom-width:1px;
+border-style:solid;
 padding-top:5px;
 padding-bottom:5px;
 }
@@ -145,6 +147,9 @@ display:block;
 color:#FFF;
 background-color:yellow;
 margin-top:0px;
+
+border-width:2px;
+border-style:solid;
 
 font-weight:bolder;
 }
@@ -183,17 +188,31 @@ var PREVIOUS_DETECTOR=1;
 
 function toHighlight(obj)
 {
-obj.setAttribute('class','selectedcaption');
-PREVIOUS_DETECTOR = obj.id;
-
-prevObj=document.getElementById(PREVIOUS_DETECTOR);
-var children = prevObj.getElementsByTagName('span'); 
-
-spanObj = children[0];
-spanObj.setAttribute('class','caption');
 
 
-return true;
+var newchildren = obj.getElementsByTagName('span');
+newSpanObj = newchildren[0];
+$(newSpanObj).addClass('selectedcaption');
+
+    prevObj=document.getElementById(PREVIOUS_DETECTOR);
+    var children = prevObj.getElementsByTagName('span'); 
+
+	spanObj = children[0];
+	
+
+
+
+$(spanObj).removeClass('selectedcaption');
+
+$(spanObj).addClass('caption');
+    
+    
+    PREVIOUS_DETECTOR = obj.id;
+
+
+    //spanObj.className.replace =	
+
+    return true;
 }
 
       
@@ -203,11 +222,6 @@ return true;
         var psfile = "<?php echo $fileName; ?>";
         var tiledir= "<?php echo $tiledir; ?>";
 		GLO_MainFileDir = psfile + '_Dir';    
-       
-
-
-
- 
         
         var params="file="+psfile;
         params+="&tiledir="+tiledir;

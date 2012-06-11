@@ -28,4 +28,21 @@ function initButtonControls()
 	tempMinusImg.setAttribute('src','Images/zoomout.png');
 	tempMinusImg.setAttribute('onclick', 'advanceZoomDown()');
 	tempZoomOutControl.appendChild(tempMinusImg);
+
+var goLeft = document.createElement('a');
+goLeft.setAttribute('id','goLeftId');
+goLeft.setAttribute('href', '#');
+goLeft.setAttribute('onclick', 'goLeft();');
+goLeft.innerHTML = '<img src="Images/left.png">';
+tempZoomOutControl.appendChild(goLeft);
+					
+var goRight = document.createElement('a');
+goRight.setAttribute('id', 'goRightId');
+goRight.setAttribute('href', '#');
+goRight.setAttribute('onclick', 'goRight();');
+goRight.innerHTML = '<img src="Images/right.png">';
+tempZoomOutControl.appendChild(goRight);
+
+
+
 }

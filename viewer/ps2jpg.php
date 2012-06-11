@@ -22,7 +22,7 @@
     
 
 $cmd2 = "grep -e ^%%Page: < $file | grep -o -e '('.*')'";
-
+$cmd2 = " grep -e ^%%Page: < $file | grep -o -e '('.*')'|cut -d \) -f 1|cut -b2-";
 ob_start();
 	system($cmd2);
 	$result=ob_get_contents();
