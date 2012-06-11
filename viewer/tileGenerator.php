@@ -11,7 +11,7 @@
     $b=$_POST['bottom'];
     $r=$_POST['right'];
     $z=$_POST['zoom'];
-    //$o='/var/www/viewer/tile/tile-';
+    
     $o=$_POST['output'];
     
     $imgNumber = $_POST['imgNumber'];
@@ -20,19 +20,39 @@
     /**
      * TODO: Read from conf
      **/
+
+$conffile = fopen("/Apex/conf/paths.csv","r");
+
+$flag=0;
+
+
+
+
+while (($data = fgetcsv($conffile, 80, ',', '"') !== FALSE)) 
+{
+if($data[0]=="TILEMAKER_PATH")
+{
+$tilemaker = $data[1];
+$flag=1;
+}
+       
+    }
+
+if($flag==0)
+{
+echo "TILEMAKER_PATH not found in /Apex/conf/paths";
+}
+
+fclose($conffile);
+
+
     $h=256;
     $w=256;
-    $tilemaker = '../executable/tilemaker';
-    /*
-    if (isset($_SESSION['opid']) && isset($_POST['imgNumber']) ) {
-        //exec("mkdir ../tile/dynamic/".$_SESSION['opid']);
-        exec("mkdir ../tile/dynamic/".$_SESSION['opid']."/$imgNumber");
-    }
-    else
-    */
-    exec("mkdir $tiledir/$imgNumber");
+
+    //$tilemaker = '../executable/tilemaker';
     
-//    exec("rm -f tile/*");
+exec("mkdir $tiledir/$imgNumber");
+    
 
     if(!is_file("$o$z-0-0.jpg")) {
         $cmd = "$tilemaker -h $h -w $w -l $l -t $t -r $r -b $b -z $z -o $o $f";

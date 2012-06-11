@@ -163,7 +163,7 @@ function displayYearMonth()
     
     
     changeYear(document.getElementById('year'+YEAR));
-    changeMonth(document.getElementById('Id'+parseInt(month,10)));
+    changeMonth(document.getElementById('Id'+(parseInt(month,10)+1)));
 }
 
 

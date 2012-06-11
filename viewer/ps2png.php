@@ -20,9 +20,6 @@
     }
    
    
-    ////exec("mkdir $dirname");
-    
-    
     $outputFile = "$dirname"."$pageNo";
     
     if($pageNo<10)

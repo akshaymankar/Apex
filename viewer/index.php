@@ -4,7 +4,7 @@
     include '../conf/mysql.php';
 
     if(!isset($_SESSION['opid'])) {
-        //print_r($_SESSION);
+
         if(isset($_GET['filetype']) && isset($_GET['filename']))
         {
             $fileType=$_GET['filetype'];
@@ -32,9 +32,7 @@
         if(!$row){
             die('Error Occured while getting output file name'.$query);
         }
-        /**
-         * TODO: Read opdir from config
-         **/
+
         $opdir='../output/dynamic/';
         $_SESSION['file']=$row[0];
         $fileName="$opdir/$opid/".$row[0];
@@ -79,11 +77,8 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
 		border:5px;
 		border-color:black;
 		border-style:solid;
-		padding:10px;
-		margin:0; 
-
 		border-radius:20px;
-
+	display:inline-block;
 	}
 
 	.docviewerthumbnails
@@ -108,18 +103,15 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
 	div#main 
 	{
 		font-family: sans-serif;
-		margin: 0;
-		padding: 10px 0px 10px 0px;
 		color: #000000;
 		background-color: #FFFFFF;
 		font-size: 0.7em;
 		border: 5px;
-			border-color:black;
+		border-color:black;
 		border-style:solid;
-
-
+	float:right;
+	width:88%;
 	border-radius:20px;
-
 	}
 	
 
@@ -130,13 +122,13 @@ text-decoration:none;
 
 .caption
 {
-display:inline-block;
+display:block;
 color:#FFF;
 margin-top:-16px;
 }
 
 
-	</style>
+</style>
     
     
     
@@ -154,7 +146,7 @@ margin-top:-16px;
 	var GLO_MainFileDir = "";
 	var GLO_TileFileDir = "";
 
-    var GLO_ImgNumber=1;
+	var GLO_ImgNumber=1;
 	
 	xhr = false;
     
@@ -166,16 +158,12 @@ margin-top:-16px;
       
     function ps2jpg()
     {
-		//var filename =  document.getElementById("opFile").value;
+		
         var psfile = "<?php echo $fileName; ?>";
         var tiledir= "<?php echo $tiledir; ?>";
-		GLO_MainFileDir = psfile + '_Dir';    
+		
+	GLO_MainFileDir = psfile + '_Dir';    
        
-
-
-
- 
-        
         var params="file="+psfile;
         params+="&tiledir="+tiledir;
     
@@ -201,17 +189,8 @@ margin-top:-16px;
 					tempAnchor.setAttribute('onclick', 'psToPng(this.id);');
 					tempDocViewer.appendChild(tempAnchor);
 					
-					var tempImg = document.createElement('img');
-					tempImg.setAttribute('id', imageNumber);
-					tempImg.setAttribute('name', 'docviewerthumbnails');
-					tempImg.setAttribute('class', 'docviewerthumbnails');
-					tempImg.setAttribute('style', 'height:200px;margin:20px;');//todo
-					tempImg.setAttribute('src','<?php echo $tiledir; ?>/'+imageNumber+'.jpg');
-					tempAnchor.appendChild(tempImg);						
-				
-					//var tempNewline = document.createElement('br');
-					//tempAnchor.appendChild(tempNewline);
-
+					var tempNewline = document.createElement('br');
+					tempAnchor.appendChild(tempNewline);
 
 					var tempCaption = document.createElement('span');
 
@@ -238,14 +217,14 @@ margin-top:-16px;
 	function psToPng(imgNumber)
 	{
 
-$(".ajax-loader").show();
+	$(".ajax-loader").show();
 	
 	var psfile = "<?php echo $fileName; ?>";
         var tiledir= "<?php echo $tiledir; ?>";
         
         var params="file="+psfile;
         params+="&tiledir="+tiledir;
-		params+="&pageNo="+imgNumber;
+	params+="&pageNo="+imgNumber;
     
         xhr.open("POST","ps2png.php?"+params);
         xhr.onreadystatechange = function ()
@@ -256,7 +235,8 @@ $(".ajax-loader").show();
 			}
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
-				console.log("xhr status :" + xhr.status);//TODO There should be error page
+				console.log("xhr status :" + xhr.status);
+				//TODO There should be error page
             }
 		}
         
@@ -266,7 +246,7 @@ $(".ajax-loader").show();
 	
 	function displayInViewer(imgNumber) 
     {
-        GLO_ImgNumber=imgNumber;
+	        GLO_ImgNumber=imgNumber;
 		var imagePath = GLO_MainFileDir + '/' + imgNumber + ".png"; 
 		GLO_TileFileDir = '<?php echo $tiledir; ?>';
   
@@ -332,23 +312,17 @@ require_once('./viewer_generic_page/generic_page/page_body.php');
 	
 	
 	<?php
-	
 		echo '<script type="text/javascript">$(".ajax-loader").show();ps2jpg();</script>';
 
 	?>
 	
 	
-	<div id="docviewer" style="width: 20%; height: 100%;" align="center">
-    </div>
+<div id="docviewer" style="width: 10%; height: 100%;" align="center"></div>
     
-    
-	<div id="main">
-
+<div id="main">
 <img src="resource/ajax-loader.gif" style="position:absolute;left:50%;width:100px;height:100px;top:50%;z-index:100;" class="ajax-loader" />
-	
-<div id="viewer" class="viewer" style="width:77%;height:100%">
-	
-	</div>
-	</div>	
+<div id="viewer" class="viewer" style="height:100%;float:right;"></div>
+</div>	
+
 </body>
 </html>

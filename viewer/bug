@@ -1,8 +1,3 @@
 <<<<<<< HEAD
-1. display thumbnails on scroll.
 2. $pageNo parameter in case of dynamic.
-3. bug in loading. 1st n last zoom level. 
-=======
-1. display detector no
-2. display thumbnails on scroll
->>>>>>> dynamic_better_UI
+
