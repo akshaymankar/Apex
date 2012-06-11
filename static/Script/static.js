@@ -278,15 +278,19 @@ function changeFileList()
                 filedata.buttonName=this.getElementsByTagName("form")[0]["buttonName"].value;
                 filedata.fileDir=this.getElementsByTagName("form")[0]["fileDir"].value;
                 filedata.filename=this.getElementsByTagName("form")[0]["fileName"].value;
-                $(tempthis).append('<span class="toolTip"><span href="#" onclick="wayToDisplay(filedata);">View</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span href="#" onclick="wayToDownload(filedata);">Download</span></span>');
+                $(tempthis).append('<span class="toolTip"><span href="javascript:void(0);" onclick="wayToDisplay(filedata);">View</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span href="#" onclick="wayToDownload(filedata);">Download</span></span>');
                 $('.toolTip').attr('title',this.id);
 
             });
 
             $('.filenamebutton').mouseleave(function() {
-                tempTimer = setTimeout("$('.toolTip').remove();",1000);
+                tempTimer = setTimeout("$('.toolTip').remove();",10000);
             });
 
+
+            $('#fileNameList').mouseleave(function() {
+               $('.toolTip').remove();
+            });
           
             if((tempFileNameList.childNodes.length / 2) == 0)
             {

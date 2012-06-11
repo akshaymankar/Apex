@@ -58,9 +58,6 @@ require_once('./static_generic_page/generic_page/page_body.php');
                                 $temp = "<img id='" . $lineNo . "' name='" . $data[1] . "' class='thumbnails' src='./Configure/CFG_Images/" . $name . ".jpg' title='" . $title . "'alt='" . $data[0] . "'  onclick='changeMainContent(this);' />";
                                 echo "$temp";
 
-                                $break = "<br/>";
-                                echo "$break";
-
                                 $temp = "<span class='thumbnailName'>" . $name . "</span>";
                                 echo "$temp";
                             }

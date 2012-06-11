@@ -31,18 +31,17 @@ function initButtonControls()
 
 var goLeft = document.createElement('a');
 goLeft.setAttribute('id','goLeftId');
-goLeft.setAttribute('href', '#');
+goLeft.setAttribute('href', 'javascript:void(0);');
 goLeft.setAttribute('onclick', 'goLeft();');
 goLeft.innerHTML = '<img src="Images/left.png">';
 tempZoomOutControl.appendChild(goLeft);
 					
 var goRight = document.createElement('a');
 goRight.setAttribute('id', 'goRightId');
-goRight.setAttribute('href', '#');
+goRight.setAttribute('href', 'javascript:void(0);');
 goRight.setAttribute('onclick', 'goRight();');
 goRight.innerHTML = '<img src="Images/right.png">';
 tempZoomOutControl.appendChild(goRight);
-
 
 
 }

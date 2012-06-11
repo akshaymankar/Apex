@@ -171,7 +171,7 @@ font-weight:bolder;
 	var EXTENSION = '.jpg';
 
 var PREVIOUS_DETECTOR=1;	
-	
+var TOTAL_DETECTORS=0;	
 	var GLO_MainFileDir = "";
 	var GLO_TileFileDir = "";
 
@@ -189,6 +189,13 @@ var PREVIOUS_DETECTOR=1;
 function toHighlight(obj)
 {
 
+if(PREVIOUS_DETECTOR == obj.id)
+{
+return true;
+}
+
+var currDetectorNumber = document.getElementById('hiddenDetectorNumber');
+currDetectorNumber.value = obj.id;
 
 var newchildren = obj.getElementsByTagName('span');
 newSpanObj = newchildren[0];
@@ -209,11 +216,40 @@ $(spanObj).addClass('caption');
     
     PREVIOUS_DETECTOR = obj.id;
 
-
-    //spanObj.className.replace =	
-
-    return true;
+   return true;
 }
+
+function goLeft()
+{
+
+var currDetectorNumber = document.getElementById('hiddenDetectorNumber');
+
+
+if(currDetectorNumber.value < 2)
+{
+return false;
+}
+currDetectorNumber.value -= 1;
+var tmp = currDetectorNumber.value;
+
+$('#'+tmp).click();
+}
+
+function goRight()
+{
+var currDetectorNumber = document.getElementById('hiddenDetectorNumber');
+
+if(currDetectorNumber.value >= TOTAL_DETECTORS)
+{
+return false;
+}
+var tmp=parseInt(currDetectorNumber.value);
+tmp += 1;
+
+
+$('#'+tmp).click();
+}
+
 
       
     function ps2jpg()
@@ -236,22 +272,8 @@ $(spanObj).addClass('caption');
 				pageNameList=eval('(' + xhr.responseText + ')');
             	
 				var tempDocViewer = document.getElementById("docviewer");
-/*
-var goLeft = document.createElement('a');
-goLeft.setAttribute('id','goLeftId');
-goLeft.setAttribute('href', '#');
-goLeft.setAttribute('onclick', 'goLeft();');
-goLeft.innerHTML = '<img src="Images/left.png">';
-tempDocViewer.appendChild(goLeft);
-					
-var goRight = document.createElement('a');
-goRight.setAttribute('id', 'goRightId');
-goRight.setAttribute('href', '#');
-goRight.setAttribute('onclick', 'goRight();');
-goRight.innerHTML = '<img src="Images/right.png">';
-tempDocViewer.appendChild(goRight);
-*/					
 
+TOTAL_DETECTORS=pageNameList.length;
             	for(var i=0;i<pageNameList.length;i++)
             	{
 					var imageNumber = i + 1; 
@@ -259,15 +281,12 @@ tempDocViewer.appendChild(goRight);
 
 					var tempAnchor = document.createElement('a');
 					tempAnchor.setAttribute('id', imageNumber);
-					tempAnchor.setAttribute('href', '#');
+					tempAnchor.setAttribute('href', 'javascript:void(0);');
 					tempAnchor.setAttribute('onclick', 'toHighlight(this);psToPng(this.id);');
 					tempDocViewer.appendChild(tempAnchor);
 					
 											
 				
-					//var tempNewline = document.createElement('br');
-					//tempAnchor.appendChild(tempNewline);
-
 
 					var tempCaption = document.createElement('span');
 
@@ -279,6 +298,14 @@ tempDocViewer.appendChild(goRight);
 				
 				
 				psToPng('1');
+
+
+
+var tempspanparent = document.getElementById('1').getElementsByTagName('span');
+var tempspan = tempspanparent[0];
+$(tempspan).addClass('selectedcaption');
+
+
 			}
             else if (xhr.readyState == 4 && xhr.status != 200) 
             {
@@ -381,6 +408,14 @@ $(".ajax-loader").show();
 require_once('./viewer_generic_page/generic_page/page_body.php');
 ////////////////////////////////////////////////////////////////////
 ?>
+
+<?php
+echo ('<span style="font-size:0.8em;border-size:1px;border-style:solid;padding:2px;padding-bottom:2px;border-bottom-style:none;border-radius:20px">');
+echo ($_GET['filename']);
+echo ('</span>');
+
+?>
+
 </div>
 
 	
@@ -394,6 +429,7 @@ require_once('./viewer_generic_page/generic_page/page_body.php');
 	?>
 	
 	
+<input type="hidden" id='hiddenDetectorNumber' value="1"></input>
 <div id="docviewer" style="width: 10%; height: 100%;" align="center"></div>
     
     
@@ -401,6 +437,7 @@ require_once('./viewer_generic_page/generic_page/page_body.php');
 <img src="resource/ajax-loader.gif" style="position:absolute;left:50%;width:100px;height:100px;top:50%;z-index:100;" class="ajax-loader" />
 <div id="viewer" class="viewer" style="height:100%"></div>
 </div>	
+
 
 </body>
 </html>

@@ -34,4 +34,18 @@
 {
 width:45px;
 height:35px;
+position:absolute;
+
+right:-1500%;
+top:-150%;
+}
+
+#goRightId img
+{
+width:45px;
+height:35px;
+position:absolute;
+
+right:-2000%;
+top:-150%;
 }

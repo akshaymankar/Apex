@@ -11,8 +11,7 @@ tile/
 admin/nbproject
 
 #mysql configs
-dynamic/mysql.php
-ui/lib/mysql.php
-admin/mysql.php
+conf/mysql.php
+
 #sql
 sql/
