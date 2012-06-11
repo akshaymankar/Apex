@@ -133,8 +133,22 @@ text-decoration:none;
 {
 display:block;
 color:#FFF;
-margin-top:-16px;
+margin-top:0px;
+
+padding-top:5px;
+padding-bottom:5px;
 }
+
+.selectedcaption
+{
+display:block;
+color:#FFF;
+background-color:yellow;
+margin-top:0px;
+
+font-weight:bolder;
+}
+
 
 
 	</style>
@@ -150,7 +164,8 @@ margin-top:-16px;
 	var HEIGHT = 3750;
 	var TILESIZE = 256;
 	var EXTENSION = '.jpg';
-	
+
+var PREVIOUS_DETECTOR=1;	
 	
 	var GLO_MainFileDir = "";
 	var GLO_TileFileDir = "";
@@ -164,6 +179,23 @@ margin-top:-16px;
     else if (window.ActiveXObject)
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");	//For IE 7+
       
+
+
+function toHighlight(obj)
+{
+obj.setAttribute('class','selectedcaption');
+PREVIOUS_DETECTOR = obj.id;
+
+prevObj=document.getElementById(PREVIOUS_DETECTOR);
+var children = prevObj.getElementsByTagName('span'); 
+
+spanObj = children[0];
+spanObj.setAttribute('class','caption');
+
+
+return true;
+}
+
       
     function ps2jpg()
     {
@@ -195,16 +227,17 @@ var goLeft = document.createElement('a');
 goLeft.setAttribute('id','goLeftId');
 goLeft.setAttribute('href', '#');
 goLeft.setAttribute('onclick', 'goLeft();');
-goLeft.innerHTML = '<img src='Images/goLeft.png'>';
+goLeft.innerHTML = '<img src="Images/left.png">';
 tempDocViewer.appendChild(goLeft);
 					
 var goRight = document.createElement('a');
 goRight.setAttribute('id', 'goRightId');
 goRight.setAttribute('href', '#');
 goRight.setAttribute('onclick', 'goRight();');
+goRight.innerHTML = '<img src="Images/right.png">';
 tempDocViewer.appendChild(goRight);
-					
-*/
+*/					
+
             	for(var i=0;i<pageNameList.length;i++)
             	{
 					var imageNumber = i + 1; 
@@ -213,13 +246,13 @@ tempDocViewer.appendChild(goRight);
 					var tempAnchor = document.createElement('a');
 					tempAnchor.setAttribute('id', imageNumber);
 					tempAnchor.setAttribute('href', '#');
-					tempAnchor.setAttribute('onclick', 'psToPng(this.id);');
+					tempAnchor.setAttribute('onclick', 'toHighlight(this);psToPng(this.id);');
 					tempDocViewer.appendChild(tempAnchor);
 					
 											
 				
-					var tempNewline = document.createElement('br');
-					tempAnchor.appendChild(tempNewline);
+					//var tempNewline = document.createElement('br');
+					//tempAnchor.appendChild(tempNewline);
 
 
 					var tempCaption = document.createElement('span');
