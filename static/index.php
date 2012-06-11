@@ -13,15 +13,9 @@ require_once('./static_generic_page/generic_page/page_head.php');
         <meta http-equiv="Content-Type" content="text/html;">
         <link href="Style/static.css" type="text/css" rel="stylesheet" />
 
-
         <script language="javaScript" type="text/javascript" src="Script/jquery.js"></script>
 
-
-
         <script type="text/javascript" src="Script/static.js" ></script>
-
-
-
 
     </head>
 

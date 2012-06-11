@@ -27,7 +27,15 @@
 		<script type="text/javascript">
 	
 			$(function() {
-				Cufon.replace('a, span').CSS.ready(function() {
+
+
+if(navigator.appName == 'Microsoft Internet Explorer')
+{
+alert('This website supports only Mozilla Firefox and Google Chrome.');
+exit();
+}	
+
+		Cufon.replace('a, span').CSS.ready(function() {
 					var $menu 		= $("#slidingMenu");
 					
 					/**
@@ -103,6 +111,7 @@
 						}, speed, 'easeOutExpo');
 					}
 				}) ;
+
 			});
 	
 		</script>
@@ -408,7 +417,9 @@ $(function() {
 	<body>
 		
 
-
+<noscript>
+document.write('Turn On Javascript and Cookies in your browser!'); 
+</noscript>
 
         
 		<div id="slidingMenuDesc" class="slidingMenuDesc">

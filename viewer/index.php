@@ -4,8 +4,8 @@
     include '../conf/mysql.php';
 
     if(!isset($_SESSION['opid'])) {
-        //print_r($_SESSION);
-        if(isset($_GET['filetype']) && isset($_GET['filename']))
+        
+       if(isset($_GET['filetype']) && isset($_GET['filename']))
         {
             $fileType=$_GET['filetype'];
             $fileName="../tile/static/".$_GET['filename']."/".$_GET['filename'];
@@ -79,9 +79,9 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
 		border:5px;
 		border-color:black;
 		border-style:solid;
-		padding:10px;
+	
 		margin:0; 
-
+display:inline;
 		border-radius:20px;
 
 	}
@@ -109,7 +109,7 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
 	{
 		font-family: sans-serif;
 		margin: 0;
-		padding: 10px 0px 10px 0px;
+	
 		color: #000000;
 		background-color: #FFFFFF;
 		font-size: 0.7em;
@@ -117,7 +117,8 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
 			border-color:black;
 		border-style:solid;
 
-
+float:right;
+width:88%;
 	border-radius:20px;
 
 	}
@@ -130,7 +131,7 @@ text-decoration:none;
 
 .caption
 {
-display:inline-block;
+display:block;
 color:#FFF;
 margin-top:-16px;
 }
@@ -189,7 +190,21 @@ margin-top:-16px;
 				pageNameList=eval('(' + xhr.responseText + ')');
             	
 				var tempDocViewer = document.getElementById("docviewer");
-
+/*
+var goLeft = document.createElement('a');
+goLeft.setAttribute('id','goLeftId');
+goLeft.setAttribute('href', '#');
+goLeft.setAttribute('onclick', 'goLeft();');
+goLeft.innerHTML = '<img src='Images/goLeft.png'>';
+tempDocViewer.appendChild(goLeft);
+					
+var goRight = document.createElement('a');
+goRight.setAttribute('id', 'goRightId');
+goRight.setAttribute('href', '#');
+goRight.setAttribute('onclick', 'goRight();');
+tempDocViewer.appendChild(goRight);
+					
+*/
             	for(var i=0;i<pageNameList.length;i++)
             	{
 					var imageNumber = i + 1; 
@@ -201,16 +216,10 @@ margin-top:-16px;
 					tempAnchor.setAttribute('onclick', 'psToPng(this.id);');
 					tempDocViewer.appendChild(tempAnchor);
 					
-					var tempImg = document.createElement('img');
-					tempImg.setAttribute('id', imageNumber);
-					tempImg.setAttribute('name', 'docviewerthumbnails');
-					tempImg.setAttribute('class', 'docviewerthumbnails');
-					tempImg.setAttribute('style', 'height:200px;margin:20px;');//todo
-					tempImg.setAttribute('src','<?php echo $tiledir; ?>/'+imageNumber+'.jpg');
-					tempAnchor.appendChild(tempImg);						
+											
 				
-					//var tempNewline = document.createElement('br');
-					//tempAnchor.appendChild(tempNewline);
+					var tempNewline = document.createElement('br');
+					tempAnchor.appendChild(tempNewline);
 
 
 					var tempCaption = document.createElement('span');
@@ -338,17 +347,13 @@ require_once('./viewer_generic_page/generic_page/page_body.php');
 	?>
 	
 	
-	<div id="docviewer" style="width: 20%; height: 100%;" align="center">
-    </div>
+<div id="docviewer" style="width: 10%; height: 100%;" align="center"></div>
     
     
-	<div id="main">
-
+<div id="main">
 <img src="resource/ajax-loader.gif" style="position:absolute;left:50%;width:100px;height:100px;top:50%;z-index:100;" class="ajax-loader" />
-	
-<div id="viewer" class="viewer" style="width:77%;height:100%">
-	
-	</div>
-	</div>	
+<div id="viewer" class="viewer" style="height:100%"></div>
+</div>	
+
 </body>
 </html>

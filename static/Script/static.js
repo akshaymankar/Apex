@@ -6,6 +6,9 @@ var day = "";
 var month = curDate.getMonth();
 var YEAR = curDate.getFullYear();
 var filedata;		
+
+month = month + 1;
+
 if(month < 10)
 {
     month = "0" + month;
@@ -267,13 +270,6 @@ function changeFileList()
 
             tempFileSelector.insertBefore(tempFileNameList,tempFileSelector.firstChild);
 
-            
-
-
-
-
-
-
             $('.filenamebutton').mouseenter(function() {
                 $('.toolTip').remove();
                 tempthis=(this).getElementsByTagName("span")[0];
@@ -291,14 +287,7 @@ function changeFileList()
                 tempTimer = setTimeout("$('.toolTip').remove();",1000);
             });
 
-
-
-
-
-
-
-
-            
+          
             if((tempFileNameList.childNodes.length / 2) == 0)
             {
                 tempFileNameList.innerHTML="No files";

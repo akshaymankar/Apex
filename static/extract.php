@@ -23,7 +23,8 @@
 		$tempInputFileName = "$dir"."/"."$file1";
 		$tempOutputFileName = "$dirname"."/"."$file2";
 
-		$cmd1="gunzip -c $tempInputFileName > $tempOutputFileName";
-		exec($cmd1);
+		$cmd1="exec 2>&1;gunzip -c $tempInputFileName > $tempOutputFileName";
+		echo $cmd1;
+		passthru($cmd1) or die("jhol");
 	}    
 ?>

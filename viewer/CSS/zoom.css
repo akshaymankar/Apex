@@ -6,7 +6,7 @@
   background-color: #434343;
   overflow: hidden;     
   padding: 0;
-  width: 0;
+  width: 100% !important;
   height: 0;
 }
 
