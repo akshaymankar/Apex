@@ -62,7 +62,9 @@ if (!isset($_SESSION['opid'])) {
         <script type="text/javascript" src="script/eventUtil.js"></script>
         <script type="text/javascript" src="script/pan.js"></script>    
         <script type="text/javascript" src="script/buttonControls.js"></script>    
-
+        <script type="text/javascript" src="../ui/lib/lightbox.js"></script>
+        
+        <link rel="stylesheet" href="../ui/css/lightbox.css"/>
 
         <style type="text/css">
 
@@ -89,16 +91,12 @@ if (!isset($_SESSION['opid'])) {
 
             }
 
-
             #docviewer span
             {
                 color:black !important;
                 font-weight:bolder;
                 font-family:sans-serif;
             }
-
-
-
 
             div#main 
             {
@@ -195,6 +193,13 @@ if (!isset($_SESSION['opid'])) {
 
             function downloadCurrentPage()
             {
+                
+                                
+                $('#sign_up').lightbox_me({centered: true, onLoad: function(){}}); //sign_up as defined on the ui, is used for format selection
+            }
+           
+            function getPageDownloadLink()
+            {
                 var dir = document.getElementById("tiledir").getAttribute('value');
                 var pageNo = document.getElementById("hiddenDetectorNumber").getAttribute('value');
                 var suffix="";
@@ -208,11 +213,19 @@ if (!isset($_SESSION['opid'])) {
                
                 var currentPageToDownload = pageNo + "_" + suffix + pageNo + ".ps";
                 var pageTitle=document.getElementsByClassName('selectedCaption')[0].innerHTML;
-
-                window.location.href = "download.php?file="+dir + currentPageToDownload+"&pageTitle="+pageTitle;
+                return "download.php?file="+dir + currentPageToDownload+"&pageTitle="+pageTitle;
             }
-            
-            
+            function downloadPs()
+            {
+                var link = getPageDownloadLink();
+                window.location.href=link+"&format=ps";
+            }
+            function downloadPdf()
+            {
+                var link = getPageDownloadLink();
+                window.location.href=link+"&format=pdf";
+            }
+
             function toHighlight(obj)
             {
 
@@ -458,6 +471,16 @@ if (!isset($_SESSION['opid'])) {
             <img src="resource/ajax-loader.gif" style="position:absolute;left:50%;width:100px;height:100px;top:50%;z-index:100;" class="ajax-loader" />
             <div id="viewer" class="viewer" style="height:100%"></div>
         </div>	
-
+        
+        <div id="sign_up">
+            <img src="../ui/resource/close_button.png" id="closebutton" onclick="$('#sign_up').trigger('close');" />
+            <span style="font-weight: bold;">Select Format</span>
+            <center>
+                <div style="position:relative;">
+                    <a class="formbuttons"  href="javascript:void()" tabindex="30" id="ps" onclick="downloadPs();$('#sign_up').trigger('close');return false;" >.ps</a>
+                    <a class="formbuttons"  href="javascript:void()" tabindex="30" id="pdf" onclick="downloadPdf();$('#sign_up').trigger('close');return false;" >.pdf</a>
+                </div>
+            </center>
+        <hr/>
     </body>
 </html>
