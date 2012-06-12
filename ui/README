@@ -1,0 +1,24 @@
+Max userid length : 20 
+Password length : none (stored as a 40 byte SHA1 hash)
+Max phone length : 15 in db
+Max email length : 40 in db
+	
+Admin account can't be used to view monitoring plots. The Adminstrator has to create another regular account for himself
+
+The Admin has to create the initial admin entry in 'userdata' table in dbApex;
+insert into userdata values(1,'main',SHA1('main'),'9923184428','admin','open');
+
+insert into userdata values(2,'user',SHA1('user'),'9223184428','user','open');       //for normal user, not necessary.
+
+
+Lock can have three stages : 1) open 
+			     2) locked 
+			     3)	nolock
+
+
+A generic course of action for any client-side problem is to ask him to flush his cookies and to enable them in his browser.
+Javascript should also be enabled.
+
+The client has to flush his cache everytime he makes a JOINING request.
+
+

@@ -1,8 +1,0 @@
-Max userid length : 20 
-Max password length : 20 (string of 40 hex digits)
-Min password length : 5
-Max phone length : 10 (20 in db)
-	
-
-
-
