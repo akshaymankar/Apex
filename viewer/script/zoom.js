@@ -1,20 +1,20 @@
 var MAX_ZOOM = "";
-var TILEDIR="";
-var DIR = "";
+var TILEDIR="";//Directory where PS File is stored after extracting.
+var DIR = "";//Directory where Tiles are generated.
 var PREFIX = "";
 var CUR_ZOOM = "";
-var EXTENSION = "";
-var tempSurface = "";
-var tempWell = "";
-var tileRow = "";
-var tileCol	= "";		
-var fileName = "";
-var offWidth = "";
-var offHeight = "";
+var EXTENSION = "";//Extension of Tile (i.e. .jpg)
+var tempSurface = "";//It's above 'well' and where buttons & pan are put.
+var tempWell = "";//Where tiles are loaded
+var tileRow = "";//No of tiles along coloum
+var tileCol	= "";//No of tiles along row		
+var fileName = "";//Name of tile
+var offWidth = "";//Width of Viewer
+var offHeight = "";//Height of Viewer
 var midWidth = "";
 var midHeight = "";
-var topTile = "";
-var leftTile = "";
+var topTile = "";//Top of each tile
+var leftTile = "";//Left of each tile
 var iDiffX = 0;
 var iDiffY = 0;
 var previousValueX = "";
@@ -24,10 +24,11 @@ var previousLeftOfFirst = "";
 var previousBottomOfLast = "";
 var previousRightOfLast = "";
 var PREV_ZOOM = "";
-var firstFile = "";//to make function to compute no of tiles along width
+var firstFile = "";//Tile corresponding to First Zoom Level
 
 
 
+//For computing maximum possible Zoom Level.
 function getMaxZoomLevel(width,height,tilesize)
 {
     var zoomLevels = 0;
@@ -46,19 +47,20 @@ function getMaxZoomLevel(width,height,tilesize)
 }
 
 
+//To initialize Viewer & to set the Pan (Calling to initPan() function)
 function init(tiledir,dir,prefix,width,height,tilesize,extension)
 {
     MAX_ZOOM=getMaxZoomLevel(width,height,tilesize);
 	
-    if(!flagForFirstTime)
+    if(!flagForFirstTime)//not Executing for First Time
         CUR_ZOOM--; 
-//    flagForFirstTime = false
+
     tempWell = null;
     
     tileRow = null;
     tileCol = null;
         
-    var arrayLimit = Math.pow(2,0);//to do
+    var arrayLimit = Math.pow(2,0);
     tileRow = arrayLimit;
     tileCol	= arrayLimit;
     
@@ -124,58 +126,30 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
     midWidth = offWidth/2;
     midHeight = offHeight/2;
     
-    if(flagForFirstTime)
+    if(flagForFirstTime)//Executing for First Time
     {
         topTile[0][0] = midHeight - (Math.pow(2,CUR_ZOOM) * 128);
-    leftTile[0][0] = midWidth - (Math.pow(2,CUR_ZOOM) * 128);
+        leftTile[0][0] = midWidth - (Math.pow(2,CUR_ZOOM) * 128);
 
-    previousTopOfFirst = topTile[0][0];
-    previousLeftOfFirst = leftTile[0][0];
+        previousTopOfFirst = topTile[0][0];
+        previousLeftOfFirst = leftTile[0][0];
     
-    previousBottomOfLast = (midHeight + (Math.pow(2,CUR_ZOOM) * 128)) + 256;
-    previousRightOfLast = (midWidth + (Math.pow(2,CUR_ZOOM) * 128)) + 256;
+        previousBottomOfLast = (midHeight + (Math.pow(2,CUR_ZOOM) * 128)) + 256;
+        previousRightOfLast = (midWidth + (Math.pow(2,CUR_ZOOM) * 128)) + 256;
 
-    PREV_ZOOM = CUR_ZOOM;
+        PREV_ZOOM = CUR_ZOOM;
     }
 
-    initButtonControls();
+    initButtonControls();//To set Buttons on 'surface'
 	
-    initPan();
+    initPan();//To set Pan on 'surface'
     initCreatePanRectangleFrame();
+
     advanceZoomUp();
 }
 
-function defaultZoomUp()
-{	
-    if(CUR_ZOOM < MAX_ZOOM)
-    {
-        CUR_ZOOM++;
-		
-		
-        tempWell = null;
-        defaultPositions();
-		
-		
-        loadImage();
-    }    
-}
 
-
-function defaultZoomDown()
-{	
-    if(CUR_ZOOM > 0)
-    {		
-        CUR_ZOOM--;
-	
-	
-        tempWell = null;
-        defaultPositions();
-		
-		
-        loadImage();
-    }       
-}
-
+//To compute top & left of tile with respect to centre and also computes Tile's Name according to convention
 function defaultPositions()
 {	
     var mainviewer = document.getElementById("main");
@@ -201,9 +175,8 @@ function defaultPositions()
         EventUtil.addEventHandler(tempSurface,"DOMMouseScroll", mouseWheelHandler);
     tempSurface.setAttribute('onmouseout', 'mouseUpHandler()');
     tempViewer.appendChild(tempSurface);
-   
-   
-
+ 
+ 
     tempWell = document.createElement('div');
     tempWell.setAttribute('id', 'well');
     tempWell.setAttribute('class', 'well printable');
@@ -232,10 +205,9 @@ function defaultPositions()
         topTile[i] = new Array(arrayLimit);
         leftTile[i] = new Array(arrayLimit);	
     }
-
-    		
+    
 		
-    var temp = Math.pow(2,CUR_ZOOM)/2;//if odd no of tiles along width, then add 1 to it
+    var temp = Math.pow(2,CUR_ZOOM)/2;
     var topMultiplier = temp;
     var leftMultiplier = temp;
 		
@@ -286,7 +258,7 @@ function defaultPositions()
 		
         if(i > temp)
             topMultiplier++;		
-    }//if odd no of tiles along width, then add 128 to each left n top
+    }
 	
 	
     initButtonControls();
@@ -294,6 +266,9 @@ function defaultPositions()
 	
     initPan();
 }
+
+
+
 var xhr=false;
 
 if(window.XMLHttpRequest) {
@@ -308,6 +283,8 @@ var firstTileX;
 var lastTileY;
 var lastTileX;
 
+
+//It finds which tiles are inside viewer & load them into viewer (i.e. into 'well') 
 function loadImage()
 {
     firstTileY= Math.floor(Math.max((-topTile[0][0])/256,0));
@@ -340,6 +317,10 @@ function loadImage()
 }
 
 
+//It zooms up image inside viewer.
+//It first computes new top & left of each Tile for zoomed up image.
+//Then it calls 'tileGenerator.php' to generate required tiles.
+//It also calls 'loadImage()' function to load tiles into browser.
 function advanceZoomUp()
 {
 
@@ -370,94 +351,95 @@ function advanceZoomUp()
 		
         if(flagForFirstTime==true || !switchToPage)
         {
-         var temp = 256 * Math.pow(2,CUR_ZOOM);// to do
-        var maxConstY = temp;
-        var maxConstX = temp;
-        var minConstY = temp / 4;
-        var minConstX = temp / 4;
+            var temp = 256 * Math.pow(2,CUR_ZOOM);// to do
+            var maxConstY = temp;
+            var maxConstX = temp;
+            var minConstY = temp / 4;
+            var minConstX = temp / 4;
         
         
-        var flagY = 0;
-        var flagX = 0;
+            var flagY = 0;
+            var flagX = 0;
         
         
-        if((previousTopOfFirst < midHeight) && (previousBottomOfLast > midHeight))
-        {
-            for(var i=0; i<tileRow; i++)
-                for(var j=0; j<tileCol; j++)
-                    topTile[i][j] = topTile[i][j] - minConstY;
+            if((previousTopOfFirst < midHeight) && (previousBottomOfLast > midHeight))
+            {
+                for(var i=0; i<tileRow; i++)
+                    for(var j=0; j<tileCol; j++)
+                        topTile[i][j] = topTile[i][j] - minConstY;
                     
-            flagY = 1;
-        }
+                flagY = 1;
+            }
         
-        if((previousTopOfFirst < midHeight) && (previousBottomOfLast < midHeight))
-        {			
-            for(var i=0; i<tileRow; i++)
-                for(var j=0; j<tileCol; j++)
-                    topTile[i][j] = topTile[i][j] - (maxConstY - minConstY);
+            if((previousTopOfFirst < midHeight) && (previousBottomOfLast < midHeight))
+            {			
+                for(var i=0; i<tileRow; i++)
+                    for(var j=0; j<tileCol; j++)
+                        topTile[i][j] = topTile[i][j] - (maxConstY - minConstY);
                     
-            flagY = 2;
-        }
+                flagY = 2;
+            }
         
-        if((previousTopOfFirst > midHeight) && (previousBottomOfLast > midHeight))
-        {
-            for(var i=0; i<tileRow; i++)
-                for(var j=0; j<tileCol; j++)
-                    topTile[i][j] = topTile[i][j] + minConstY;
+            if((previousTopOfFirst > midHeight) && (previousBottomOfLast > midHeight))
+            {
+                for(var i=0; i<tileRow; i++)
+                    for(var j=0; j<tileCol; j++)
+                        topTile[i][j] = topTile[i][j] + minConstY;
                     
-            flagY = 3;
-        }
+                flagY = 3;
+            }
         
-        if(previousBottomOfLast == midHeight)
-        {
-            for(var i=0; i<tileRow; i++)
-                for(var j=0; j<tileCol; j++)
-                    topTile[i][j] = topTile[i][j] - (maxConstY - minConstY);
+            if(previousBottomOfLast == midHeight)
+            {
+                for(var i=0; i<tileRow; i++)
+                    for(var j=0; j<tileCol; j++)
+                        topTile[i][j] = topTile[i][j] - (maxConstY - minConstY);
                     
-            flagY = 4;
-        }
+                flagY = 4;
+            }
         
-        if((previousLeftOfFirst < midWidth) && (previousRightOfLast > midWidth))
-        {
-            for(var i=0; i<tileRow; i++)
-                for(var j=0; j<tileCol; j++)
-                    leftTile[i][j] = leftTile[i][j] - minConstX;
+            if((previousLeftOfFirst < midWidth) && (previousRightOfLast > midWidth))
+            {
+                for(var i=0; i<tileRow; i++)
+                    for(var j=0; j<tileCol; j++)
+                        leftTile[i][j] = leftTile[i][j] - minConstX;
                     
-            flagX = 1;
-        }
+                flagX = 1;
+            }
         
-        if((previousLeftOfFirst < midWidth) && (previousRightOfLast < midWidth))
-        {
-            for(var i=0; i<tileRow; i++)
-                for(var j=0; j<tileCol; j++)
-                    leftTile[i][j] = leftTile[i][j] - (maxConstX - minConstX);
+            if((previousLeftOfFirst < midWidth) && (previousRightOfLast < midWidth))
+            {
+                for(var i=0; i<tileRow; i++)
+                    for(var j=0; j<tileCol; j++)
+                        leftTile[i][j] = leftTile[i][j] - (maxConstX - minConstX);
                     
-            flagX = 2;
-        }
+                flagX = 2;
+            }
         
-        if((previousLeftOfFirst > midWidth) && (previousRightOfLast > midWidth))
-        {
-            for(var i=0; i<tileRow; i++)
-                for(var j=0; j<tileCol; j++)
-                    leftTile[i][j] = leftTile[i][j] + minConstX;
+            if((previousLeftOfFirst > midWidth) && (previousRightOfLast > midWidth))
+            {
+                for(var i=0; i<tileRow; i++)
+                    for(var j=0; j<tileCol; j++)
+                        leftTile[i][j] = leftTile[i][j] + minConstX;
                     
-            flagX = 3;
-        }
+                flagX = 3;
+            }
         
-        if(previousRightOfLast == midWidth)
-        {
-            for(var i=0; i<tileRow; i++)
-                for(var j=0; j<tileCol; j++)
-                    leftTile[i][j] = leftTile[i][j] - (maxConstX - minConstX);
+            if(previousRightOfLast == midWidth)
+            {
+                for(var i=0; i<tileRow; i++)
+                    for(var j=0; j<tileCol; j++)
+                        leftTile[i][j] = leftTile[i][j] - (maxConstX - minConstX);
                     
-            flagX = 4;
-        }
-        flagForFirstTime=false;
+                flagX = 4;
+            }
+            flagForFirstTime=false;
         
         }
         
         switchToPage=false;
         
+
         var params="file="+TILEDIR+GLO_ImgNumber+".png";
         params+="&zoom="+CUR_ZOOM;
         params+="&left=0";
@@ -470,7 +452,6 @@ function advanceZoomUp()
         
         xhr.open("POST","tileGenerator.php");
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        //xhr.setRequestHeader("Content-length", params.length);
 
         xhr.onreadystatechange = function ()
         {
@@ -481,7 +462,7 @@ function advanceZoomUp()
                 previousTopOfFirst = topTile[0][0];
                 previousLeftOfFirst = leftTile[0][0];
                 
-                var lastIndexY = (Math.pow(2,CUR_ZOOM)) - 1;//to do
+                var lastIndexY = (Math.pow(2,CUR_ZOOM)) - 1;
                 var lastIndexX = (Math.pow(2,CUR_ZOOM)) - 1;
                 
                 previousBottomOfLast = topTile[lastIndexY][lastIndexX] + 256;
@@ -507,16 +488,17 @@ function advanceZoomUp()
 }
 
 
+//It zooms down image inside viewer.
+//It first computes new top & left of each Tile for zoomed down image.
+//Then it calls 'tileGenerator.php' to generate required tiles.
+//It also calls 'loadImage()' function to load tiles into browser.
 function advanceZoomDown()
 {
-
-
     if(CUR_ZOOM > 0)
     {		
-        CUR_ZOOM--;	
+        CUR_ZOOM--;	      
+        
 
-        
-        
         $(".ajax-loader").show();
 		
 		
@@ -624,28 +606,8 @@ function advanceZoomDown()
             flagX = 4;
         }
 		
-		/*
-        loadImage();
-				
-		
-        previousTopOfFirst = topTile[0][0];
-        previousLeftOfFirst = leftTile[0][0];
-		
-        var lastIndexY = (Math.pow(2,CUR_ZOOM)) - 1;//to do
-        var lastIndexX = (Math.pow(2,CUR_ZOOM)) - 1;
-		
-        previousBottomOfLast = topTile[lastIndexY][lastIndexX] + 256;
-        previousRightOfLast = leftTile[lastIndexY][lastIndexX] + 256;
-		
-        PREV_ZOOM = CUR_ZOOM;
-		
-		
-        viewerToPanOnZoom(); 
 	
-	
-        $(".ajax-loader").hide();*/
-	
-var params="file="+TILEDIR+GLO_ImgNumber+".png";
+        var params="file="+TILEDIR+GLO_ImgNumber+".png";
         params+="&zoom="+CUR_ZOOM;
         params+="&left=0";
         params+="&top=0";
@@ -657,31 +619,29 @@ var params="file="+TILEDIR+GLO_ImgNumber+".png";
         
         xhr.open("POST","tileGenerator.php");
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        //xhr.setRequestHeader("Content-length", params.length);
-
+        
         xhr.onreadystatechange = function ()
         {
             if (xhr.readyState == 4 && xhr.status == 200)
             { 
-                 loadImage();
+                loadImage();
 				
+                previousTopOfFirst = topTile[0][0];
+                previousLeftOfFirst = leftTile[0][0];
 		
-        previousTopOfFirst = topTile[0][0];
-        previousLeftOfFirst = leftTile[0][0];
+                var lastIndexY = (Math.pow(2,CUR_ZOOM)) - 1;
+                var lastIndexX = (Math.pow(2,CUR_ZOOM)) - 1;
 		
-        var lastIndexY = (Math.pow(2,CUR_ZOOM)) - 1;//to do
-        var lastIndexX = (Math.pow(2,CUR_ZOOM)) - 1;
+                previousBottomOfLast = topTile[lastIndexY][lastIndexX] + 256;
+                previousRightOfLast = leftTile[lastIndexY][lastIndexX] + 256;
 		
-        previousBottomOfLast = topTile[lastIndexY][lastIndexX] + 256;
-        previousRightOfLast = leftTile[lastIndexY][lastIndexX] + 256;
-		
-        PREV_ZOOM = CUR_ZOOM;
+                PREV_ZOOM = CUR_ZOOM;
 		
 		
-        viewerToPanOnZoom(); 
+                viewerToPanOnZoom(); 
 	
 	
-        $(".ajax-loader").hide();
+                $(".ajax-loader").hide();
 	
             }
             else if (xhr.readyState == 4 && xhr.status != 200) 
@@ -694,6 +654,7 @@ var params="file="+TILEDIR+GLO_ImgNumber+".png";
 }
 
 
+//This function gets called on 'mousedown' event on Viewer.
 function mouseDownHandler(oEvent)
 {
     oEvent = EventUtil.getEvent();
@@ -717,6 +678,8 @@ function mouseDownHandler(oEvent)
 }
 
 
+//This function gets called on 'mousemove' event on Viewer.
+//It handles code for Image Dragging inside Viewer.
 function mouseMoveHandler(oEvent)
 {
     oEvent = EventUtil.getEvent();
@@ -771,6 +734,7 @@ function mouseMoveHandler(oEvent)
 }
 
 
+//This function gets called on 'mouseup' event on Viewer.
 function mouseUpHandler()
 {
     EventUtil.removeEventHandler(document.body, "mousemove", mouseMoveHandler);
@@ -790,6 +754,7 @@ function mouseUpHandler()
 }
 
 
+//Zooming image inside viewer on mouse's double click.
 function mouseDoubleClickHandler(oEvent)
 {
     if(CUR_ZOOM < MAX_ZOOM)
@@ -839,6 +804,8 @@ function mouseDoubleClickHandler(oEvent)
 }
 
 
+//This function gets called on 'mousewheel' event on Viewer.
+//It zooms up or down image inside Viewer on mouse scroll up or down.
 function mouseWheelHandler(oEvent)
 {
     oEvent = EventUtil.getEvent();
@@ -851,9 +818,6 @@ function mouseWheelHandler(oEvent)
         advanceZoomUp();
     else if(afterNormalization < 0)
         advanceZoomDown();
-	
-		
-    //EventUtil.addEventHandler(document.body, "mousewheel", mouseWheelHandler);
 
 
     preventDefaultAction(oEvent);

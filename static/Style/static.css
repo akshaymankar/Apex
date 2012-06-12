@@ -8,13 +8,12 @@
 
 body
 {
-text-align:center;
-margin: 10 auto;
-width:80%;
-overflow:auto;
-height:80%;
+    text-align:center;
+    margin: 10 auto;
+    width:80%;
+    overflow:auto;
+    height:80%;
 }
-
 
 
 #banner
@@ -24,16 +23,15 @@ height:80%;
     color:blue;
     font-size:200%;
     font-family:Verdana, Geneva, sans-serif;
-	font-style:normal;
-
+    font-style:normal;
 }
 
 
 #content-wrapper
 {
-position:relative;
-width: 100%;
-height:100%;
+    position:relative;
+    width: 100%;
+    height:100%;
 }
 
 
@@ -41,30 +39,28 @@ height:100%;
 {
     width: 18%;
     height:100%;
-    
     float: left;
     background-color: #99FF99;
     border-radius: 20px;
     border: 2px;
     border-color: #99FF99;
-    
     alignment-adjust: central;
     position:relative;
-	overflow:auto;
+    overflow:auto;
 }
 
 
 #main-area
 {
-	width: 81%;
-	height:100%; 
+    width: 81%;
+    height:100%; 
     float: right;
     background-color: #FD8;
     border-radius: 20px;
     border: 2px;
     border-color: #99FF99;
-	position:relative;
-	overflow:auto;
+    position:relative;
+    overflow:auto;
 }
 
 
@@ -73,20 +69,20 @@ height:100%;
     display:block;
     margin-left:40%;
     margin-top:7%;
-    
     width:40px;
     height:40px;
     border: 2px solid #000000;
 }
 
+
 .highlightedthumbnail
 {
-width:80px;
-height:80px;
-margin-left:35%;
-margin-top:8%;
-    
+    width:80px;
+    height:80px;
+    margin-left:35%;
+    margin-top:8%;    
 }
+
 
 .thumbnailName
 {
@@ -94,67 +90,63 @@ margin-top:8%;
     height:20px;
     font-size:125%;
     font-weight:bolder;
-padding-left:15px;
-    margin-top:1%;
-    
+    padding-left:15px;
+    margin-top:1%;    
 }
+
 
 #subCategoryWrapper
 {
-position:absolute;
-width:100%;
-margin-top:5px;
-
+    position:absolute;
+    width:100%;
+    margin-top:5px;
 }
+
 
 #subCategory
 {
-height:50px;
-margin-top:5px;
-width:100%;
-position:absolute;
-top:40px;
-
-overflow:auto;
-
+    height:50px;
+    margin-top:5px;
+    width:100%;
+    position:absolute;
+    top:40px;
+    overflow:auto;
 }
-
 
 
 #fileSelector
 {
-
- overflow:auto;
- position:absolute;
- top:100px;
- left:10px;
- width:90%
+    overflow:auto;
+    position:absolute;
+    top:100px;
+    left:10px;
+    width:90%
 }
+
 
 #fileNameList
 {
-height:390px;
-float:left;
-overflow:auto;
-width:70%;
-position:relative;
+    height:390px;
+    float:left;
+    overflow:auto;
+    width:70%;
+    position:relative;
 }
 
-
-            
 
 #yearMonth
 {
-display:inline-block;
-float:right;
-position:relative;
-
+    display:inline-block;
+    float:right;
+    position:relative;
 }
+
 
 #year
 {
-margin-right:15px;
+    margin-right:15px;
 }
+
 
 .subtypeclass
 {
@@ -165,63 +157,48 @@ margin-right:15px;
     height:35px;
     border: 2px solid #000000;
     font-size:125%;
-
-font-family:sans-serif;
-
+    font-family:sans-serif;
     color:black;
     background-color:#33CCFF;
     border-radius: 15px;
-padding-left:10px;
-padding-right:10px;
+    padding-left:10px;
+    padding-right:10px;
 }
 
 
 .file
 {
-   
-
     margin-top:1px;
     margin-bottom:1px;
     margin-left:1px;
     margin-right:1px;
-
     height:20px;
     display:block;
-    
-
     color:#000000;
     background-color:#99FF99;
-
-padding:15px;
-
-text-align:left;
-
-margin:5px;
-
+    padding:15px;
+    text-align:left;
+    margin:5px;
 }
+
 
 .filenamebutton span
 {
-padding-top:10px;
-padding-bottom:10px;
-
+    padding-top:10px;
+    padding-bottom:10px;
 }
-
 
 
 .toolTip {
-	background-color:yellow;
-        padding: 10px;
-        color: blue;
-        cursor:pointer;
-        position: relative;
-	border-radius:10px;
-margin-left:15px;
-display:inline;
+    background-color:yellow;
+    padding: 10px;
+    color: blue;
+    cursor:pointer;
+    position: relative;
+    border-radius:10px;
+    margin-left:15px;
+    display:inline;
 }
-
-
-
 
 
 .years
@@ -259,6 +236,5 @@ display:inline;
     display:block;
     color:blue;
     font-size:220%;
-    text-align:center;
-	
+    text-align:center;	
 }

@@ -25,17 +25,16 @@ if ($handleForFileTypes !== FALSE) {
             while (($i <= $countToEnd) && (($data = fgetcsv($handleForFileTypes, 80, ',', '"')) !== FALSE)) {
                 $i++;
                 $j++;
-                
+
                 if (($i - 1) == 1) {
                     $firstSubType = $data[1];
                 }
 
-                if($countToEnd > 1)
-                {
-					$tempj = $j - 1;
-					$temp = "<input type='button' class='subtypeclass' id='SubType+".$tempj."' name='" . $data[1] . "' value='" . $data[0] . "' onclick='preChangePrefix(this);'/>";
-					echo "$temp";
-				}
+                if ($countToEnd > 1) {
+                    $tempj = $j - 1;
+                    $temp = "<input type='button' class='subtypeclass' id='SubType+" . $tempj . "' name='" . $data[1] . "' value='" . $data[0] . "' onclick='preChangePrefix(this);'/>";
+                    echo "$temp";
+                }
             }
         }
     }

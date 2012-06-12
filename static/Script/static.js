@@ -47,8 +47,7 @@ function changeMainContent(thumbnail)
     tempSubType.setAttribute('id', 'subCategory');
     tempST.appendChild(tempSubType);   	
     
-   		
-                
+   		        
     var params="id="+thumbnail.id;
       
     xhr.open("POST","readSubType.php?"+params);
@@ -59,11 +58,9 @@ function changeMainContent(thumbnail)
         {
             tempSubType.innerHTML += xhr.responseText;
             
-			
 					
             changedPrefix = thumbnail.name;
             GLO_SubType = thumbnail.alt;		
-
 
 
             if(thumbnail.id==1)
@@ -72,26 +69,18 @@ function changeMainContent(thumbnail)
             }
 
 
-				
-
-
             if(document.getElementById('SubType+1')!=null)
             {				
                 document.getElementById('SubType+1').style.backgroundColor="black";
                 document.getElementById('SubType+1').style.color="white";
             }
+
+
             changeYear(document.getElementById('year'+YEAR));
             changeMonth(document.getElementById('Id'+parseInt(month,10)));
             
 
             changeFileList();
-            
-            
-            
-
-            
-            
-            
         }
         else if (xhr.readyState == 4 && xhr.status != 200) 
         {
@@ -182,9 +171,6 @@ function changePrefix(obj)
 {
     changedPrefix = obj.name;
     GLO_SubType = obj.value;
-
-
-
 
 
     for(i=1;i<=(document.getElementById('subCategory')).childNodes.length;i++)
@@ -289,7 +275,7 @@ function changeFileList()
 
 
             $('#fileNameList').mouseleave(function() {
-               $('.toolTip').remove();
+                $('.toolTip').remove();
             });
           
             if((tempFileNameList.childNodes.length / 2) == 0)
@@ -305,7 +291,6 @@ function changeFileList()
       
     xhr.send(null);		
 }
-	
 	
 	
 function wayToDisplay(fileData)

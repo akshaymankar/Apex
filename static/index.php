@@ -1,12 +1,12 @@
 <html>
     <head>
-<title>Apex - Static Plots</title>
-        
-<?php
+        <title>Apex - Static Plots</title>
+
+        <?php
 /////////////////////////////////////////////////////////////////////
-require_once('./static_generic_page/generic_page/page_head.php');
+        require_once('./static_generic_page/generic_page/page_head.php');
 /////////////////////////////////////////////////////////////////////
-?>
+        ?>
 
         <title>Static</title>
 
@@ -22,13 +22,13 @@ require_once('./static_generic_page/generic_page/page_head.php');
 
     <body>
 
-<div style="height:20px;">
-<?php
+        <div style="height:20px;">
+            <?php
 ////////////////////////////////////////////////////////////////////
-require_once('./static_generic_page/generic_page/page_body.php');
+            require_once('./static_generic_page/generic_page/page_body.php');
 ////////////////////////////////////////////////////////////////////
-?>
-</div>
+            ?>
+        </div>
 
         <h1 id="banner">GRAPES-3 DATA Monitoring Plots</h1>
 
