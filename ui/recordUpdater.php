@@ -32,7 +32,7 @@ exit();
 if(strcmp($newpassword,""))
 {
 
-$passwordQuery = "UPDATE userdata set password=PASSWORD('".$newpassword."') WHERE serialnum='".$userid."'"; 
+$passwordQuery = "UPDATE userdata set password=SHA1('".$newpassword."') WHERE serialnum='".$userid."'"; 
 
 $passwordResult = mysql_query($passwordQuery);
 

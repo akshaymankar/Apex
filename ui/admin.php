@@ -2,14 +2,6 @@
 
 require_once('./lib/sessioncode.php');
 
-// make sure same password or phone number isn't entered twice
-
-//$sql = "INSERT INTO `apex`.`userdata` (`serialnum`, `username`, `password`, `phone`, `usertype`) VALUES (NULL, \'blah\', \'this\', \'9923184428\', \'1\');";
-
-// maximum number of failed attempts
-
-//pipe not allowed in username or password
-
 ?>
 
 <html>
@@ -114,6 +106,15 @@ $('#result').css('display','inline-block');
 return true;
 }
 
+
+if(resultString == "Password Changed UserInfo Updated")
+{
+$('#submitbutton').show();
+$('#throbber').hide();
+$('#result').css('display','inline-block');
+return true;
+
+}
 
 
 
@@ -517,7 +518,7 @@ echo '<table id="summarytable" cellpadding="5" cellspacing="5" width="50%" align
 echo "<tr style=\"background-color:yellow;\">";
 echo "<th>User&nbsp;Id</th>";
 echo "<th>Username</th>";
-echo "<th>Password</th>";
+
 echo "<th>Phone</th>";
 echo "<th>Type</th>";
 echo "<th>Lock</th>";
@@ -531,6 +532,10 @@ echo "<tr id='".$row['serialnum']."' style=\"cursor:pointer\"ondblclick=\"update
 
 for($i=0;$i<mysql_num_fields($qry_result);$i++)
 {
+if($i==2)
+{
+continue;
+}
 echo "<td>";
 echo "$row[$i]";
 echo "</td>";
@@ -568,34 +573,28 @@ $qry_result = mysql_query($query) or die(mysql_error());
 
 if(mysql_affected_rows() == 0)
 {
-echo "<center><h1>Something broke !</h1></center>";
+echo "<center><h1>No Pending Requests.</h1></center>";
+
 }
 
 
 echo '<table cellpadding="5" cellspacing="5" width="50%" align="center">';
 echo "<tr style=\"background-color:yellow;\">";
 echo "<th>Request ID</th>";
-echo "<th>Name</th>";
 echo "<th>Username</th>";
 echo "<th>Phone</th>";
 echo "<th>Email</th>";
-echo "<th>Location</th>";
 echo "</tr>";
 
 
 while($row = mysql_fetch_assoc($qry_result))
 {
-echo "<tr id='REQ".$row['requestnumber']."' style=\"cursor:pointer\"ondblclick=\"acceptUser(this,true);\">";
+echo "<tr id='REQ".$row['userid']."' style=\"cursor:pointer\"ondblclick=\"acceptUser(this,true);\">";
 
 
 echo "<td>";
-echo "$row[requestnumber]";
+echo "$row[userid]";
 echo "</td>";
-
-echo "<td>";
-echo "$row[firstname]"." "."$row[lastname]";
-echo "</td>";
-
 
 echo "<td>";
 echo "$row[username]";
@@ -610,12 +609,8 @@ echo "<td>";
 echo "$row[email]";
 echo "</td>";
 
-echo "<td>";
-echo "$row[location]";
-echo "</td>";
 
-
-echo "<td id='TMP".$row['requestnumber']."' onclick = 'acceptUser(this,false);' >";	
+echo "<td id='TMP".$row['userid']."' onclick = 'acceptUser(this,false);' >";	
 echo "<img src='resource/close_button.png' class='closebutton' style ='cursor:pointer;' />";
 echo "</td>";
 
@@ -650,7 +645,7 @@ echo "</tr>";
 <br />       
 <br />
 <label for="passWordBox">Password: </label>
-&nbsp;<input type="text" name="passWordBox" id="password" placeholder="Set new Password" tabindex="20" />
+&nbsp;<input type="password" name="passWordBox" id="password" placeholder="Set new Password" tabindex="20" />
 <br />
 <br />
 
@@ -690,8 +685,8 @@ echo "</tr>";
 
 
 <input type="hidden" id = "deletehidden" value="dont" />
-                        <a class="formbuttons"  href="#" tabindex="90"  id="deletebutton" onclick="deleteFunction();" >Delete Record</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="formbuttons"  href="#" tabindex="100" id="submitbutton" onclick="makeRequest();return false;" >Log In</a>
+                        <a class="formbuttons"  href="javascript:void(0);" tabindex="90"  id="deletebutton" onclick="deleteFunction();" >Delete Record</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="formbuttons"  href="javascript:void(0);" tabindex="100" id="submitbutton" onclick="makeRequest();return false;" >Update Record</a>
                                                                                             
                         <img style="display:none;position:absolute;top:10px;" id="throbber" src="resource/ajax-loader.gif" />
         </div>                

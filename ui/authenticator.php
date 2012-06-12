@@ -16,20 +16,6 @@ $isRemember = addslashes($isRemember);
 
 require_once('../conf/mysql.php');
 
-////////////////////////
-
-// to obtain password hash
-
-$passwordHash = "SELECT PASSWORD('".$password."')";
-
-$result = mysql_query($passwordHash);
-
-$hashrow = mysql_fetch_array($result);
-
-$password = $hashrow[0];
-
-///////////////////////
-
 
 //build query
 
@@ -107,7 +93,7 @@ if($attempts >= $maxAttempts && $row['locked'] == "open")
 	
 }
 
-sleep(1); //TODO
+
 mysql_close($myconnection);
 exit();
 ?>

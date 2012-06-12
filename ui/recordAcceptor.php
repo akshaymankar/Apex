@@ -11,7 +11,7 @@ $action = $_POST['action'];
 if($action == "false")
 {
 
-$deleteQuery = "DELETE FROM userpending WHERE requestnumber='".$requestid."'";
+$deleteQuery = "DELETE FROM userpending WHERE userid='".$requestid."'";
 
 $deleteQueryResult = mysql_query($deleteQuery) or die(mysql_error());
 
@@ -27,7 +27,7 @@ if ($action == "true" )
 
 
 
-$query = "select * from userpending where requestnumber= '".$requestid."'"; 
+$query = "select * from userpending where userid= '".$requestid."'"; 
 
 $queryResult = mysql_query($query) or die(mysql_error());
 
@@ -35,32 +35,13 @@ $pendingrecord = mysql_fetch_assoc($queryResult);
 
 
 
-$generalQuery = "INSERT INTO userdata (username,password,phone) VALUES ('".$pendingrecord['username']."','".$pendingrecord['password']."','".$pendingrecord['phone']."')";
+$generalQuery = "INSERT INTO userdata (username,password,phone,email) VALUES ('".$pendingrecord['username']."','".$pendingrecord['password']."','".$pendingrecord['phone']."','".$pendingrecord['email']."')";
 
 $generalResult = mysql_query($generalQuery);
 
 
-
-
-$query = "select serialnum from userdata where username= '".$pendingrecord['username']."'"; 
-
-$queryResult = mysql_query($query) or die(mysql_error());
-
-$temprow = mysql_fetch_assoc($queryResult);
-
-$tempuserid = $temprow['serialnum'];
-
-
-
-$remainderQuery = "INSERT INTO moreuserdata VALUES('".$tempuserid."','".$pendingrecord['firstname']."','".$pendingrecord['lastname']."','".$pendingrecord['email']."','".$pendingrecord['location']."')";
-
-mysql_query($remainderQuery) or die(mysql_error());
-
-
-$deleteQuery = "DELETE FROM userpending WHERE requestnumber='".$requestid."'";
-
+$deleteQuery = "DELETE FROM userpending WHERE userid='".$requestid."'";
 $deleteQueryResult = mysql_query($deleteQuery) or die(mysql_error());
-
 
 
 echo "Accepted";
