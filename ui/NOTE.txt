@@ -2,15 +2,7 @@ Max userid length : 20
 Max password length : 20 (string of 40 hex digits)
 Min password length : 5
 Max phone length : 10 (20 in db)
-
-
-remove locked cookie on client side.
 	
 
-TODO :
 
-# Protection against SQL INJECTION. done .. 
-# Cookies and Session handling / jstorage Local storage API.
-# For java script disabled browsers.
-# Account Locking.
-# IP of incoming request.
+

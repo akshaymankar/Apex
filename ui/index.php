@@ -1,4 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
 <html>
 	<head>
 
@@ -117,16 +118,13 @@ exit();
 		</script>
 		
 
-    <link rel="stylesheet" href="./css/lightbox.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="./css/lightbox.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
 
-	<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
 
 //////////////////////////////////////////////////////////////////////////////
-		
-		
 /////////////   LOGIN FORM
-
 
     
 $(function() {
@@ -135,11 +133,6 @@ $(function() {
 $('#signin').click(function(e)
 {
         $("#sign_up").lightbox_me({centered: true, onLoad: function() {
-				
-				//setTimeout(function() 
-				//{ 
-				//$("#sign_up").find("input:first").focus();
-				//},2000);	
 				
 
 if((navigator.userAgent).search("Chrome")==-1)
@@ -158,33 +151,14 @@ if((navigator.userAgent).search("Chrome")==-1)
 
 
 }
-	});
+});
 				
-		e.preventDefault();
+e.preventDefault();
 		
 }); //end of .click
             
 
 
-/*
-
-
-$('#sign_up').keypress(function(e) {
-	
-	var e=window.event || e ;
-
-//alert(e.keyCode);
-
-	if(e.keyCode == '9')
-	{
-$("#name").focus();	
-
-	}
-
-	});
-        
-*/
-      
 $('#name').keypress(function(e) {
 	
 	var e=window.event || e ;
@@ -213,13 +187,6 @@ $("#submitbutton").click();
 
 	});
             
-            
-
-
-            
-            
-
-
           
 }); //end of document on ready binding
             
@@ -249,7 +216,7 @@ document.getElementById('invisibleRememberBox').value = "remember";
 		
 	
 <script language="javascript" type="text/javascript">
-<!-- 
+ 
 var ajaxRequest;
 
 function ajaxFunction(){
@@ -278,14 +245,14 @@ ajaxRequest.onreadystatechange=function(){
   $('#throbber').hide();
   $('#submitbutton').show();
   
-  if(document.getElementById("result").innerHTML == 'acceptedadmin')
+  if(document.getElementById("result").innerHTML == 'AcceptedAdmin')
   {
 	  
 	  window.location = "admin.php";
   }
   
   
-  if(document.getElementById("result").innerHTML == 'accepted')
+  if(document.getElementById("result").innerHTML == 'Accepted.')
   {
 	  window.location = "./generic_page/page.php";
   }
@@ -300,6 +267,12 @@ ajaxRequest.onreadystatechange=function(){
   {
 	  failed_retry();
   }
+
+if(document.getElementById("result").innerHTML == 'Locked !')
+{
+alert("Account Locked. Contact your SysAdmin ! ");
+}
+
 }
   else{
    alert("An error has occured while making the request");
@@ -344,21 +317,9 @@ else
 {
 alert("Account Locked. Contact your SysAdmin ! ");
 }
-
 }
 
-
-
-//-->
 </script>
-		
-		
-		
-		
-		
-		
-		
-		
 		
 <style>
 
@@ -383,11 +344,10 @@ margin:auto;
 width:50%;
 }
 
-
-      
-		</style>
+</style>
 	
-        <script>
+<script>
+
 $(function() {            
     $('#ad_1 > img').each(function(i,e){
         rotate($(this),500,3000,i);
@@ -407,18 +367,16 @@ $(function() {
     }
 });
 
-
-
-        </script>
+</script>
 
 
 	
-	</head>
-	<body>
+</head>
+<body>
 		
 
 <noscript>
-document.write('Turn On Javascript and Cookies in your browser!'); 
+document.write('<span style="color:white;font-size:3em;margin-left:20px;">Turn On Javascript and Cookies in your browser!</span>'); 
 </noscript>
 
         
