@@ -1,4 +1,7 @@
 <?php
+
+include '../conf/dir.php';
+
     if(isset($_GET['dir']) && isset($_GET['file1']) && isset($_GET['file2']))
     {
 		$dir = $_GET['dir'];
@@ -12,7 +15,7 @@
     }
 
    
-    $dirname = "../tile/static/"."$file2";
+    $dirname = $TILE_DIR_STATIC."$file2";
     
     
     if(!is_dir($dirname))

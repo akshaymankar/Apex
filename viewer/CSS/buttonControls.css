@@ -1,51 +1,52 @@
 .viewer .zoomincontrol
 {
-	position: absolute; 
-	z-index: 16;
-	top: 10px; 
-	left: 10px; 
-	width: 30px;
-	height: 30px;
+    position: absolute; 
+    z-index: 16;
+    top: 10px; 
+    left: 10px; 
+    width: 30px;
+    height: 30px;
 }
 
 
 .viewer .zoomoutcontrol
 {
-	position: absolute; 
-	z-index: 16;
-	top: 50px; 
-	left: 10px; 
-	width: 30px;
-	height: 30px;
+    position: absolute; 
+    z-index: 16;
+    top: 50px; 
+    left: 10px; 
+    width: 30px;
+    height: 30px;
 }
 
 
 .viewer .zoomincontrol .plus, .viewer .zoomincontrol .minus 
 {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 30px;
-	height: 30px;
-	overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
 }
 
 #goLeftId img
 {
-width:45px;
-height:35px;
-position:absolute;
+    width:45px;
+    height:35px;
+    position:absolute;
 
-right:-1600%;
-top:-150%;
+    right:-1600%;
+    top:-150%;
 }
 
 #goRightId img
 {
-width:45px;
-height:35px;
-position:absolute;
+    width:45px;
+    height:35px;
+    position:absolute;
 
-right:-2100%;
-top:-150%;
+    right:-2100%;
+    top:-150%;
 }
+

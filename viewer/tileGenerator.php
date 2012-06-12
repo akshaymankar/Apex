@@ -1,5 +1,8 @@
 <?php
     session_start();
+    
+    include '../conf/dir.php';
+    
     if (!isset($_POST['file'])) {
         print_r($_POST);
         die('Error Occured');
@@ -22,7 +25,7 @@
      **/
     $h=256;
     $w=256;
-    $tilemaker = '../executable/tilemaker';
+    $tilemaker = $TILEMAKER_DIR;
     /*
     if (isset($_SESSION['opid']) && isset($_POST['imgNumber']) ) {
         //exec("mkdir ../tile/dynamic/".$_SESSION['opid']);

@@ -2,13 +2,20 @@
 session_start();
 
 include '../conf/mysql.php';
+include '../conf/dir.php';
+
+$FILENAME = 0;
 
 if (!isset($_SESSION['opid'])) {
 
     if (isset($_GET['filetype']) && isset($_GET['filename'])) {
         $fileType = $_GET['filetype'];
-        $fileName = "../tile/static/" . $_GET['filename'] . "/" . $_GET['filename'];
-        $tiledir = "../tile/static/" . $_GET['filename'] . "/";
+        
+$FILENAME = $_GET['filename'];
+
+        $tiledir = $TILE_DIR_STATIC . $_GET['filename'] . "/";
+        $fileName = $TILE_DIR_STATIC . $_GET['filename'] . "/" . $_GET['filename'];
+        
     } else {
         print_r($_GET);
         die('Died');
@@ -30,10 +37,10 @@ if (!isset($_SESSION['opid'])) {
     /**
      * TODO: Read opdir from config
      * */
-    $opdir = '../output/dynamic/';
+    $opdir = $OP_DIR;
     $_SESSION['file'] = $row[0];
     $fileName = "$opdir/$opid/" . $row[0];
-    $tiledir = "../tile/dynamic/$opid/";
+    $tiledir = $TILE_DIR_DYNAMIC.$opid."/";
 }
 ?>
 <html>
@@ -149,6 +156,19 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
                 font-weight:bolder;
             }
 
+.span_fname
+{   border-color:black;
+    border-size:1px;
+    border-style:solid;
+    padding:2px;
+    padding-bottom:2px;
+    border-bottom-style:none;
+    border-radius:20px;
+    color:green;
+    font-size:1.0em;
+    font-weight: bolder;              
+}
+
 
 
         </style>
@@ -197,9 +217,11 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
                else if(pageNo<1000)
                    suffix="0";
                
-               var currentPageToDownload = pageNo + "_" + suffix + pageNo;
-                window.location.href = dir + currentPageToDownload;
-            }
+               var currentPageToDownload = pageNo + "_" + suffix + pageNo + ".ps";
+               var pageTitle=document.getElementsByClassName('selectedCaption')[0].innerHTML;
+
+                window.location.href = "download.php?file="+dir + currentPageToDownload+"&pageTitle="+pageTitle;
+             }
             
             
             function toHighlight(obj)
@@ -422,29 +444,31 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
 
 
     <body>   
+
+
+</script>
         <div style="height:20px;">
 <?php
+
+echo "<span class='span_fname'>".$_GET['filename']."</span>";
+
+
 ////////////////////////////////////////////////////////////////////
 require_once('./viewer_generic_page/generic_page/page_body.php');
 ////////////////////////////////////////////////////////////////////
 ?>
-
-            <?php
-            echo ('<span style="font-size:0.8em;border-size:1px;border-style:solid;padding:2px;padding-bottom:2px;border-bottom-style:none;border-radius:20px">');
-            echo ($_GET['filename']);
-            echo ('</span>');
-            ?>
-
+   
         </div>
+
 
 
         <input type="hidden" id="opFile" name="opFile" value="<?php echo $fileName ?>">	
 
 
 <?php
+
 echo '<script type="text/javascript">$(".ajax-loader").show();ps2jpg();</script>';
 ?>
-
 
         <input type="hidden" id='hiddenDetectorNumber' value="1"></input>
         <input type="hidden" id='tiledir' value='<?php echo $tiledir;?>'></input>

@@ -1,9 +1,12 @@
 <?php
     session_start();
+    
+    include '../conf/dir.php';
+    
     if (isset($_SESSION['opid'])) {
         $opid=$_SESSION['opid'];
-        $file="../output/dynamic/$opid/".$_SESSION['file'];
-        $dirname="../tile/dynamic/$opid/";
+        $file=$OP_DIR."$opid/".$_SESSION['file'];
+        $dirname=$TILE_DIR_DYNAMIC."$opid/";
         $pageNo="1";//error
     }
     else {

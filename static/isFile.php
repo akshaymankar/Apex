@@ -1,5 +1,7 @@
 <?php
 
+include '../conf/dir.php';
+
 if (isset($_GET['mainType']) && isset($_GET['subType']) && isset($_GET['changedPrefix']) && isset($_GET['year']) && isset($_GET['month'])) {
     $mainType = $_GET['mainType'];
     $subType = $_GET['subType'];
@@ -12,7 +14,7 @@ if (isset($_GET['mainType']) && isset($_GET['subType']) && isset($_GET['changedP
 }
 
 
-$fileDir = "../output/static/" . "$mainType" . "/" . "$subType";
+$fileDir = $OP_DIR_STATIC . "$mainType" . "/" . "$subType";
 
 ob_start();
 passthru("ls \"$fileDir\"|grep ".$changedPrefix."$year"."$month");
@@ -36,34 +38,5 @@ foreach ( $fileArr as $file){
     </div>
     <?php
 }
-/*
-for ($i = 1; $i <= 31; $i++) {
-    if ($i < 10)
-        $day = "0" . "$i";
-    else
-        $day = $i;
 
-
-    if ($subType == "MuAng" || $subType == "WtPlot") {
-        $compressedFilename = "$changedPrefix" . "$year" . "$month" . "$day" . "_" . "$year" . "$month" . "$day" . ".ps.gz";
-        $psFilename = "$changedPrefix" . "$year" . "$month" . "$day" . "_" . "$year" . "$month" . "$day" . ".ps";
-    } else if ($subType == "ScPlot") {
-        $compressedFilename = "$changedPrefix" . "$year" . "$month" . "$day" . "-" . "$year" . "$month" . "$day" . ".ps.gz";
-        $psFilename = "$changedPrefix" . "$year" . "$month" . "$day" . "-" . "$year" . "$month" . "$day" . ".ps";
-    } else {
-        $compressedFilename = "$changedPrefix" . "$year" . "$month" . "$day" . ".ps.gz";
-        $psFilename = "$changedPrefix" . "$year" . "$month" . "$day" . ".ps";
-    }
-
-    $filename = "$fileDir" . "/" . "$compressedFilename";
-
-
-    if (is_file($filename)) {
-        
-        $temp = "<div class='filenamebutton file'><span>$psFilename</span><input type='hidden' value='filenamebutton$i' /><input type='hidden' value='$fileDir' /><input type='hidden' value='$psFilename'/></div>";
-        echo "$temp";
-     
-    }
-}
-*/
 ?>
