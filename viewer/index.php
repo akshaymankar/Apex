@@ -173,6 +173,7 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
             var GLO_ImgNumber=1;
 	
             var flagForFirstTime = false;
+            var switchToPage=true;
             
             xhr = false;
     
@@ -183,6 +184,24 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
       
 
 
+            function downloadCurrentPage()
+            {
+                var dir = document.getElementById("tiledir").getAttribute('value');
+               var pageNo = document.getElementById("hiddenDetectorNumber").getAttribute('value');
+               var suffix="";
+               
+               if(pageNo<10)
+                   suffix="000";
+               else if(pageNo<100)
+                   suffix="00";
+               else if(pageNo<1000)
+                   suffix="0";
+               
+               var currentPageToDownload = pageNo + "_" + suffix + pageNo;
+                window.location.href = dir + currentPageToDownload;
+            }
+            
+            
             function toHighlight(obj)
             {
 
@@ -333,6 +352,8 @@ require_once('./viewer_generic_page/generic_page/page_head.php');
                     if (xhr.readyState == 4 && xhr.status == 200)
                     {
                         displayInViewer(imgNumber);
+                        
+                        switchToPage=true;
                     }
                     else if (xhr.readyState == 4 && xhr.status != 200) 
                     {
@@ -426,7 +447,7 @@ echo '<script type="text/javascript">$(".ajax-loader").show();ps2jpg();</script>
 
 
         <input type="hidden" id='hiddenDetectorNumber' value="1"></input>
-       
+        <input type="hidden" id='tiledir' value='<?php echo $tiledir;?>'></input>
         
         <div id="docviewer" style="width: 10%; height: 100%;" align="center"></div>
 

@@ -25,7 +25,7 @@ var previousBottomOfLast = "";
 var previousRightOfLast = "";
 var PREV_ZOOM = "";
 var firstFile = "";//to make function to compute no of tiles along width
-var firstPage=true;
+
 
 
 function getMaxZoomLevel(width,height,tilesize)
@@ -52,7 +52,7 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
 	
     if(!flagForFirstTime)
         CUR_ZOOM--; 
-    flagForFirstTime = false
+//    flagForFirstTime = false
     tempWell = null;
     
     tileRow = null;
@@ -77,7 +77,6 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
     TILEDIR=tiledir;
     DIR = dir;
     PREFIX = prefix;
-    //CUR_ZOOM = 0;
     EXTENSION = extension;
 
     fileName[0][0] = DIR + "/" + PREFIX + "0-0-0" + EXTENSION;
@@ -125,7 +124,9 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
     midWidth = offWidth/2;
     midHeight = offHeight/2;
     
-    topTile[0][0] = midHeight - (Math.pow(2,CUR_ZOOM) * 128);
+    if(flagForFirstTime)
+    {
+        topTile[0][0] = midHeight - (Math.pow(2,CUR_ZOOM) * 128);
     leftTile[0][0] = midWidth - (Math.pow(2,CUR_ZOOM) * 128);
 
     previousTopOfFirst = topTile[0][0];
@@ -135,7 +136,8 @@ function init(tiledir,dir,prefix,width,height,tilesize,extension)
     previousRightOfLast = (midWidth + (Math.pow(2,CUR_ZOOM) * 128)) + 256;
 
     PREV_ZOOM = CUR_ZOOM;
-    
+    }
+
     initButtonControls();
 	
     initPan();
@@ -351,7 +353,6 @@ function advanceZoomUp()
         tempWell = null;
         defaultPositions();
     
-    
         var newTopOfFirst = topTile[0][0];
         var newLeftOfFirst = leftTile[0][0];
         
@@ -367,7 +368,9 @@ function advanceZoomUp()
             }
         }
 		
-        var temp = 256 * Math.pow(2,CUR_ZOOM);// to do
+        if(flagForFirstTime==true || !switchToPage)
+        {
+         var temp = 256 * Math.pow(2,CUR_ZOOM);// to do
         var maxConstY = temp;
         var maxConstX = temp;
         var minConstY = temp / 4;
@@ -449,7 +452,12 @@ function advanceZoomUp()
                     
             flagX = 4;
         }
-
+        flagForFirstTime=false;
+        
+        }
+        
+        switchToPage=false;
+        
         var params="file="+TILEDIR+GLO_ImgNumber+".png";
         params+="&zoom="+CUR_ZOOM;
         params+="&left=0";
