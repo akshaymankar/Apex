@@ -9,13 +9,8 @@ session_start();
 	if (!isset($_SESSION['LOGGED'])) 
 	{
 		echo "YOU HAVE NOT LOGGED IN !";
-		echo "<br /><a href='./index.php'>Click Here</a> to log in.";
+		echo "<br /><a href='/Apex/ui/index.php'>Click Here</a> to log in.";
 		exit();
     }
-    else
-    {
-		echo "LOGGED IN";
-	}
-
-	
+    
 ?>

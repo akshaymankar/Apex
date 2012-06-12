@@ -424,7 +424,7 @@ document.write('Turn On Javascript and Cookies in your browser!');
         
 		<div id="slidingMenuDesc" class="slidingMenuDesc">
 		
-			<div><span>Go back to www.tifr.res.in.</span></div>
+			<div><span>Go back to grapes-3.tifr.res.in</span></div>
 			<div><span>Access root data !</span></div>
 			<div><span>Need some help? </span></div>
 			<div><span>Any suggestions or queries ? </span></div>
@@ -432,11 +432,11 @@ document.write('Turn On Javascript and Cookies in your browser!');
 		</div>
 	
 		<ul id="slidingMenu" class="slidingMenu">
-			<li><a href="#"></a></li>
-			<li><a href="#" >Home</a></li>
-			<li><a href="#" id="signin">Sign-In</a></li>
-			<li><a href="./page.php">About</a></li>
-			<li><a href="#">Contact Us</a></li>
+			<li><a href="javascript:void(0);"></a></li>
+			<li><a href="http://grapes-3.tifr.res.in/" >Home</a></li>
+			<li><a href="javascript:void(0);" id="signin">Sign-In</a></li>
+			<li><a href="/Apex/Others/Help.html">User Guide</a></li>
+			<li><a href="/Apex/Others/Contact.html">Contact Info</a></li>
 			
 		</ul>
 		
