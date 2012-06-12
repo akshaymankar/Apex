@@ -1,4 +1,7 @@
 <html>
+<?php
+require_once('../lib/sessioncode.php');
+  ?>
     <head>
 <title>Apex - Static Plots</title>
         
