@@ -34,6 +34,18 @@ $qry_result = mysql_query($query) or die(mysql_error());
 if(mysql_affected_rows() == 0)
 {
 echo "Invalid Username !";
+
+
+$today = getdate();
+$curMonth = $today['month'];
+$curYear = $today['year'];
+
+$logfile = fopen("../log/log-$curMonth-$curYear",'a+');
+$logentry = "\nInvalid username, user : ".$row['username']." tried to login in at ".date(DATE_RFC822)." from ". $_SERVER['REMOTE_ADDR'];
+fwrite($logfile,$logentry);
+fclose($logfile);
+
+
 }
 
 	
@@ -59,6 +71,17 @@ exit();
 	$_SESSION['LOGGED'] = true ;
 	$_SESSION['usertype'] = "user";
 	$_SESSION['userid'] = $row['serialnum'];
+	
+
+$today = getdate();
+$curMonth = $today['month'];
+$curYear = $today['year'];
+
+$logfile = fopen("../log/log-$curMonth-$curYear",'a+');
+$logentry = "\nRegular user : ".$row['username']." logged in successfully at ".date(DATE_RFC822)." from ". $_SERVER['REMOTE_ADDR'];
+fwrite($logfile,$logentry);
+fclose($logfile);
+
 	}
 	else if($row['password'] == $password && $row['usertype'] == "admin" )
 	{
@@ -73,11 +96,32 @@ exit();
 	$_SESSION['userid'] = $row['serialnum'];
 
 
+$today = getdate();
+$curMonth = $today['month'];
+$curYear = $today['year'];
+
+$logfile = fopen("../log/log-$curMonth-$curYear",'a+');
+$logentry = "\nAdmin user : ".$row['username']." logged in successfully at ".date(DATE_RFC822)." from ". $_SERVER['REMOTE_ADDR'];
+fwrite($logfile,$logentry);
+fclose($logfile);
+
+
 	}
 	else
 	{
 
 echo "Username and Password didn't match !";
+
+$today = getdate();
+$curMonth = $today['month'];
+$curYear = $today['year'];
+
+$logfile = fopen("../log/log-$curMonth-$curYear",'a+');
+$logentry = "\nInvalid Password, user : ".$row['username']." who tried to log in at ".date(DATE_RFC822)." from ". $_SERVER['REMOTE_ADDR'];
+fwrite($logfile,$logentry);
+fclose($logfile);
+
+
 
 if($attempts >= $maxAttempts && $row['locked'] == "open")
 {
